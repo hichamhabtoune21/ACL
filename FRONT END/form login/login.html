@@ -36,99 +36,66 @@
     </script>
 </head>
 
-<body>
+<body class="d-flex flex-column" style="min-height: 100vh">
+
     <nav class="navbar navbar-dark bg-dark">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">ACL</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarText">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Login</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Signup</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">About</a>
-              </li>
-            </ul>
-          </div>
+            <a class="navbar-brand" href="#">ACL</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Signup</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-      </nav>
+    </nav>
 
-    <div class="container">
+    <div class="container" style="flex: 1 0 auto">
         <div class="row d-flex justify-content-center align-items-center" style="height: 100%;">
             <div class="col-md-6 col-lg-6 col-xl-6" style="padding: 100px;">
-
-                <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="https://www.mortenhansen.com/wp-content/uploads/2018/09/quiz-intro-image-2000x1720.png"
-                                class="d-block w-100" alt="...">
-
-                        </div>
-                        <div class="carousel-item">
-                            <img src="https://cdn.dribbble.com/users/605032/screenshots/2215449/working.gif"
-                                class="d-block w-100" alt="...">
-                        </div>
-
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
-                        data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
-                        data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
-                </div>
-
+                <img src="https://www.mortenhansen.com/wp-content/uploads/2018/09/quiz-intro-image-2000x1720.png"
+                    class="d-block w-100" alt="...">
             </div>
             <div class="col-md-6 col-lg-6 col-xl-6">
                 <h1 style="font-size: 50px; padding-bottom: 50px;">Login</h1>
                 <form>
 
                     <div class="mb-3">
-                        <input type="email" id="form3Example3" class="form-control form-control-lg"
-                            placeholder="Enter email address" />
-                        <label class="form-label" for="form3Example3">Email address</label>
+                        <label for="inputEmail" class="form-label">Email address</label>
+                        <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp">
                     </div>
 
                     <div class="mb-3">
-                        <input type="password" id="form3Example4" class="form-control form-control-lg"
-                            placeholder="Enter password" />
-                        <label class="form-label" for="form3Example4">Password</label>
-                    </div>
-
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div class="form-check mb-0">
-                            <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3" />
-                            <label class="form-check-label" for="form2Example3">
-                                Remember me
-                            </label>
-                        </div>
-                        <a href="#!" class="text-body">Forgot password?</a>
+                        <label for="inputPassword" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="inputPassword">
                     </div>
 
                     <div class="text-center text-lg-start mt-4 pt-2">
-                        <button type="button" class="btn btn-primary btn-lg" onclick="checkLogin()">Login</button>
+                        <button type="button" class="btn btn-primary btn-dark" onclick="checkLogin()">Login</button>
                     </div>
 
                 </form>
             </div>
         </div>
     </div>
-    
     <footer class="text-center text-white bg-dark">
         <div class="text-center" style="padding: 20px;">
             © 2022-23 Copyright: ACL PROJECT GROUP 1
         </div>
 
     </footer>
+
+
 
 </body>
