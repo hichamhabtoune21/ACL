@@ -3,12 +3,12 @@ include "connect.php";
 
 $name = $_POST["name"];
 $surname = $_POST["surname"];
-$username = $_POST["usename"];
+$username = $_POST["username"];
 $email = $_POST["email"];
 $password = $_POST["password"];
-
-$sql = "INSERT INTO `user` (email,password,username,nome,cognome)
-        values($email,$password,$username,$name,$surname)";
+mysqli_query($connect,"SET FOREIGN_KEY_CHECKS=0");
+$sql = "insert into `user` (ID_User, Email, Password, Username, Nome, Cognome, Ruolo)
+values('NULL','$email','$password','$username','$name','$surname','NULL')";
 
 $result = mysqli_query($connect, $sql);
 if($result){
