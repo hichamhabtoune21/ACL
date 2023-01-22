@@ -11,7 +11,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <title>Signup Page</title>
     <style>
-        body{
+        body {
             font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         }
     </style>
@@ -19,7 +19,6 @@
 
     <script>
         const inputSignup = ["inputName", "inputSurname", "inputEmail", "inputPassword", "inputRepeatPassword"];
-        const inputLogin = ["email", "password"];
 
 
         function checkSignup() {
@@ -48,18 +47,31 @@
 
 
             }
-
-
             if (checkErrors) {
                 alert(errors);
             }
             //console.log(document.getElementById("inputRepeatPassword").value);
+        }
+        function isEmpty(x) {
+            return (document.getElementById(x).value == "" || document.getElementById(x).value == null);
 
         }
 
+        (function () {
+            'use strict'
+            const forms = document.querySelectorAll('.needs-validation')
+            Array.from(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
 
-
-
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
 
 
     </script>
@@ -69,64 +81,65 @@
 
     <nav class="navbar navbar-dark bg-dark">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">ACL</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarText">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="/FRONT END/form login/login.html">Login</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active" href="#">Signup</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">About</a>
-              </li>
-            </ul>
-          </div>
+            <a class="navbar-brand" href="#">ACL</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="../form login/login.html">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Signup</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../about page.html">About</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-      </nav>
+    </nav>
 
-    <div class="container-fluid bg-dark" style="color: white;flex: 1 0 auto;" >
+    <div class="container-fluid bg-dark" style="color: white;flex: 1 0 auto;">
         <div class="row d-flex justify-content-center align-items-center" style="height: 100%;">
             <div class="col-md-3 col-lg-3 col-xl-3">
                 <h1 style="font-size: 50px; padding-bottom: 50px; padding-top: 50px;">Signup</h1>
-                <form>
+                <form class="needs-validation" action="../../BACK END/script_signup.php" method="post" novalidate>
 
                     <div class="mb-3">
                         <label for="inputName" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="inputName">
+                        <input type="text" class="form-control" id="inputName" name="name" required>
                     </div>
 
                     <div class="mb-3">
                         <label for="inputSurname" class="form-label">Surname</label>
-                        <input type="text" class="form-control" id="inputSurname">
+                        <input type="text" class="form-control" id="inputSurname" name="surname" required>
                     </div>
 
                     <div class="mb-3">
                         <label for="inputUsername" class="form-label">Username</label>
-                        <input type="text" class="form-control" id="inputUsername">
+                        <input type="text" class="form-control" id="inputUsername" name="username" required>
                     </div>
 
                     <div class="mb-3">
                         <label for="inputEmail" class="form-label">Email address</label>
-                        <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp">
+                        <input type="email" class="form-control" id="inputEmail" name="email" aria-describedby="emailHelp" required>
                     </div>
 
                     <div class="mb-3">
                         <label for="inputPassword" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="inputPassword">
+                        <input type="password" class="form-control" id="inputPassword" name="password" required>
                     </div>
 
                     <div class="mb-3">
                         <label for="inputRepeatPassword" class="form-label">Repeat Password</label>
-                        <input type="password" class="form-control" id="inputRepeatPassword">
+                        <input type="password" class="form-control" id="inputRepeatPassword" required>
                     </div>
 
                     <div class="text-center text-lg-start mt-4 pt-2">
-                        <button type="button" class="btn btn-primary btn-light" onclick="checkSignup()">Signup</button>
+                        <button type="submit" class="btn btn-primary btn-light" onclick="checkSignup()" >Signup</button>
                     </div>
 
                 </form>
