@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,13 +24,13 @@
 <body>
 
 
-    <div class="container-fluid" style="flex: 1 0 auto;">
+    <div class="container-fluid">
         <div class="row row-space" style="height: 100%;">
             <div class="col-2 bg-dark float-left" style="color: beige; border-top-right-radius: 3%;">
 
                 <h3 style="padding: 20px;">ACL</h3>
                 <nav class="navbar navbar-dark bg-dark">
-                    <div id="navbarText" style="font-size: 30px; padding-left: 20px;">
+                    <div id="navbarText" style="font-size: 20px; padding-left: 20px;">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item" style="padding-bottom: 20px;">
                                 <a class="nav-link active" aria-current="page" href="#"><i class="bi bi-house"></i>Home</a>
@@ -51,8 +54,14 @@
                     </div>
                 </nav>
             </div>
+            
             <div class="col-10" style="background-color: white;">
-                <h1 style="font-size: 50px; padding: 20px;">Content............</h1>
+                <h1 style="font-size: 50px; padding: 20px;">
+                   <?php
+                   echo "Welcome " . $_SESSION["username"]; 
+                   ?>
+                
+                </h1>
 
 
             </div>
