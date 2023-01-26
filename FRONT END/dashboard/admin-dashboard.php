@@ -26,7 +26,7 @@ session_start();
 
     <div class="container-fluid">
         <div class="row row-space" style="height: 100%;">
-            <div class="col-2 bg-dark float-left" style="color: beige; border-top-right-radius: 3%;">
+            <div class="col-md-2 col-lg-2 col-xl-2 bg-dark float-left" style="color: beige; border-top-right-radius: 3%;">
 
                 <h3 style="padding: 20px;">ACL</h3>
                 <nav class="navbar navbar-dark bg-dark">
@@ -55,7 +55,7 @@ session_start();
                 </nav>
             </div>
             
-            <div class="col-10" style="background-color: white;">
+            <div class="col-md-10 col-lg-10 col-xl-10" style="background-color: white;">
                 <h1 style="font-size: 50px; padding: 20px;">
                    <?php
                    echo "Welcome " . $_SESSION["username"]; 
