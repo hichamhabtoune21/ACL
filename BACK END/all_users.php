@@ -2,6 +2,8 @@
 session_start();
 include("connect.php");
 ?>
+<!doctype>
+<html>
 
 <head>
     <meta charset="UTF-8">
@@ -16,51 +18,117 @@ include("connect.php");
     <style>
         body {
             font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            overflow-x: hidden;
         }
 
         i {
             padding-right: 10px;
         }
+
+        @media(prefers-reduced-motion: reduce) {
+            .collapsing {
+                transition-property: height, visibility;
+                transition-duration: .999s;
+            }
+        }
+
+        @media (max-width: 450px) {
+            .h-custom {
+                height: 100%;
+            }
+        }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+        integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
+        crossorigin="anonymous"></script>
 </head>
 
-<body>
+<body class="d-flex flex-column" style="min-height: 100vh">
 
 
-    <div class="container-fluid" style="flex: 1 0 auto;">
-        <div class="row row-space" style="height: 100%;">
-            <div class="col-2 bg-dark float-left" style="color: beige; border-top-right-radius: 3%;">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 bg-dark vh-10 show d-none d-md-block overflow-hidden"
+                style="color: white;padding-left: 18px;padding-top: 10px;font-size: 25px;">
 
-                <h3 style="padding: 20px;">ACL</h3>
-                <nav class="navbar navbar-dark bg-dark">
-                    <div id="navbarText" style="font-size: 30px; padding-left: 20px;">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li class="nav-item" style="padding-bottom: 20px;">
-                                <a class="nav-link active" aria-current="page" href="#"><i
-                                        class="bi bi-house"></i>Home</a>
-                            </li>
-
-                            <li class="nav-item" style="padding-bottom: 20px;">
-                                <a class="nav-link" aria-current="page" href="../../BACK END/all_users.php"><i
-                                        class="bi bi-people"></i>Users</a>
-                            </li>
-
-                            <li class="nav-item" style="padding-bottom: 20px;">
-                                <a class="nav-link" href="#"><i class="bi bi-journal-check"></i>Clients</a>
-                            </li>
-                            <li class="nav-item" style="padding-bottom: 20px;">
-                                <a class="nav-link" href="#"><i class="bi bi-bar-chart"></i>Overview</a>
-                            </li>
-
-                            <li class="nav-item" style="padding-bottom: 20px;">
-                                <a class="nav-link" href="#"><i class="bi bi-question-square"></i>Help</a>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
+                <i class="bi bi-bounding-box"></i><span>ECMA</span>
             </div>
-            <div class="col-10" style="background-color: white;">
-                <h1 style="font-size: 50px; padding: 20px;">Users</h1>
+        </div>
+
+        <div class="row vw-100">
+            <div class="col-md-2 col-lg-2 col-xl-2 bg-dark float-left" style="color: beige;">
+                <div class="row d-md-none">
+
+                    <div class="col-6 inline d-flex justify-content-between">
+
+
+                        <nav class="navbar navbar-dark">
+                            <button class="navbar-toggler" data-bs-toggle="collapse" href="#nav" role="button"
+                                aria-expanded="true" aria-controls="nav" data-toggle="collapse">
+                                <i class="navbar-toggler-icon"></i>
+                            </button>
+                            <div style="padding-left: 20px;padding-top: 5px;font-size: 25px;">
+                                <i class="bi bi-bounding-box"></i><span>ECMA</span>
+                            </div>
+
+                        </nav>
+
+                    </div>
+
+                    <div class="col-6">
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-2 col-lg-2 col-xl-2 bg-dark collapse show d-md-block text-nowrap"
+                style="color: beige; padding-right: 10px; align-items: center;" id="nav">
+                <div class="vh-100">
+                    <div class="navbar navbar-dark bg-dark">
+                        <div class="align-middle" style="font-size: 18px; padding-left: 18px; padding-top: 20px;">
+                            <ul class="navbar-nav">
+                                <li class="nav-item" style="padding-bottom: 20px;">
+                                    <a class="nav-link" aria-current="page"
+                                        href="../FRONT END/dashboard/admin-dashboard.php"><i
+                                            class="bi bi-house"></i>Home</a>
+                                </li>
+
+                                <li class="nav-item" style="padding-bottom: 20px;">
+                                    <a class="nav-link active" aria-current="page" href="#"><i
+                                            class="bi bi-people"></i>Users</a>
+                                </li>
+
+                                <li class="nav-item" style="padding-bottom: 20px;">
+                                    <a class="nav-link" href="#"><i class="bi bi-journal-check"></i>Clients</a>
+                                </li>
+                                <li class="nav-item" style="padding-bottom: 20px;">
+                                    <a class="nav-link" href="#"><i class="bi bi-bar-chart"></i>Overview</a>
+                                </li>
+
+                                <li class="nav-item" style="padding-bottom: 20px;">
+                                    <a class="nav-link" href="#"><i class="bi bi-question-square"></i>Help</a>
+                                </li>
+                                <hr style="width: 200%; background-color: white;">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#"><i class="bi bi-person-square"></i></i>Profile</a>
+                                </li>
+
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="col-md-10 col-lg-10 col-xl-10" style="background-color: white;">
+                <h1 style="font-size: 50px; padding-left: 20px;">Users</h1>
                 <table class="table">
                     <thead>
                         <tr>
@@ -78,11 +146,21 @@ include("connect.php");
                             foreach ($query as $user) {
                                 ?>
                                 <tr>
-                                    <td><?= $user["Email"];?></th>
-                                    <td><?= $user["Password"];?></th>
-                                    <td><?= $user["Username"];?></th>
-                                    <td><?= $user["Nome"];?></th>
-                                    <td><?= $user["Cognome"];?></th>
+                                    <td>
+                                        <?= $user["Email"]; ?>
+                                        </th>
+                                    <td>
+                                        <?= $user["Password"]; ?>
+                                        </th>
+                                    <td>
+                                        <?= $user["Username"]; ?>
+                                        </th>
+                                    <td>
+                                        <?= $user["Nome"]; ?>
+                                        </th>
+                                    <td>
+                                        <?= $user["Cognome"]; ?>
+                                        </th>
                                 </tr>
                                 <?php
                             }
@@ -98,3 +176,39 @@ include("connect.php");
         </div>
     </div>
 </body>
+<script>
+    /* Storing user's device details in a variable*/
+    let details = navigator.userAgent;
+
+    /* Creating a regular expression 
+    containing some mobile devices keywords 
+    to search it in details string*/
+    let regexp = /android|iphone|kindle|ipad/i;
+
+    /* Using test() method to search regexp in details
+    it returns boolean value*/
+    let isMobileDevice = regexp.test(details);
+
+    const a = ["desktop", "mobile"];
+    if (isMobileDevice) {
+        //document.write("You are using a Mobile Device");
+        //var x = document.getElementById("select").value;
+
+
+
+    } else {
+        // document.write("You are using Desktop");
+        // document.getElementById("nav").classList.add('collapse-horizontal');
+
+    }
+    function change() {
+
+
+    }
+
+
+
+
+</script>
+
+</html>
