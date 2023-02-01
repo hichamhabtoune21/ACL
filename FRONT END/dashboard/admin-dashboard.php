@@ -17,7 +17,6 @@ session_start();
     <style>
         body {
             font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-            overflow-x: hidden;
         }
 
         i {
@@ -49,6 +48,7 @@ session_start();
 <body class="d-flex flex-column" style="min-height: 100vh">
 
 
+
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 bg-dark vh-10 show d-none d-md-block overflow-hidden"
@@ -58,32 +58,33 @@ session_start();
             </div>
         </div>
 
-        <div class="row vw-100">
-            <div class="col-md-2 col-lg-2 col-xl-2 bg-dark float-left" style="color: beige;">
-                <div class="row d-md-none">
+            <div class="row">
+                <div class="col-md-2 col-lg-2 col-xl-2 bg-dark float-left" style="color: beige;">
+                    <div class="row d-md-none">
 
-                    <div class="col-6 inline d-flex justify-content-between">
+                        <div class="col-6 inline d-flex justify-content-between">
 
 
-                        <nav class="navbar navbar-dark">
-                            <button class="navbar-toggler" data-bs-toggle="collapse" href="#nav" role="button"
-                                aria-expanded="true" aria-controls="nav" data-toggle="collapse">
-                                <i class="navbar-toggler-icon"></i>
-                            </button>
-                            <div style="padding-left: 20px;padding-top: 5px;font-size: 25px;">
-                                <i class="bi bi-bounding-box"></i><span>ECMA</span>
-                            </div>
+                            <nav class="navbar navbar-dark">
+                                <button class="navbar-toggler" data-bs-toggle="collapse" href="#nav" role="button"
+                                    aria-expanded="true" aria-controls="nav" data-toggle="collapse">
+                                    <i class="navbar-toggler-icon"></i>
+                                </button>
+                                <div style="padding-left: 20px;padding-top: 5px;font-size: 25px;">
+                                    <i class="bi bi-bounding-box"></i><span>ECMA</span>
+                                </div>
 
-                        </nav>
+                            </nav>
+
+                        </div>
+
+                        <div class="col-6">
+                        </div>
 
                     </div>
-
-                    <div class="col-6">
-                    </div>
-
                 </div>
             </div>
-        </div>
+        
 
 
         <div class="row">
@@ -94,8 +95,7 @@ session_start();
                         <div class="align-middle" style="font-size: 18px; padding-left: 18px; padding-top: 20px;">
                             <ul class="navbar-nav">
                                 <li class="nav-item" style="padding-bottom: 20px;">
-                                    <a class="nav-link active" aria-current="page"
-                                        href="#"><i
+                                    <a class="nav-link active" aria-current="page" href="#"><i
                                             class="bi bi-house"></i>Home</a>
                                 </li>
 
@@ -128,8 +128,10 @@ session_start();
 
             </div>
             <div class="col-md-10 col-lg-10 col-xl-10" style="background-color: white;">
-                <h1 style="font-size: 50px; padding-left: 20px;">Welcome <?php echo $_SESSION["username"]?></h1>
-               
+                <h1 style="font-size: 50px; padding-left: 20px;">Welcome
+                    <?php echo $_SESSION["username"] ?>
+                </h1>
+
 
 
 

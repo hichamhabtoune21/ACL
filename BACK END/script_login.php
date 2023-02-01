@@ -13,6 +13,25 @@ if(mysqli_num_rows($query)>0){
     //$user_get = mysqli_query($connect, "SELECT * FROM user WHERE email='$email' AND password = '$password'");
     $user = mysqli_fetch_array($query);
     $_SESSION["username"] = $user["Username"];
+
+    switch($user["Ruolo"]){
+        case "Admin":
+            header("Location: ../FRONT END/dashboard/admin-dashboard.php");
+            break;
+        case "Commerciale":
+            header("Location: ../FRONT END/dashboard/admin-dashboard.php");
+            break;
+        case "Amministrazione":
+            header("Location: ../FRONT END/dashboard/admin-dashboard.php");
+            break;
+        case "Capo area":
+            header("Location: ../FRONT END/dashboard/admin-dashboard.php");
+            break;
+        case "NULL":
+        default:
+            header("Location: ../FRONT END/dashboard/null-dashboard.php");
+                    
+    }
     //console . log($_SESSION["username"]);
 
 

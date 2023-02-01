@@ -7,7 +7,7 @@ include("connect.php");
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
@@ -18,7 +18,6 @@ include("connect.php");
     <style>
         body {
             font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-            overflow-x: hidden;
         }
 
         i {
@@ -36,7 +35,17 @@ include("connect.php");
             .h-custom {
                 height: 100%;
             }
+
         }
+        /*
+        .table{
+   display: block !important;
+   overflow-x: auto !important;
+   width: 100% !important;
+ }
+ */
+ 
+   
     </style>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
         integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
@@ -44,6 +53,8 @@ include("connect.php");
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
         integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
         crossorigin="anonymous"></script>
+        <script src="extensions/mobile/bootstrap-table-mobile.js"></script>
+
 </head>
 
 <body class="d-flex flex-column" style="min-height: 100vh">
@@ -52,17 +63,17 @@ include("connect.php");
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 bg-dark vh-10 show d-none d-md-block overflow-hidden"
-                style="color: white;padding-left: 18px;padding-top: 10px;font-size: 25px;">
+                style="color: white;padding-left: 18px;padding-top: 10px;font-size: 25px; width:100%;">
 
                 <i class="bi bi-bounding-box"></i><span>ECMA</span>
             </div>
         </div>
-
-        <div class="row vw-100">
-            <div class="col-md-2 col-lg-2 col-xl-2 bg-dark float-left" style="color: beige;">
+        
+        <div class="row bg-dark" >
+            <div class="col-md-12 col-lg-12 col-xl-12 bg-dark float-left" style="color: beige;">
                 <div class="row d-md-none">
 
-                    <div class="col-6 inline d-flex justify-content-between">
+                    <div class="col-12 inline d-flex justify-content-between">
 
 
                         <nav class="navbar navbar-dark">
@@ -78,9 +89,7 @@ include("connect.php");
 
                     </div>
 
-                    <div class="col-6">
-                    </div>
-
+                   
                 </div>
             </div>
         </div>
@@ -128,8 +137,9 @@ include("connect.php");
 
             </div>
             <div class="col-md-10 col-lg-10 col-xl-10" style="background-color: white;">
-                <h1 style="font-size: 50px; padding-left: 20px;">Users</h1>
-                <table class="table">
+                <h1 style=" padding-left: 20px;">Users</h1>
+                <div class="overflow-auto">
+                <table class="table " >
                     <thead>
                         <tr>
                             <th scope="col">Email</th>
@@ -143,9 +153,9 @@ include("connect.php");
                     </thead>
                     <tbody>
                         <?php
-                        $query = mysqli_query($connect, "SELECT * from user");
-                        if (mysqli_num_rows($query)) {
-                            foreach ($query as $user) {
+                        $result = mysqli_query($connect, "SELECT * from user");
+                        if (mysqli_num_rows($result)) {
+                            while($user=mysqli_fetch_array($result)){
                                 ?>
                                 <tr>
                                     <td>
@@ -163,7 +173,7 @@ include("connect.php");
                                     <td>
                                         <?= $user["Cognome"]; ?>
                                     </td>
-                                    <td>
+                                    <td >
                                         <select class="form-select" aria-label="Default select example" name="role" id="role">
                                             <?php
                                             if ($user["Ruolo"] == "NULL") {
@@ -175,36 +185,35 @@ include("connect.php");
                                                         <option value='amministrazione'>Amministrazione</option>";
                                             } elseif ($user["Ruolo"] == "Amministratore") {
                                                 echo "
-                                                            <option selected>Amministratore</option>
-                                                            <option value='ad'>Admin</option>
-                                                            <option value='commercial'>Commerciale</option>
-                                                            <option value='capo'>Capo area</option>";
+                                                        <option selected>Amministrazione</option>
+                                                        <option value='ad'>Admin</option>
+                                                        <option value='commercial'>Commerciale</option>
+                                                        <option value='capo'>Capo area</option>";
                                             } elseif ($user["Ruolo"] == "Admin") {
                                                 echo "
-                                                                    <option selected>Admin</option>
-                                                                    <option value='ad'>Amministrazione</option>
-                                                                    <option value='commercial'>Commerciale</option>
-                                                                    <option value='capo'>Capo area</option>";
-                                            }
-                                            elseif ($user["Ruolo"] == "Commerciale") {
+                                                <option selected>Admin</option>
+                                                <option value='commercial'>Commerciale</option>
+                                                <option value='capo'>Capo area</option>
+                                                <option value='amministrazione'>Amministrazione</option>";
+                                            } elseif ($user["Ruolo"] == "Commerciale") {
                                                 echo "
-                                                                    <option selected>Commerciale</option>
-                                                                    <option value='ad'>Amministrazione</option>
-                                                                    <option value='admin'>Admin</option>
-                                                                    <option value='capo'>Capo area</option>";
-                                            }
+                                                <option selected>Commerciale</option>
+                                                <option value='ad'>Admin</option>
+                                                <option value='capo'>Capo area</option>
+                                                <option value='amministrazione'>Amministrazione</option>";
+                                            }elseif($user[""])
 
                                             ?>
                                             <!--
-                                            <option selected>
-                                                <?= $user["Ruolo"] ?>
-                                            </option>
+                                                            <option selected>
+                                                                <?= $user["Ruolo"] ?>
+                                                            </option>
 
-                                            <option value='ad'>Admin</option>
-                                            <option value='commercial'>Commerciale</option>
-                                            <option value='capo'>Capo area</option>
-                                            <option value='amministrazione'>Amministrazione</option>
-                                        -->
+                                                            <option value='ad'>Admin</option>
+                                                            <option value='commercial'>Commerciale</option>
+                                                            <option value='capo'>Capo area</option>
+                                                            <option value='amministrazione'>Amministrazione</option>
+                                                        -->
                                         </select>
                                     </td>
 
@@ -222,6 +231,7 @@ include("connect.php");
 
                     </tbody>
                 </table>
+                </div>
 
 
 
