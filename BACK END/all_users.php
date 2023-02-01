@@ -137,6 +137,8 @@ include("connect.php");
                             <th scope="col">Username</th>
                             <th scope="col">Name</th>
                             <th scope="col">Surname</th>
+                            <th scope="col">Role</th>
+                            <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -148,25 +150,76 @@ include("connect.php");
                                 <tr>
                                     <td>
                                         <?= $user["Email"]; ?>
-                                        </th>
+                                    </td>
                                     <td>
                                         <?= $user["Password"]; ?>
-                                        </th>
+                                    </td>
                                     <td>
                                         <?= $user["Username"]; ?>
-                                        </th>
+                                    </td>
                                     <td>
                                         <?= $user["Nome"]; ?>
-                                        </th>
+                                    </td>
                                     <td>
                                         <?= $user["Cognome"]; ?>
-                                        </th>
+                                    </td>
+                                    <td>
+                                        <select class="form-select" aria-label="Default select example" name="role" id="role">
+                                            <?php
+                                            if ($user["Ruolo"] == "NULL") {
+                                                echo "
+                                                        <option selected>Senza ruolo</option>
+                                                        <option value='ad'>Admin</option>
+                                                        <option value='commercial'>Commerciale</option>
+                                                        <option value='capo'>Capo area</option>
+                                                        <option value='amministrazione'>Amministrazione</option>";
+                                            } elseif ($user["Ruolo"] == "Amministratore") {
+                                                echo "
+                                                            <option selected>Amministratore</option>
+                                                            <option value='ad'>Admin</option>
+                                                            <option value='commercial'>Commerciale</option>
+                                                            <option value='capo'>Capo area</option>";
+                                            } elseif ($user["Ruolo"] == "Admin") {
+                                                echo "
+                                                                    <option selected>Admin</option>
+                                                                    <option value='ad'>Amministrazione</option>
+                                                                    <option value='commercial'>Commerciale</option>
+                                                                    <option value='capo'>Capo area</option>";
+                                            }
+                                            elseif ($user["Ruolo"] == "Commerciale") {
+                                                echo "
+                                                                    <option selected>Commerciale</option>
+                                                                    <option value='ad'>Amministrazione</option>
+                                                                    <option value='admin'>Admin</option>
+                                                                    <option value='capo'>Capo area</option>";
+                                            }
+
+                                            ?>
+                                            <!--
+                                            <option selected>
+                                                <?= $user["Ruolo"] ?>
+                                            </option>
+
+                                            <option value='ad'>Admin</option>
+                                            <option value='commercial'>Commerciale</option>
+                                            <option value='capo'>Capo area</option>
+                                            <option value='amministrazione'>Amministrazione</option>
+                                        -->
+                                        </select>
+                                    </td>
+
+                                    <td>
+                                        <button type="button" class="btn btn-danger">Delete</button>
+
+                                    </td>
                                 </tr>
                                 <?php
                             }
+
                         }
 
                         ?>
+
                     </tbody>
                 </table>
 
