@@ -1,3 +1,10 @@
+<?php
+session_start();
+session_destroy();
+
+
+?>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -40,7 +47,8 @@
 
     <nav class="navbar navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">ACL</a>
+            <a class="navbar-brand" href="#" style="font-size: 25px;"> <i class="bi bi-bounding-box"></i><span style="padding-left: 10px;">ECMA</span>
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
                 aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -69,12 +77,13 @@
             </div>
             <div class="col-md-6 col-lg-6 col-xl-6">
                 <h1 style="font-size: 50px; padding-bottom: 50px;">Login</h1>
+
                 <form action="../../BACK END/script_login.php" method="post">
                     <div class="form-group">
                         <div class="mb-3">
                             <label for="inputEmail" class="form-label">Email address</label>
-                            <input type="email" class="form-control" id="inputEmail" name="email" aria-describedby="emailHelp"
-                                required>
+                            <input type="email" class="form-control" id="inputEmail" name="email"
+                                aria-describedby="emailHelp" required>
                         </div>
                     </div>
                     <div class="form-group">

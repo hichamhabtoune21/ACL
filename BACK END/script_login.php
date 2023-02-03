@@ -1,20 +1,20 @@
 <?php
-session_start();
 include("connect.php");
 
 $email = $_POST["email"];
 $password = $_POST["password"];
 
-$query  = mysqli_query($connect,"SELECT * FROM user WHERE email='$email' AND password = '$password' ");
-if(mysqli_num_rows($query)>0){
-    header("Location: ../FRONT END/dashboard/admin-dashboard.php");
+$query = mysqli_query($connect, "SELECT * FROM user WHERE email='$email' AND password = '$password' ");
+
+if (mysqli_num_rows($query) > 0) {
+    session_start();
     $_SESSION["id"] = session_id();
 
-    //$user_get = mysqli_query($connect, "SELECT * FROM user WHERE email='$email' AND password = '$password'");
     $user = mysqli_fetch_array($query);
     $_SESSION["username"] = $user["Username"];
+    $_SESSION["ruolo"] = $user["Ruolo"];
 
-    switch($user["Ruolo"]){
+    switch ($user["Ruolo"]) {
         case "Admin":
             header("Location: ../FRONT END/dashboard/admin-dashboard.php");
             break;
@@ -30,17 +30,14 @@ if(mysqli_num_rows($query)>0){
         case "NULL":
         default:
             header("Location: ../FRONT END/dashboard/null-dashboard.php");
-                    
+
     }
-    //console . log($_SESSION["username"]);
 
 
+} else {
+    session_start();
+    session_destroy();
 }
-else{
-}
-
-//$check_email = mysqli_query($connect, "SELECT Email FROM user where Email = '$email' ");
-
 
 ?>
 
@@ -115,13 +112,15 @@ else{
             </div>
             <div class="col-md-6 col-lg-6 col-xl-6">
                 <h1 style="font-size: 50px; padding-bottom: 50px;">Login</h1>
-                <span style="color:red ;"><?php echo "Email or password incorrect"?></span><br><br>
-                <form action="../../BACK END/script_login.php" method="post">
+                <span style="color:red ;">
+                    <?php echo "Email or password incorrect" ?>
+                </span><br><br>
+                <form action="script_login.php" method="post">
                     <div class="form-group">
                         <div class="mb-3">
                             <label for="inputEmail" class="form-label">Email address</label>
-                            <input type="email" class="form-control" id="inputEmail" name="email" aria-describedby="emailHelp"
-                                required>
+                            <input type="email" class="form-control" id="inputEmail" name="email"
+                                aria-describedby="emailHelp" required>
                         </div>
                     </div>
                     <div class="form-group">
