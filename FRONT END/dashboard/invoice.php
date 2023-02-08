@@ -363,7 +363,7 @@ include("../../BACK END/connect.php");
                 type: "POST",
 
                 //Dove devo inviare i dati recuperati dal form?
-                url: "risultato_aggiunta.php",
+                url: "addInvoice.php",
 
                 //Quali dati devo inviare?
                 data: data: $('#form1').serialize(),
