@@ -257,7 +257,7 @@ include("../../BACK END/connect.php");
                         <tbody id="invoices">
                             <?php
                             $result = mysqli_query($connect, "SELECT * from fattura");
-                            $invoice = mysqli_fetch_array($result);
+                            //$invoice = mysqli_fetch_array($result);
 
                             if (mysqli_num_rows($result)) {
                                 while ($invoice = mysqli_fetch_array($result)) {
