@@ -146,7 +146,7 @@ include("../../BACK END/connect.php");
                                         aria-label="Close"></button>
                                 </div>
 
-                                <form class="form1">
+                                <form class="form1" action="addInvoice.php" method="POST">
 
                                     <div class="modal-body">
                                         Show a second modal and hide this one with the button below.
@@ -178,6 +178,13 @@ include("../../BACK END/connect.php");
                                             <div class="mb-3">
                                                 <label for="num" class="form-label">Progressive number</label>
                                                 <input type="number" id="num" name="num" class="form-control" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="mb-3">
+                                                <label for="amount" class="form-label">Amount</label>
+                                                <input type="number" id="amount" name="amount" class="form-control" required>
                                             </div>
                                         </div>
 
@@ -310,7 +317,7 @@ include("../../BACK END/connect.php");
     </div>
     <script>
 
-        document.getElementById("save").addEventListener("click", validate);
+       // document.getElementById("save").addEventListener("click", validate);
         //document.getElementById("save").addEventListener("click", CheckForm);
 
 
@@ -341,7 +348,7 @@ include("../../BACK END/connect.php");
                 modal.hide();
                 //modal.hide();
                 //save.dataset.bsToggle = "modal"; //se tutti i dati nel form di inserimento fatture sono stati inseriti posso farlo chiudere
-                CheckForm();
+                //CheckForm();
             }
             //console.log(document.getElementById("inputRepeatPassword").value);
 
@@ -356,7 +363,7 @@ include("../../BACK END/connect.php");
 
             $.ajax({
                 type: "POST",
-                url: 'test.php',
+                url: 'addInvoice.php',
                 data: $(this).serialize(),
                 success: function (response) {
                     var jsonData = JSON.parse(response);
