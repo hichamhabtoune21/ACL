@@ -12,7 +12,9 @@ include("../../BACK END/connect.php");
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+
 
     <title>Dashboard</title>
 
@@ -58,7 +60,7 @@ include("../../BACK END/connect.php");
             <div class="col-12 bg-dark vh-10 show d-none d-md-block overflow-hidden"
                 style="color: white;padding-left: 18px;padding-top: 10px;font-size: 25px; width:100%;">
 
-                <i class="bi bi-bounding-box"></i><span>ECMA</span>
+                <i class="bi bi-bounding-box"></i><span>ACME</span>
             </div>
         </div>
 
@@ -75,7 +77,7 @@ include("../../BACK END/connect.php");
                                 <i class="navbar-toggler-icon"></i>
                             </button>
                             <div style="padding-left: 20px;padding-top: 5px;font-size: 25px;">
-                                <i class="bi bi-bounding-box"></i><span>ECMA</span>
+                                <i class="bi bi-bounding-box"></i><span>ACME</span>
                             </div>
 
                         </nav>
@@ -139,7 +141,7 @@ include("../../BACK END/connect.php");
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Modal 1</h1>
+                                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel">New Invoice</h1>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                                 </div>
@@ -210,7 +212,7 @@ include("../../BACK END/connect.php");
                                             data-bs-toggle="modal">Cancel</button>
 
                                         <div class="form-group">
-                                            <button type="submit" class="btn btn-primary" id="save"
+                                            <button class="btn btn-primary" id="save"
                                                 data-bs-target="#exampleModalToggle" data-bs-toggle="">Save</button>
                                         </div>
                                     </div>
@@ -245,7 +247,7 @@ include("../../BACK END/connect.php");
 
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="invoices">
                             <?php
                             $result = mysqli_query($connect, "SELECT * from fattura");
                             $invoice = mysqli_fetch_array($result);
@@ -306,80 +308,82 @@ include("../../BACK END/connect.php");
             </div>
         </div>
     </div>
+    <script>
 
+        document.getElementById("save").addEventListener("click", validate);
+        //document.getElementById("save").addEventListener("click", CheckForm);
+
+
+
+        function validate() {
+            event.preventDefault()
+            const inputSignup = ["client", "num", "date", "bus_name", "pay_type"];
+
+
+
+            let errors = "";
+            let checkErrors = false;
+
+            for (var key in inputSignup) {
+                if (isEmpty(inputSignup[key])) {
+                    errors += inputSignup[key].substring(5) + " empty\n";
+                    checkErrors = true;
+                }
+            }
+            const save = document.getElementById("save");
+            const modal = document.getElementById("exampleModalToggle");
+
+
+            if (!checkErrors) {
+                //modal.setAttribute("type","button");
+                const truck_modal = document.querySelector('#exampleModalToggle');
+                const modal = bootstrap.Modal.getInstance(truck_modal);
+                modal.hide();
+                //modal.hide();
+                //save.dataset.bsToggle = "modal"; //se tutti i dati nel form di inserimento fatture sono stati inseriti posso farlo chiudere
+                CheckForm();
+            }
+            //console.log(document.getElementById("inputRepeatPassword").value);
+
+        }
+        function isEmpty(x) {
+            return (document.getElementById(x).value == "" || document.getElementById(x).value == null);
+
+        }
+        // data: $('#form1').serialize(),
+
+        function CheckForm() {
+
+            $.ajax({
+                type: "POST",
+                url: 'test.php',
+                data: $(this).serialize(),
+                success: function (response) {
+                    var jsonData = JSON.parse(response);
+
+                    // user is logged in successfully in the back-end 
+                    // let's redirect 
+                    $("#invoices").append("<tr><td>bello</td></tr>")
+                    /*
+                    if (jsonData.success == "1") {
+                        location.href = 'my_profile.php';
+                    }
+                    else {
+                        alert('Invalid Credentials!');
+                    }
+                    */
+                }
+            });
+            console.log("bello")
+
+        }
+
+
+    </script>
 
 </body>
 
 
-<script>
 
-    document.getElementById("save").addEventListener("click", validate);
-    // document.getElementById("save").addEventListener("click", CheckForm);
-
-
-    function validate() {
-        const inputSignup = ["client", "num", "date", "bus_name", "pay_type"];
-
-
-
-        let errors = "";
-        let checkErrors = false;
-
-        for (var key in inputSignup) {
-            if (isEmpty(inputSignup[key])) {
-                errors += inputSignup[key].substring(5) + " empty\n";
-                checkErrors = true;
-            }
-        }
-        const modal = document.getElementById("save");
-
-
-        if (checkErrors) {
-        }
-        else {
-            modal.dataset.bsToggle = "modal";
-        }
-        //console.log(document.getElementById("inputRepeatPassword").value);
-
-    }
-    function isEmpty(x) {
-        return (document.getElementById(x).value == "" || document.getElementById(x).value == null);
-
-    }
-
-
-
-    $(document).ready(function () {
-
-        //al click sul bottone del form
-        $("#save").click(function () {
-
-            //associo variabili
-
-            //chiamata ajax
-            $.ajax({
-
-                //imposto il tipo di invio dati (GET O POST)
-                type: "POST",
-
-                //Dove devo inviare i dati recuperati dal form?
-                url: "addInvoice.php",
-
-                //Quali dati devo inviare?
-                data: data: $('#form1').serialize(),
-                dataType: "html",
-
-                //Inizio visualizzazione errori
-                success: function (msg) {
-                    $("#risultato").html(msg); // messaggio di avvenuta aggiunta valori al db (preso dal file risultato_aggiunta.php) potete impostare anche un alert("Aggiunto, grazie!");
-                },
-                error: function () {
-                    alert("Chiamata fallita, si prega di riprovare..."); //sempre meglio impostare una callback in caso di fallimento
-                }
-            });
-        });
-    });
-</script>
-</script>
 
 </html>

@@ -56,7 +56,7 @@ include("../../BACK END/connect.php");
                     <div class="col-12 bg-dark vh-10 show d-none d-md-block overflow-hidden"
                         style="color: white;padding-left: 18px;padding-top: 10px;font-size: 25px;">
 
-                        <i class="bi bi-bounding-box"></i><span>ECMA</span>
+                        <i class="bi bi-bounding-box"></i><span>ACME</span>
                     </div>
                 </div>
 
@@ -73,7 +73,7 @@ include("../../BACK END/connect.php");
                                         <i class="navbar-toggler-icon"></i>
                                     </button>
                                     <div style="padding-left: 20px;padding-top: 5px;font-size: 25px;">
-                                        <i class="bi bi-bounding-box"></i><span>ECMA</span>
+                                        <i class="bi bi-bounding-box"></i><span>ACME</span>
                                     </div>
 
                                 </nav>
