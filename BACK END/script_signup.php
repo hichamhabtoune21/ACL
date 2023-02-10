@@ -13,8 +13,7 @@ $check_email = mysqli_query($connect, "SELECT Email FROM user where Email = '$em
 if (mysqli_num_rows($check_email) > 0) { // se esiste già un'email uguale
     echo "Email already exists";
 } else { //altrimenti inserisco i dati nel database
-    $sql = "insert into `user` (ID_User, Email, Password, Username, Nome, Cognome, Ruolo)
-values('NULL','$email','$password','$username','$name','$surname','NULL')";
+    $sql = "insert into `user` values('NULL','$email','$password','$username','$name','$surname','NULL')";
 }
 $result = mysqli_query($connect, $sql);
 

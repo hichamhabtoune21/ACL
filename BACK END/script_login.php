@@ -12,9 +12,9 @@ if (mysqli_num_rows($query) > 0) {
 
     $user = mysqli_fetch_array($query);
     $_SESSION["username"] = $user["Username"];
-    $_SESSION["ruolo"] = $user["Ruolo"];
+    $_SESSION["ruolo"] = $user["Role"];
 
-    switch ($user["Ruolo"]) {
+    switch ($user["Role"]) {
         case "Admin":
             header("Location: ../FRONT END/dashboard/admin-dashboard.php");
             break;

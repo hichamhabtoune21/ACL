@@ -157,12 +157,12 @@ include("../../BACK END/connect.php");
                                                     <option value="" selected disabled hidden>Choose here</option>
 
                                                     <?php
-                                                    $result = mysqli_query($connect, "SELECT * from cliente");
+                                                    $result = mysqli_query($connect, "SELECT * from client");
                                                     if (mysqli_num_rows($result)) {
-                                                        while ($cliente = mysqli_fetch_array($result)) {
+                                                        while ($client = mysqli_fetch_array($result)) {
                                                             ?>
-                                                            <option value="<?= $cliente["ID_Cliente"]; ?>">
-                                                                <?= $cliente["Nome"]; ?>
+                                                            <option value="<?= $client["ID_Client"]; ?>">
+                                                                <?= $client["Name"]; ?>
                                                             </option>
 
 
@@ -257,40 +257,40 @@ include("../../BACK END/connect.php");
                         </thead>
                         <tbody id="invoices">
                             <?php
-                            $result = mysqli_query($connect, "SELECT * from fattura");
+                            $result = mysqli_query($connect, "SELECT * from invoice");
                             //$invoice = mysqli_fetch_array($result);
                             
                             if (mysqli_num_rows($result)) {
                                 while ($invoice = mysqli_fetch_array($result)) {
-                                    $c = mysqli_query($connect, "SELECT * from cliente WHERE ID_Cliente = " . $invoice["ID_Cliente"]);
+                                    $c = mysqli_query($connect, "SELECT * from client WHERE ID_Client = " . $invoice["ID_Client"]);
                                     $client = mysqli_fetch_array($c);
                                     ?>
 
-                                    <tr>
+                                    <tr id="<?= $invoice["ID_Invoice"]?>">
                                         <td>
 
-                                            <?= $client["Nome"] ?>
-                                            <?= $client["Cognome"] ?>
+                                            <?= $client["Name"] ?>
+                                            <?= $client["Surname"] ?>
 
                                         </td>
                                         <td>
-                                            <?= $invoice["Numero progressivo"]; ?>
+                                            <?= $invoice["Progressive number"]; ?>
                                         </td>
                                         <td>
-                                            <?= $invoice["Data di emissione"]; ?>
+                                            <?= $invoice["Issuing date"]; ?>
                                         </td>
                                         <td>
-                                            <?= $invoice["Ragione sociale"]; ?>
+                                            <?= $invoice["Business name"]; ?>
                                         </td>
                                         <td>
-                                            <?= $invoice["Importo"]; ?>
+                                            <?= $invoice["Amount"]; ?>
                                         </td>
                                         <td>
-                                            <?= $invoice["Tipo di pagamento"]; ?>
+                                            <?= $invoice["Payment type"]; ?>
                                         </td>
                                         <td>
                                             <button type="button" class="btn btn-danger"><span
-                                                    class="bi bi-x-square-fill"></span></button>
+                                                    class="bi bi-x-square-fill" onclick="deleteInvoice(<?=$invoice['ID_Invoice']?>)"></span></button>
                                             <button type="button" class="btn btn-warning"><span
                                                     class="bi bi-pencil-fill"></span></button>
 
@@ -385,7 +385,7 @@ include("../../BACK END/connect.php");
                             "<td>" + message.date + "</td>" +
                             "<td>" + message.bus_name + "</td>" +
                             "<td>" + message.amount + "</td>" +
-                            "<td>" + message.pay_type + "</td></tr>"
+                            "<td>" + message.pay_type + "</td><td><button type='button' class='btn btn-danger'><spanclass='bi bi-x-square-fill'></span></button><button type='button' class='btn btn-warning'><spanclass='bi bi-pencil-fill'></span></button></td></tr>"
                         )
 
                         /*
@@ -401,6 +401,28 @@ include("../../BACK END/connect.php");
         $(".modal").on("hidden.bs.modal", function () {
             $(this).find('form').trigger('reset');
         });
+
+        var invoice = [];
+
+        function deleteInvoice(rowid) {
+            console.log("bello");
+            var row = document.getElementById(rowid);
+            row.parentNode.removeChild(row);
+        }
+
+        class Invoice {
+            constructor(clientName, clientSurname, number, date, bus_name, amount, pay_type) {
+                this.clientName = clientName;
+                this.clientSurname = clientSurname;
+                this.number = number;
+                this.date = date;
+                this.bus_name = bus_name;
+                this.amount = amount;
+                this.pay_type = pay_type;
+            }
+        }
+
+
     </script>
 
 </body>

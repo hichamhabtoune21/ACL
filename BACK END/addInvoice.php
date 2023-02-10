@@ -12,17 +12,17 @@ mysqli_query($connect, "SET FOREIGN_KEY_CHECKS=0");
 
 
 $query= "insert into fattura values ('NULL', '$number', '$date', '$bus_name',
-        '$amount','$pay_type', '$clientID', 'NULL')"; 
+        '$amount','$pay_type', '$clientID')"; 
 
 
 $result=mysqli_query($connect,$query);
 
 
-$query= "SELECT * FROM cliente where ID_Cliente='$clientID'";
+$query= "SELECT * FROM cliente where ID_Client='$clientID'";
 
 $result = mysqli_query($connect,$query);
 $client = mysqli_fetch_array($result);
-$values= array('clientName'=>$client["Nome"], 'clientSurname'=>$client["Cognome"],'number'=>$_POST["num"], 'date'=>$_POST["date"], 'bus_name'=> $_POST["bus_name"], 'pay_type' => $_POST["pay_type"],'amount'=>$_POST["amount"]);
+$values= array('clientName'=>$client["Name"], 'clientSurname'=>$client["Surname"],'number'=>$_POST["num"], 'date'=>$_POST["date"], 'bus_name'=> $_POST["bus_name"], 'pay_type' => $_POST["pay_type"],'amount'=>$_POST["amount"]);
 
 
 if($result){

@@ -168,34 +168,34 @@ include("../../BACK END/connect.php");
                                         <?= $user["Username"]; ?>
                                     </td>
                                     <td>
-                                        <?= $user["Nome"]; ?>
+                                        <?= $user["Name"]; ?>
                                     </td>
                                     <td>
-                                        <?= $user["Cognome"]; ?>
+                                        <?= $user["Surname"]; ?>
                                     </td>
                                     <td >
                                         <select class="form-select" aria-label="Default select example" name="role" id="role">
                                             <?php
-                                            if ($user["Ruolo"] == "NULL") {
+                                            if ($user["Role"] == "NULL") {
                                                 echo "
                                                         <option selected>Senza ruolo</option>
                                                         <option value='ad'>Admin</option>
                                                         <option value='commercial'>Commerciale</option>
                                                         <option value='capo'>Capo area</option>
                                                         <option value='amministrazione'>Amministrazione</option>";
-                                            } elseif ($user["Ruolo"] == "Amministratore") {
+                                            } elseif ($user["Role"] == "Amministratore") {
                                                 echo "
                                                         <option selected>Amministrazione</option>
                                                         <option value='ad'>Admin</option>
                                                         <option value='commercial'>Commerciale</option>
                                                         <option value='capo'>Capo area</option>";
-                                            } elseif ($user["Ruolo"] == "Admin") {
+                                            } elseif ($user["Role"] == "Admin") {
                                                 echo "
                                                 <option selected>Admin</option>
                                                 <option value='commercial'>Commerciale</option>
                                                 <option value='capo'>Capo area</option>
                                                 <option value='amministrazione'>Amministrazione</option>";
-                                            } elseif ($user["Ruolo"] == "Commerciale") {
+                                            } elseif ($user["Role"] == "Commerciale") {
                                                 echo "
                                                 <option selected>Commerciale</option>
                                                 <option value='ad'>Admin</option>
