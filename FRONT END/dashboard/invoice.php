@@ -163,6 +163,8 @@ include("../../BACK END/connect.php");
                                                             ?>
                                                             <option value="<?= $client["ID_Client"]; ?>">
                                                                 <?= $client["Name"]; ?>
+                                                                <?= $client["Surname"]; ?>
+
                                                             </option>
 
 
@@ -289,13 +291,12 @@ include("../../BACK END/connect.php");
                                             <?= $invoice["Payment type"]; ?>
                                         </td>
                                         <td>
-                                            <form id="delete" method="POST">
-                                                <button type="button" class="btn btn-danger"
-                                                    onclick="deleteInvoice(<?= $invoice['ID_Invoice'] ?>)"><span
-                                                        class="bi bi-x-square-fill"></span></button>
-                                            </form>
-                                            <button type="button" class="btn btn-warning"><span
-                                                    class="bi bi-pencil-fill"></span></button>
+                                            <button type="button" class="btn btn-danger"
+                                                onclick="deleteInvoice(<?= $invoice['ID_Invoice'] ?>)"><span
+                                                    class="bi bi-x-square-fill"></span></button>
+                                            <button type="button" class="btn btn-warning"
+                                                onclick="changeInvoice(<?= $invoice['ID_Invoice'] ?>)" data-bs-toggle="modal"
+                                                href="#exampleModalToggle"><span class="bi bi-pencil-fill"></span></button>
 
                                         </td>
                                     </tr>
@@ -388,8 +389,8 @@ include("../../BACK END/connect.php");
                             "<td>" + message.date + "</td>" +
                             "<td>" + message.bus_name + "</td>" +
                             "<td>" + message.amount + "</td>" +
-                            "<td>" + message.pay_type + "</td><td><button type='button' class='btn btn-danger'><span class='bi bi-x-square-fill'></span></button><button type='button' class='btn btn-warning'><span class='bi bi-pencil-fill'></span></button></td></tr>"
-                        )
+                            "<td>" + message.pay_type + "</td><td><button type='button' class='btn btn-danger'><span class='bi bi-x-square-fill'></span></button><button type='button' class='btn btn-warning' onclick='changeInvoice(" + message.ID_Invoice + ")' data-bs-toggle='modal' href='#exampleModalToggle'><span class='bi bi-pencil-fill'></span></button></td></tr>"
+                        );
 
                         /*
                         
@@ -407,18 +408,18 @@ include("../../BACK END/connect.php");
 
         var invoice = [];
 
-        function deleteInvoice(rowid) {
+        function deleteInvoice(id) {
             //rimuove fatture prendendo come paramentro l'id della riga della tabella e della tabella padre
             //console.log("bello");
-            var row = document.getElementById(rowid);
+            var row = document.getElementById(id);
             row.parentNode.removeChild(row);
-        
+
 
             $.ajax({
                 type: "POST",
                 url: '../../BACK END/deleteInvoice.php',
                 data: {
-                    ID_Invoice: rowid,
+                    ID_Invoice: id,
                 },
                 success: function (response) {
                     //var message=JSON.parse(response);
@@ -430,6 +431,30 @@ include("../../BACK END/connect.php");
                 }
 
             })
+        }
+
+        function changeInvoice(id) {
+
+            $.ajax({
+                type: "POST",
+                url: "../../BACK END/invoice_search.php",
+                data:{
+                    ID_Invoice: id
+                },
+                success: function(message){
+                    message=JSON.parse(message);
+                    //console.log(message);
+
+                    document.getElementById("num").value=message.num;
+                    document.getElementById("amount").value=message.amount;
+                    document.getElementById("date").value=message.date;
+                    document.getElementById("bus_name").value=message.bus_name;
+                    document.getElementById("pay_type").value=message.pay_type;
+                    document.getElementById("client").value=message.clientID;
+                    
+                }
+            })
+            
         }
 
         class Invoice {

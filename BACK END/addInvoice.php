@@ -8,6 +8,7 @@ $bus_name=$_POST["bus_name"];
 $pay_type=$_POST["pay_type"];
 $amount=$_POST["amount"];
 
+
 mysqli_query($connect, "SET FOREIGN_KEY_CHECKS=0");
 
 
@@ -17,12 +18,14 @@ $query= "insert into invoice values ('NULL', '$number', '$date', '$bus_name',
 
 $result=mysqli_query($connect,$query);
 
+$last_id = mysqli_insert_id($connect); //id appena inserito della fattura
 
 $query= "SELECT * FROM client where ID_Client='$clientID'";
 
 $result = mysqli_query($connect,$query);
 $client = mysqli_fetch_array($result);
-$values= array('clientName'=>$client["Name"], 'clientSurname'=>$client["Surname"],'number'=>$_POST["num"], 'date'=>$_POST["date"], 'bus_name'=> $_POST["bus_name"], 'pay_type' => $_POST["pay_type"],'amount'=>$_POST["amount"]);
+$values= array('clientName'=>$client["Name"], 'clientSurname'=>$client["Surname"],'number'=>$_POST["num"], 'date'=>$_POST["date"], 'bus_name'=> $_POST["bus_name"], 'pay_type' => $_POST["pay_type"],'amount'=>$_POST["amount"],
+                'ID_Invoice' => $last_id);
 
 
 if($result){

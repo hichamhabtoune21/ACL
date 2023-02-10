@@ -174,7 +174,7 @@ include("../../BACK END/connect.php");
                                         <?= $user["Surname"]; ?>
                                     </td>
                                     <td >
-                                        <select class="form-select" aria-label="Default select example" name="role" id="role">
+                                        <select class="form-select" aria-label="Default select example" name="role" id="role" onchange="changeRole()">
                                             <?php
                                             if ($user["Role"] == "NULL") {
                                                 echo "
