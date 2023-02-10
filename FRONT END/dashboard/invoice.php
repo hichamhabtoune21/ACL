@@ -146,7 +146,7 @@ include("../../BACK END/connect.php");
                                         aria-label="Close"></button>
                                 </div>
 
-                                <form class="form1" action="addInvoice.php" method="POST">
+                                <form id="form1" method="POST">
 
                                     <div class="modal-body">
                                         Show a second modal and hide this one with the button below.
@@ -184,7 +184,8 @@ include("../../BACK END/connect.php");
                                         <div class="form-group">
                                             <div class="mb-3">
                                                 <label for="amount" class="form-label">Amount</label>
-                                                <input type="number" id="amount" name="amount" class="form-control" required>
+                                                <input type="number" id="amount" name="amount" class="form-control"
+                                                    step="any" required>
                                             </div>
                                         </div>
 
@@ -219,7 +220,7 @@ include("../../BACK END/connect.php");
                                             data-bs-toggle="modal">Cancel</button>
 
                                         <div class="form-group">
-                                            <button class="btn btn-primary" id="save"
+                                            <button class="btn btn-primary" id="save" type="submit"
                                                 data-bs-target="#exampleModalToggle" data-bs-toggle="">Save</button>
                                         </div>
                                     </div>
@@ -258,7 +259,7 @@ include("../../BACK END/connect.php");
                             <?php
                             $result = mysqli_query($connect, "SELECT * from fattura");
                             //$invoice = mysqli_fetch_array($result);
-
+                            
                             if (mysqli_num_rows($result)) {
                                 while ($invoice = mysqli_fetch_array($result)) {
                                     $c = mysqli_query($connect, "SELECT * from cliente WHERE ID_Cliente = " . $invoice["ID_Cliente"]);
@@ -267,8 +268,10 @@ include("../../BACK END/connect.php");
 
                                     <tr>
                                         <td>
-                                            <?= $client["Nome"];
-                                            $client["Cognome"] ?>
+
+                                            <?= $client["Nome"] ?>
+                                            <?= $client["Cognome"] ?>
+
                                         </td>
                                         <td>
                                             <?= $invoice["Numero progressivo"]; ?>
@@ -316,15 +319,14 @@ include("../../BACK END/connect.php");
         </div>
     </div>
     <script>
-
-       // document.getElementById("save").addEventListener("click", validate);
+        document.getElementById("save").addEventListener("click", validate);
         //document.getElementById("save").addEventListener("click", CheckForm);
 
 
 
         function validate() {
-            event.preventDefault()
-            const inputSignup = ["client", "num", "date", "bus_name", "pay_type"];
+            //event.preventDefault()
+            const inputSignup = ["client", "num", "amount", "date", "bus_name", "pay_type"];
 
 
 
@@ -348,44 +350,57 @@ include("../../BACK END/connect.php");
                 modal.hide();
                 //modal.hide();
                 //save.dataset.bsToggle = "modal"; //se tutti i dati nel form di inserimento fatture sono stati inseriti posso farlo chiudere
-                //CheckForm();
+                console.log("bello");
+                checkForm();
             }
             //console.log(document.getElementById("inputRepeatPassword").value);
 
         }
+
         function isEmpty(x) {
             return (document.getElementById(x).value == "" || document.getElementById(x).value == null);
 
         }
         // data: $('#form1').serialize(),
 
-        function CheckForm() {
 
-            $.ajax({
-                type: "POST",
-                url: 'addInvoice.php',
-                data: $(this).serialize(),
-                success: function (response) {
-                    var jsonData = JSON.parse(response);
-
-                    // user is logged in successfully in the back-end 
-                    // let's redirect 
-                    $("#invoices").append("<tr><td>bello</td></tr>")
+        function checkForm() {
+            $('#form1').submit(function (e) {
+                e.preventDefault();
+                $.ajax({
                     /*
-                    if (jsonData.success == "1") {
-                        location.href = 'my_profile.php';
-                    }
-                    else {
-                        alert('Invalid Credentials!');
-                    }
+                    manda richiesta al server di aggiungere la fattura, una volta aggiunta nel server verrà visualizzata anche sulla pagina attuale
                     */
-                }
-            });
-            console.log("bello")
+                    type: "POST",
+                    url: '../../BACK END/addInvoice.php',
+                    data: $(this).serialize(),
+                    success: function (response) {
+                        var message = JSON.parse(response);
 
+                        // user is logged in successfully in the back-end 
+                        // let's redirect 
+                        $("#invoices").append(
+                            "<tr><td>" + message.clientName + " " + message.clientSurname + "</td>" +
+                            "<td>" + message.number + "</td>" +
+                            "<td>" + message.date + "</td>" +
+                            "<td>" + message.bus_name + "</td>" +
+                            "<td>" + message.amount + "</td>" +
+                            "<td>" + message.pay_type + "</td></tr>"
+                        )
+
+                        /*
+                        
+                        */
+                    }
+                });
+                console.log("bello")
+            })
         }
 
-
+        //resetta modal
+        $(".modal").on("hidden.bs.modal", function () {
+            $(this).find('form').trigger('reset');
+        });
     </script>
 
 </body>

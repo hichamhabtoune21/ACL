@@ -1,6 +1,6 @@
 <?php
-
-echo json_encode(array('success' => "bello"));
+$val=array("bello"=>10);
+echo json_encode($val);
 
 
 
