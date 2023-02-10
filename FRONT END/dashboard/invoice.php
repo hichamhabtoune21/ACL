@@ -289,8 +289,10 @@ include("../../BACK END/connect.php");
                                             <?= $invoice["Payment type"]; ?>
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-danger"><span
+                                            <form id="delete" method="POST" action="../../BACK END/deleteInvoice.php">
+                                            <button type="submit" class="btn btn-danger"><span
                                                     class="bi bi-x-square-fill" onclick="deleteInvoice(<?=$invoice['ID_Invoice']?>)"></span></button>
+                                            </form>
                                             <button type="button" class="btn btn-warning"><span
                                                     class="bi bi-pencil-fill"></span></button>
 
@@ -393,7 +395,7 @@ include("../../BACK END/connect.php");
                         */
                     }
                 });
-                console.log("bello")
+                //console.log("bello")
             })
         }
 
@@ -405,9 +407,27 @@ include("../../BACK END/connect.php");
         var invoice = [];
 
         function deleteInvoice(rowid) {
-            console.log("bello");
+            //rimuove fatture prendendo come paramentro l'id della riga della tabella e della tabella padre
+            //console.log("bello");
             var row = document.getElementById(rowid);
             row.parentNode.removeChild(row);
+/*
+            $('#delete').submit(function (e) {
+                e.preventDefault();
+                $.ajax({
+                    type: "POST",
+                    url: "../../BACK END/deleteInvoice.php",
+                    data: {
+                        ID_Invoice: rowid
+                    },
+                    success: function(response){
+                        //var message=JSON.parse(response);
+                        console.log("funge");
+                    }
+                })
+            }
+            )
+            */
         }
 
         class Invoice {
