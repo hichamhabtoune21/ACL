@@ -11,14 +11,14 @@ $amount=$_POST["amount"];
 mysqli_query($connect, "SET FOREIGN_KEY_CHECKS=0");
 
 
-$query= "insert into fattura values ('NULL', '$number', '$date', '$bus_name',
+$query= "insert into invoice values ('NULL', '$number', '$date', '$bus_name',
         '$amount','$pay_type', '$clientID')"; 
 
 
 $result=mysqli_query($connect,$query);
 
 
-$query= "SELECT * FROM cliente where ID_Client='$clientID'";
+$query= "SELECT * FROM client where ID_Client='$clientID'";
 
 $result = mysqli_query($connect,$query);
 $client = mysqli_fetch_array($result);

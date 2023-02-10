@@ -266,7 +266,7 @@ include("../../BACK END/connect.php");
                                     $client = mysqli_fetch_array($c);
                                     ?>
 
-                                    <tr id="<?= $invoice["ID_Invoice"]?>">
+                                    <tr id="<?= $invoice["ID_Invoice"] ?>">
                                         <td>
 
                                             <?= $client["Name"] ?>
@@ -289,9 +289,10 @@ include("../../BACK END/connect.php");
                                             <?= $invoice["Payment type"]; ?>
                                         </td>
                                         <td>
-                                            <form id="delete" method="POST" action="../../BACK END/deleteInvoice.php">
-                                            <button type="submit" class="btn btn-danger"><span
-                                                    class="bi bi-x-square-fill" onclick="deleteInvoice(<?=$invoice['ID_Invoice']?>)"></span></button>
+                                            <form id="delete" method="POST">
+                                                <button type="button" class="btn btn-danger"
+                                                    onclick="deleteInvoice(<?= $invoice['ID_Invoice'] ?>)"><span
+                                                        class="bi bi-x-square-fill"></span></button>
                                             </form>
                                             <button type="button" class="btn btn-warning"><span
                                                     class="bi bi-pencil-fill"></span></button>
@@ -387,7 +388,7 @@ include("../../BACK END/connect.php");
                             "<td>" + message.date + "</td>" +
                             "<td>" + message.bus_name + "</td>" +
                             "<td>" + message.amount + "</td>" +
-                            "<td>" + message.pay_type + "</td><td><button type='button' class='btn btn-danger'><spanclass='bi bi-x-square-fill'></span></button><button type='button' class='btn btn-warning'><spanclass='bi bi-pencil-fill'></span></button></td></tr>"
+                            "<td>" + message.pay_type + "</td><td><button type='button' class='btn btn-danger'><span class='bi bi-x-square-fill'></span></button><button type='button' class='btn btn-warning'><span class='bi bi-pencil-fill'></span></button></td></tr>"
                         )
 
                         /*
@@ -411,23 +412,24 @@ include("../../BACK END/connect.php");
             //console.log("bello");
             var row = document.getElementById(rowid);
             row.parentNode.removeChild(row);
-/*
-            $('#delete').submit(function (e) {
-                e.preventDefault();
-                $.ajax({
-                    type: "POST",
-                    url: "../../BACK END/deleteInvoice.php",
-                    data: {
-                        ID_Invoice: rowid
-                    },
-                    success: function(response){
-                        //var message=JSON.parse(response);
-                        console.log("funge");
-                    }
-                })
-            }
-            )
-            */
+        
+
+            $.ajax({
+                type: "POST",
+                url: '../../BACK END/deleteInvoice.php',
+                data: {
+                    ID_Invoice: rowid,
+                },
+                success: function (response) {
+                    //var message=JSON.parse(response);
+                    //console.log("funge");
+                    //alert("oooo");
+                },
+                error: function () {
+                    alert("oooo");
+                }
+
+            })
         }
 
         class Invoice {
