@@ -15,6 +15,15 @@ include("../../BACK END/connect.php");
     <script src="https://code.jquery.com/jquery-3.3.1.js"
         integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
 
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/css/bootstrap-select.min.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/js/bootstrap-select.min.js"></script>
+
+    <!-- (Optional) Latest compiled and minified JavaScript translation files -->
+
+
 
     <title>Dashboard</title>
 
@@ -40,6 +49,8 @@ include("../../BACK END/connect.php");
             }
 
         }
+
+
 
         /*
         .table{
@@ -149,11 +160,12 @@ include("../../BACK END/connect.php");
                                 <form id="form1" method="POST">
 
                                     <div class="modal-body">
-                                        Show a second modal and hide this one with the button below.
 
                                         <div class="form-group">
                                             <div class="mb-3">
-                                                <select name="client" id="client" class="form-select" required>
+                                                <label for="client" class="form-label">Client</label>
+                                                <select name="client" id="client" class="form-control selectpicker"
+                                                    data-live-search="true" required>
                                                     <option value="" selected disabled hidden>Choose here</option>
 
                                                     <?php
@@ -161,7 +173,8 @@ include("../../BACK END/connect.php");
                                                     if (mysqli_num_rows($result)) {
                                                         while ($client = mysqli_fetch_array($result)) {
                                                             ?>
-                                                            <option value="<?= $client["ID_Client"]; ?>">
+                                                            <option value="<?= $client["ID_Client"]; ?>"
+                                                                data-tokens="<?= $client["ID_Client"]; ?>">
                                                                 <?= $client["Name"]; ?>
                                                                 <?= $client["Surname"]; ?>
 
@@ -172,6 +185,7 @@ include("../../BACK END/connect.php");
                                                         }
                                                     }
                                                     ?>
+                                                    <option value="bello" data-tokens="prova">prova</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -221,7 +235,7 @@ include("../../BACK END/connect.php");
                                         <button type="button" class="btn btn-light" data-bs-target="#exampleModalToggle"
                                             data-bs-toggle="modal">Cancel</button>
 
-                                        <div class="form-group">
+                                        <div class="form-group" id="changeable">
                                             <button class="btn btn-primary" id="save" type="submit"
                                                 data-bs-target="#exampleModalToggle" data-bs-toggle="">Save</button>
                                         </div>
@@ -235,8 +249,8 @@ include("../../BACK END/connect.php");
 
                     </div>
 
-                    <button type="button" class="btn btn-info" data-bs-toggle="modal" href="#exampleModalToggle"><span
-                            class="bi bi-plus-square"></span>&nbsp;Add</button>
+                    <button type="button" class="btn btn-info" data-bs-toggle="modal" href="#exampleModalToggle"
+                        onclick="add()"><span class="bi bi-plus-square"></span>&nbsp;Add</button>
 
                     <table class="table">
 
@@ -295,7 +309,7 @@ include("../../BACK END/connect.php");
                                                 onclick="deleteInvoice(<?= $invoice['ID_Invoice'] ?>)"><span
                                                     class="bi bi-x-square-fill"></span></button>
                                             <button type="button" class="btn btn-warning"
-                                                onclick="changeInvoice(<?= $invoice['ID_Invoice'] ?>)" data-bs-toggle="modal"
+                                                onclick="invoiceInfo(<?= $invoice['ID_Invoice'] ?>)" data-bs-toggle="modal"
                                                 href="#exampleModalToggle"><span class="bi bi-pencil-fill"></span></button>
 
                                         </td>
@@ -323,8 +337,15 @@ include("../../BACK END/connect.php");
         </div>
     </div>
     <script>
-        document.getElementById("save").addEventListener("click", validate);
         //document.getElementById("save").addEventListener("click", CheckForm);
+
+        function add() {
+            document.getElementById("exampleModalToggleLabel").innerHTML="";
+            document.getElementById("exampleModalToggleLabel").innerHTML="New invoice";
+
+            document.getElementById("changeable").innerHTML = "";
+            document.getElementById("changeable").innerHTML = "<button class='btn btn-primary' id='save' type='submit'' data-bs-target='#exampleModalToggle' data-bs-toggle='' onclick='addInvoice()'>Save</button>"
+        }
 
 
 
@@ -343,9 +364,12 @@ include("../../BACK END/connect.php");
                     checkErrors = true;
                 }
             }
+            return checkErrors;
+            /*
             const save = document.getElementById("save");
             const modal = document.getElementById("exampleModalToggle");
 
+            
 
             if (!checkErrors) {
                 //modal.setAttribute("type","button");
@@ -357,6 +381,7 @@ include("../../BACK END/connect.php");
                 console.log("bello");
                 checkForm();
             }
+            */
             //console.log(document.getElementById("inputRepeatPassword").value);
 
         }
@@ -368,45 +393,57 @@ include("../../BACK END/connect.php");
         // data: $('#form1').serialize(),
 
 
-        function checkForm() {
-            $('#form1').submit(function (e) {
-                e.preventDefault();
-                $.ajax({
-                    /*
-                    manda richiesta al server di aggiungere la fattura, una volta aggiunta nel server verrà visualizzata anche sulla pagina attuale
-                    */
-                    type: "POST",
-                    url: '../../BACK END/addInvoice.php',
-                    data: $(this).serialize(),
-                    success: function (response) {
-                        var message = JSON.parse(response);
+        function addInvoice() {
 
-                        // user is logged in successfully in the back-end 
-                        // let's redirect 
-                        $("#invoices").append(
-                            "<tr><td>" + message.clientName + " " + message.clientSurname + "</td>" +
-                            "<td>" + message.number + "</td>" +
-                            "<td>" + message.date + "</td>" +
-                            "<td>" + message.bus_name + "</td>" +
-                            "<td>" + message.amount + "</td>" +
-                            "<td>" + message.pay_type + "</td><td><button type='button' class='btn btn-danger'><span class='bi bi-x-square-fill'></span></button><button type='button' class='btn btn-warning' onclick='changeInvoice(" + message.ID_Invoice + ")' data-bs-toggle='modal' href='#exampleModalToggle'><span class='bi bi-pencil-fill'></span></button></td></tr>"
-                        );
 
+            const modal = document.getElementById("exampleModalToggle");
+
+
+            if (!validate()) {
+                //modal.setAttribute("type","button");
+                const save = document.getElementById("save");
+                const truck_modal = document.querySelector('#exampleModalToggle');
+                const modal = bootstrap.Modal.getInstance(truck_modal);
+                modal.hide();
+
+                $('#form1').submit(function (e) {
+                    e.preventDefault();
+                    $.ajax({
                         /*
-                        
+                        manda richiesta al server di aggiungere la fattura, una volta aggiunta nel server verrà visualizzata anche sulla pagina attuale
                         */
-                    }
-                });
-                //console.log("bello")
-            })
+                        type: "POST",
+                        url: '../../BACK END/addInvoice.php',
+                        data: $(this).serialize(),
+                        success: function (response) {
+                            var message = JSON.parse(response);
+
+                            // user is logged in successfully in the back-end 
+                            // let's redirect 
+                            $("#invoices").append(
+                                "<tr><td>" + message.clientName + " " + message.clientSurname + "</td>" +
+                                "<td>" + message.number + "</td>" +
+                                "<td>" + message.date + "</td>" +
+                                "<td>" + message.bus_name + "</td>" +
+                                "<td>" + message.amount + "</td>" +
+                                "<td>" + message.pay_type + "</td><td><button type='button' class='btn btn-danger'><span class='bi bi-x-square-fill'></span></button><button type='button' class='btn btn-warning' onclick='invoiceInfo(" + message.ID_Invoice + ")' data-bs-toggle='modal' href='#exampleModalToggle'><span class='bi bi-pencil-fill'></span></button></td></tr>"
+                            );
+
+                            /*
+                            
+                            */
+                        }
+                    });
+
+                    //console.log("bello")
+                })
+            }
         }
 
         //resetta modal
         $(".modal").on("hidden.bs.modal", function () {
             $(this).find('form').trigger('reset');
         });
-
-        var invoice = [];
 
         function deleteInvoice(id) {
             //rimuove fatture prendendo come paramentro l'id della riga della tabella e della tabella padre
@@ -433,40 +470,33 @@ include("../../BACK END/connect.php");
             })
         }
 
-        function changeInvoice(id) {
+        function invoiceInfo(id) {
+            document.getElementById("exampleModalToggleLabel").innerHTML="";
+            document.getElementById("exampleModalToggleLabel").innerHTML="Modify invoice";
 
-            $.ajax({
-                type: "POST",
-                url: "../../BACK END/invoice_search.php",
-                data:{
-                    ID_Invoice: id
-                },
-                success: function(message){
-                    message=JSON.parse(message);
-                    //console.log(message);
+            document.getElementById("changeable").innerHTML = "";
+            document.getElementById("changeable").innerHTML = "<button class='btn btn-primary' id='save' type='submit'' data-bs-target='#exampleModalToggle' data-bs-toggle=''>Modify</button>"
 
-                    document.getElementById("num").value=message.num;
-                    document.getElementById("amount").value=message.amount;
-                    document.getElementById("date").value=message.date;
-                    document.getElementById("bus_name").value=message.bus_name;
-                    document.getElementById("pay_type").value=message.pay_type;
-                    document.getElementById("client").value=message.clientID;
-                    
-                }
-            })
-            
-        }
+                $.ajax({
+                    type: "POST",
+                    url: "../../BACK END/invoice_search.php",
+                    data: {
+                        ID_Invoice: id
+                    },
+                    success: function (message) {
+                        message = JSON.parse(message);
+                        //console.log(message);
 
-        class Invoice {
-            constructor(clientName, clientSurname, number, date, bus_name, amount, pay_type) {
-                this.clientName = clientName;
-                this.clientSurname = clientSurname;
-                this.number = number;
-                this.date = date;
-                this.bus_name = bus_name;
-                this.amount = amount;
-                this.pay_type = pay_type;
-            }
+                        document.getElementById("num").value = message.num;
+                        document.getElementById("amount").value = message.amount;
+                        document.getElementById("date").value = message.date;
+                        document.getElementById("bus_name").value = message.bus_name;
+                        document.getElementById("pay_type").value = message.pay_type;
+                        document.getElementById("client").value = message.clientID;
+
+                    }
+                })
+
         }
 
 
