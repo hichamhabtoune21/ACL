@@ -1,9 +1,4 @@
-<?php
-session_start();
-session_destroy();
-
-
-?>
+<html>
 
 <head>
     <meta charset="UTF-8">
@@ -14,8 +9,9 @@ session_destroy();
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 
-    <link rel="stylesheet" href="styleLogin.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
     <title>Login Page</title>
 
     <script>
@@ -47,7 +43,8 @@ session_destroy();
 
     <nav class="navbar navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#" style="font-size: 25px;"> <i class="bi bi-bounding-box"></i><span style="padding-left: 10px;">ACME</span>
+            <a class="navbar-brand" href="#" style="font-size: 25px;"> <i class="bi bi-bounding-box"></i><span
+                    style="padding-left: 10px;">ACME</span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
                 aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -77,8 +74,9 @@ session_destroy();
             </div>
             <div class="col-md-6 col-lg-6">
                 <h1 style="font-size: 50px; padding-bottom: 50px;">Login</h1>
+                <div id="problems"></div>
 
-                <form action="../../BACK END/script_login.php" method="post">
+                <form id="form1" method="post">
                     <div class="form-group">
                         <div class="mb-3">
                             <label for="inputEmail" class="form-label">Email address</label>
@@ -98,8 +96,11 @@ session_destroy();
                         </div>
                     </div>
 
+
                 </form>
+
             </div>
+
         </div>
     </div>
     <footer class="text-center text-white bg-dark">
@@ -109,6 +110,46 @@ session_destroy();
 
     </footer>
 
+    <script>
+        var a = false;
+        $(document).ready(function () {
+            $('#form1').submit(function (e) {
+                e.preventDefault();
+                document.getElementById("problems").innerHTML = "";
+                $.ajax({
+                    /*
+                    manda richiesta al server di aggiungere la fattura, una volta aggiunta nel server verrà visualizzata anche sulla pagina attuale
+                    */
+                    type: "POST",
+                    url: '../../BACK END/script_login.php',
+                    data: $(this).serialize(),
+                    success: function (response) {
+                        console.log("ok");
+                        var message = JSON.parse(response);
+                        //var message = JSON.parse(response);
+
+                        // user is logged in successfully in the back-end 
+                        // let's redirect 
+                        if (message.text == "failed") {
+                            $("#problems").append("<p class='text-danger'>Email or password incorrect</p>");
+                        }
+                        else{
+                            window.location=message.text;
+                        }
+                        /*
+                        
+                        */
+
+                    }
+                });
+
+                //console.log("bello")
+            })
+        })
+    </script>
+
 
 
 </body>
+
+</html>
