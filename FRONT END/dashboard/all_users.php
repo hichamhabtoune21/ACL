@@ -136,10 +136,10 @@ include("../../BACK END/connect.php");
 
 
             </div>
-            <div class="col-md-10 col-lg-10 col-xl-10" style="background-color: white;">
-                <h1 style=" padding-left: 20px;">Users</h1>
-                <div class="overflow-auto">
-                <table class="table " >
+            <div class="col-md-10 col-lg-10 col-xl-10" style="background-color: white; padding:20px">
+                <h1>Users</h1>
+                <div class="overflow-auto" style="padding-top:20px">
+                <table class="table">
                     <thead>
                         <tr>
                             <th scope="col">Email</th>

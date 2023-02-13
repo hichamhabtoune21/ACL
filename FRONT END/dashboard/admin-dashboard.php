@@ -129,8 +129,8 @@ include("../../BACK END/connect.php");
 
 
                     </div>
-                    <div class="col-md-10 col-lg-10 col-xl-10" style="background-color: white;">
-                        <h1 style="font-size: 50px; padding-left: 20px;">Welcome
+                    <div class="col-md-10 col-lg-10 col-xl-10" style="background-color: white; padding: 20px;">
+                        <h1 style="font-size: 50px;">Welcome
                             <?php echo $_SESSION["username"] ?>
                         </h1>
 

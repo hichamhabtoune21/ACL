@@ -84,7 +84,7 @@ include("../../BACK END/connect.php");
 
                         <nav class="navbar navbar-dark">
                             <button class="navbar-toggler" data-bs-toggle="collapse" href="#nav" role="button"
-                                aria-expanded="true" aria-controls="nav" data-toggle="collapse">
+                                aria-controls="nav" data-toggle="collapse">
                                 <i class="navbar-toggler-icon"></i>
                             </button>
                             <div style="padding-left: 20px;padding-top: 5px;font-size: 25px;">
@@ -102,7 +102,7 @@ include("../../BACK END/connect.php");
 
 
         <div class="row">
-            <div class="col-md-2 col-lg-2 col-xl-2 bg-dark collapse show d-md-block text-nowrap"
+            <div class="col-md-2 col-lg-2 col-xl-2 bg-dark collapse d-md-block text-nowrap"
                 style="color: beige; padding-right: 10px; align-items: center;" id="nav">
                 <div class="vh-100">
                     <div class="navbar navbar-dark bg-dark">
@@ -141,8 +141,8 @@ include("../../BACK END/connect.php");
 
 
             </div>
-            <div class="col-md-10 col-lg-10 col-xl-10" style="background-color: white;">
-                <h1 style=" padding-left: 20px;">Invoice management</h1>
+            <div class="col-md-10 col-lg-10 col-xl-10" style="background-color: white;padding:20px">
+                <h1>Invoice management</h1>
 
                 <div class="overflow-auto">
 
@@ -236,7 +236,7 @@ include("../../BACK END/connect.php");
                                             data-bs-toggle="modal">Cancel</button>
 
                                         <div class="form-group" id="changeable">
-                                            <button class="btn btn-primary" id="save" type="submit"
+                                            <button class="btn btn-secondary" id="save" type="submit"
                                                 data-bs-target="#exampleModalToggle" data-bs-toggle="">Save</button>
                                         </div>
                                     </div>
@@ -249,86 +249,100 @@ include("../../BACK END/connect.php");
 
                     </div>
 
-                    <button type="button" class="btn btn-info" data-bs-toggle="modal" href="#exampleModalToggle"
-                        onclick="add()"><span class="bi bi-plus-square"></span>&nbsp;Add</button>
+                    <div class="modal fade" id="exampleModalToggle1" aria-hidden="true"
+                        aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Are you sure to delete it?</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                              
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-light" data-bs-target="#exampleModalToggle1"
+                                        data-bs-toggle="modal">Cancel</button>
+                                    <div id="addDeleteButton">
+                                        <button class="btn btn-danger" data-bs-toggle="modal"
+                                            data-bs-target="#exampleModalToggle1"
+                                            onclick="deleteInvoice(<?= $invoice['ID_Invoice'] ?>)">Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                    <table class="table">
+                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" href="#exampleModalToggle"
+                        onclick="add()"><i class="bi bi-plus-square"></i>Add</button>
+                    <div class="overflow-auto" style="padding-top:20px">
+
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Client</th>
+                                    <th scope="col">Progressive number</th>
+                                    <th scope="col">Issuing date</th>
+                                    <th scope="col">Business name</th>
+                                    <th scope="col">Amount</th>
+                                    <th scope="col">Payment type</th>
+                                    <th scope="col">Actions</th>
 
 
+                                </tr>
+                            </thead>
+                            <tbody id="invoices">
+                                <?php
+                                $result = mysqli_query($connect, "SELECT * from invoice");
+                                //$invoice = mysqli_fetch_array($result);
+                                
+                                if (mysqli_num_rows($result)) {
+                                    while ($invoice = mysqli_fetch_array($result)) {
+                                        $c = mysqli_query($connect, "SELECT * from client WHERE ID_Client = " . $invoice["ID_Client"]);
+                                        $client = mysqli_fetch_array($c);
+                                        ?>
 
-                        <thead>
+                                        <tr id="<?= $invoice["ID_Invoice"] ?>">
+                                            <td>
+
+                                                <?= $client["Name"] ?>
+                                                <?= $client["Surname"] ?>
+
+                                            </td>
+                                            <td>
+                                                <?= $invoice["Progressive number"]; ?>
+                                            </td>
+                                            <td>
+                                                <?= $invoice["Issuing date"]; ?>
+                                            </td>
+                                            <td>
+                                                <?= $invoice["Business name"]; ?>
+                                            </td>
+                                            <td>
+                                                <?= $invoice["Amount"]; ?>
+                                            </td>
+                                            <td>
+                                                <?= $invoice["Payment type"]; ?>
+                                            </td>
+                                            <td>
+                                                <button type='button' class='btn btn-secondary'
+                                                    onclick=invoiceInfo(<?= $invoice['ID_Invoice'] ?>) data-bs-toggle='modal'
+                                                    href='#exampleModalToggle'><i class='bi bi-pencil-fill'></i>Edit</button>
+                                                <button type='button' class='btn btn-danger' data-bs-toggle='modal'
+                                                    href='#exampleModalToggle1' onclick=addDelete(<?= $invoice['ID_Invoice'] ?>)><i
+                                                        class='bi bi-trash text-light'></i>Delete</button>
 
 
-                            <tr>
-                                <th scope="col">Client</th>
-                                <th scope="col">Progressive number</th>
-                                <th scope="col">Issuing date</th>
-                                <th scope="col">Business name</th>
-                                <th scope="col">Amount</th>
-                                <th scope="col">Payment type</th>
-                                <th scope="col">Actions</th>
-
-
-                            </tr>
-                        </thead>
-                        <tbody id="invoices">
-                            <?php
-                            $result = mysqli_query($connect, "SELECT * from invoice");
-                            //$invoice = mysqli_fetch_array($result);
-                            
-                            if (mysqli_num_rows($result)) {
-                                while ($invoice = mysqli_fetch_array($result)) {
-                                    $c = mysqli_query($connect, "SELECT * from client WHERE ID_Client = " . $invoice["ID_Client"]);
-                                    $client = mysqli_fetch_array($c);
-                                    ?>
-
-                                    <tr id="<?= $invoice["ID_Invoice"] ?>">
-                                        <td>
-
-                                            <?= $client["Name"] ?>
-                                            <?= $client["Surname"] ?>
-
-                                        </td>
-                                        <td>
-                                            <?= $invoice["Progressive number"]; ?>
-                                        </td>
-                                        <td>
-                                            <?= $invoice["Issuing date"]; ?>
-                                        </td>
-                                        <td>
-                                            <?= $invoice["Business name"]; ?>
-                                        </td>
-                                        <td>
-                                            <?= $invoice["Amount"]; ?>
-                                        </td>
-                                        <td>
-                                            <?= $invoice["Payment type"]; ?>
-                                        </td>
-                                        <td>
-                                            <button type="button" class="btn btn-danger"
-                                                onclick="deleteInvoice(<?= $invoice['ID_Invoice'] ?>)"><span
-                                                    class="bi bi-x-square-fill"></span></button>
-                                            <button type="button" class="btn btn-warning"
-                                                onclick="invoiceInfo(<?= $invoice['ID_Invoice'] ?>)" data-bs-toggle="modal"
-                                                href="#exampleModalToggle"><span class="bi bi-pencil-fill"></span></button>
-
-                                        </td>
-                                    </tr>
-                                    <?php
+                                            </td>
+                                        </tr>
+                                        <?php
+                                    }
                                 }
-                            }
-                            ?>
+                                ?>
 
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
 
-                    <!-- Tabella Bootstrap -->
-
-
-
-
-
-
+                    </div>
                 </div>
 
 
@@ -340,11 +354,11 @@ include("../../BACK END/connect.php");
         //document.getElementById("save").addEventListener("click", CheckForm);
 
         function add() {
-            document.getElementById("exampleModalToggleLabel").innerHTML="";
-            document.getElementById("exampleModalToggleLabel").innerHTML="New invoice";
+            document.getElementById("exampleModalToggleLabel").innerHTML = "";
+            document.getElementById("exampleModalToggleLabel").innerHTML = "New invoice";
 
             document.getElementById("changeable").innerHTML = "";
-            document.getElementById("changeable").innerHTML = "<button class='btn btn-primary' id='save' type='submit'' data-bs-target='#exampleModalToggle' data-bs-toggle='' onclick='addInvoice()'>Save</button>"
+            document.getElementById("changeable").innerHTML = "<button class='btn btn-secondary' id='save' type='submit'' data-bs-target='#exampleModalToggle' data-bs-toggle='' onclick='addInvoice()'>Save</button>"
         }
 
 
@@ -368,9 +382,9 @@ include("../../BACK END/connect.php");
             /*
             const save = document.getElementById("save");
             const modal = document.getElementById("exampleModalToggle");
-
+ 
             
-
+ 
             if (!checkErrors) {
                 //modal.setAttribute("type","button");
                 const truck_modal = document.querySelector('#exampleModalToggle');
@@ -421,13 +435,14 @@ include("../../BACK END/connect.php");
                             // user is logged in successfully in the back-end 
                             // let's redirect 
                             $("#invoices").append(
-                                "<tr><td>" + message.clientName + " " + message.clientSurname + "</td>" +
+                                "<tr id=" + message.ID_Invoice + "><td>" + message.clientName + " " + message.clientSurname + "</td>" +
                                 "<td>" + message.number + "</td>" +
                                 "<td>" + message.date + "</td>" +
                                 "<td>" + message.bus_name + "</td>" +
                                 "<td>" + message.amount + "</td>" +
-                                "<td>" + message.pay_type + "</td><td><button type='button' class='btn btn-danger'><span class='bi bi-x-square-fill'></span></button><button type='button' class='btn btn-warning' onclick='invoiceInfo(" + message.ID_Invoice + ")' data-bs-toggle='modal' href='#exampleModalToggle'><span class='bi bi-pencil-fill'></span></button></td></tr>"
+                                "<td>" + message.pay_type + "</td><td><button type='button' class='btn btn-secondary' onclick=invoiceInfo(" + message.ID_Invoice + ") data-bs-toggle='modal' href='#exampleModalToggle'><i class='bi bi-pencil-fill'></i>Edit</button> <button type='button' class='btn btn-danger' data-bs-toggle='modal' href='#exampleModalToggle1' onclick='addDelete(" + message.ID_Invoice + ")'><i class='bi bi-trash text-light'></i>Delete</button></td></tr>"
                             );
+                            console.log(message.ID_Invoice);
 
                             /*
                             
@@ -445,9 +460,14 @@ include("../../BACK END/connect.php");
             $(this).find('form').trigger('reset');
         });
 
+        function addDelete(id){
+            document.getElementById("addDeleteButton").innerHTML= "<button class='btn btn-danger' data-bs-toggle='modal' data-bs-target='#exampleModalToggle1' onclick='deleteInvoice(" + id + ")'>Delete</button>";
+        }
+
         function deleteInvoice(id) {
             //rimuove fatture prendendo come paramentro l'id della riga della tabella e della tabella padre
-            //console.log("bello");
+            console.log(id);
+            
             var row = document.getElementById(id);
             row.parentNode.removeChild(row);
 
@@ -471,31 +491,31 @@ include("../../BACK END/connect.php");
         }
 
         function invoiceInfo(id) {
-            document.getElementById("exampleModalToggleLabel").innerHTML="";
-            document.getElementById("exampleModalToggleLabel").innerHTML="Modify invoice";
+            document.getElementById("exampleModalToggleLabel").innerHTML = "";
+            document.getElementById("exampleModalToggleLabel").innerHTML = "Modify invoice";
 
             document.getElementById("changeable").innerHTML = "";
             document.getElementById("changeable").innerHTML = "<button class='btn btn-primary' id='save' type='submit'' data-bs-target='#exampleModalToggle' data-bs-toggle=''>Modify</button>"
 
-                $.ajax({
-                    type: "POST",
-                    url: "../../BACK END/invoice_search.php",
-                    data: {
-                        ID_Invoice: id
-                    },
-                    success: function (message) {
-                        message = JSON.parse(message);
-                        //console.log(message);
+            $.ajax({
+                type: "POST",
+                url: "../../BACK END/invoice_search.php",
+                data: {
+                    ID_Invoice: id
+                },
+                success: function (message) {
+                    message = JSON.parse(message);
+                    //console.log(message);
 
-                        document.getElementById("num").value = message.num;
-                        document.getElementById("amount").value = message.amount;
-                        document.getElementById("date").value = message.date;
-                        document.getElementById("bus_name").value = message.bus_name;
-                        document.getElementById("pay_type").value = message.pay_type;
-                        document.getElementById("client").value = message.clientID;
+                    document.getElementById("num").value = message.num;
+                    document.getElementById("amount").value = message.amount;
+                    document.getElementById("date").value = message.date;
+                    document.getElementById("bus_name").value = message.bus_name;
+                    document.getElementById("pay_type").value = message.pay_type;
+                    document.getElementById("client").value = message.clientID;
 
-                    }
-                })
+                }
+            })
 
         }
 
