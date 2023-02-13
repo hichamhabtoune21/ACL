@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Gen 22, 2023 alle 16:06
--- Versione del server: 10.4.24-MariaDB
--- Versione PHP: 8.1.6
+-- Creato il: Feb 13, 2023 alle 21:50
+-- Versione del server: 10.4.27-MariaDB
+-- Versione PHP: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,65 +24,90 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `cliente`
+-- Struttura della tabella `client`
 --
 
-CREATE TABLE `cliente` (
-  `ID_Cliente` int(11) NOT NULL,
-  `partita IVA` int(11) NOT NULL,
-  `Nome` varchar(20) NOT NULL,
-  `Cognome` varchar(20) NOT NULL,
-  `Telefono` int(11) NOT NULL,
-  `Indirizzo` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE TABLE `client` (
+  `ID_Client` int(11) NOT NULL,
+  `VAT number` int(11) NOT NULL,
+  `Name` varchar(20) NOT NULL,
+  `Surname` varchar(20) NOT NULL,
+  `Phone` varchar(15) NOT NULL,
+  `Address` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dump dei dati per la tabella `client`
+--
+
+INSERT INTO `client` (`ID_Client`, `VAT number`, `Name`, `Surname`, `Phone`, `Address`) VALUES
+(1, 1111111, 'Brutto', 'Bruttino', '3349760340', 'via bello'),
+(2, 101010101, 'Bello', 'Bellino', '0101010101', 'via bello');
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `fattura`
+-- Struttura della tabella `invoice`
 --
 
-CREATE TABLE `fattura` (
-  `ID_Fattura` int(11) NOT NULL,
-  `Numero progressivo` int(11) NOT NULL,
-  `Data di emissione` date NOT NULL,
-  `Ragione sociale` varchar(30) NOT NULL,
-  `Importo` int(11) NOT NULL,
-  `Tipo di pagamento` varchar(20) NOT NULL,
-  `ID_Cliente` int(11) NOT NULL,
-  `ID_User` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE TABLE `invoice` (
+  `ID_Invoice` int(11) NOT NULL,
+  `Progressive number` int(11) NOT NULL,
+  `Issuing date` date NOT NULL,
+  `Business name` varchar(30) NOT NULL,
+  `Amount` int(11) NOT NULL,
+  `Payment type` varchar(20) NOT NULL,
+  `ID_Client` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dump dei dati per la tabella `invoice`
+--
+
+INSERT INTO `invoice` (`ID_Invoice`, `Progressive number`, `Issuing date`, `Business name`, `Amount`, `Payment type`, `ID_Client`) VALUES
+(30, 10, '2023-02-19', 'bellissimo', 10, 'card', 1),
+(36, 1111, '2023-03-04', 'bellissimo', 9, 'cash', 1);
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `permesso`
+-- Struttura della tabella `permission`
 --
 
-CREATE TABLE `permesso` (
-  `Permesso` varchar(15) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE TABLE `permission` (
+  `Permission` varchar(15) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `permesso_appartiene_ruolo`
+-- Struttura della tabella `permission_belong_to_role`
 --
 
-CREATE TABLE `permesso_appartiene_ruolo` (
-  `Permesso` varchar(15) NOT NULL,
-  `Ruolo` varchar(15) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE TABLE `permission_belong_to_role` (
+  `Permission` varchar(15) NOT NULL,
+  `Role` varchar(15) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `ruolo`
+-- Struttura della tabella `role`
 --
 
-CREATE TABLE `ruolo` (
-  `Ruolo` varchar(15) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE TABLE `role` (
+  `Role` varchar(15) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dump dei dati per la tabella `role`
+--
+
+INSERT INTO `role` (`Role`) VALUES
+('Admin'),
+('Amministrazione'),
+('Capo area'),
+('Commerciale');
 
 -- --------------------------------------------------------
 
@@ -95,107 +120,131 @@ CREATE TABLE `user` (
   `Email` varchar(30) NOT NULL,
   `Password` varchar(30) NOT NULL,
   `Username` varchar(20) NOT NULL,
-  `Nome` varchar(20) NOT NULL,
-  `Cognome` varchar(20) NOT NULL,
-  `Ruolo` varchar(15) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `Name` varchar(20) NOT NULL,
+  `Surname` varchar(20) NOT NULL,
+  `Role` varchar(15) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dump dei dati per la tabella `user`
 --
 
-INSERT INTO `user` (`ID_User`, `Email`, `Password`, `Username`, `Nome`, `Cognome`, `Ruolo`) VALUES
-(2, 'ok', 'ok', 'ok', 'ok', 'ok', 'NULL');
+INSERT INTO `user` (`ID_User`, `Email`, `Password`, `Username`, `Name`, `Surname`, `Role`) VALUES
+(5, 'admin@admin.com', 'admin', 'admin', 'admin', 'admin', 'Admin'),
+(7, 'prova@prova.com', 'prova', 'o', 'prova', 'prova', 'NULL');
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `user_manage_invoice`
+--
+
+CREATE TABLE `user_manage_invoice` (
+  `ID_Invoice` int(11) NOT NULL,
+  `ID_User` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Indici per le tabelle scaricate
 --
 
 --
--- Indici per le tabelle `cliente`
+-- Indici per le tabelle `client`
 --
-ALTER TABLE `cliente`
-  ADD PRIMARY KEY (`ID_Cliente`);
+ALTER TABLE `client`
+  ADD PRIMARY KEY (`ID_Client`);
 
 --
--- Indici per le tabelle `fattura`
+-- Indici per le tabelle `invoice`
 --
-ALTER TABLE `fattura`
-  ADD PRIMARY KEY (`ID_Fattura`),
-  ADD KEY `ID_Cliente(FK)` (`ID_Cliente`),
-  ADD KEY `ID_User(FK)` (`ID_User`);
+ALTER TABLE `invoice`
+  ADD PRIMARY KEY (`ID_Invoice`),
+  ADD KEY `ID_Cliente(FK)` (`ID_Client`);
 
 --
--- Indici per le tabelle `permesso`
+-- Indici per le tabelle `permission`
 --
-ALTER TABLE `permesso`
-  ADD PRIMARY KEY (`Permesso`);
+ALTER TABLE `permission`
+  ADD PRIMARY KEY (`Permission`);
 
 --
--- Indici per le tabelle `permesso_appartiene_ruolo`
+-- Indici per le tabelle `permission_belong_to_role`
 --
-ALTER TABLE `permesso_appartiene_ruolo`
-  ADD KEY `Permesso(FK)` (`Permesso`),
-  ADD KEY `Ruolo_FK` (`Ruolo`);
+ALTER TABLE `permission_belong_to_role`
+  ADD KEY `Permesso(FK)` (`Permission`),
+  ADD KEY `Ruolo_FK` (`Role`);
 
 --
--- Indici per le tabelle `ruolo`
+-- Indici per le tabelle `role`
 --
-ALTER TABLE `ruolo`
-  ADD PRIMARY KEY (`Ruolo`);
+ALTER TABLE `role`
+  ADD PRIMARY KEY (`Role`);
 
 --
 -- Indici per le tabelle `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`ID_User`),
-  ADD KEY `Ruolo(FK)` (`Ruolo`);
+  ADD KEY `Ruolo(FK)` (`Role`);
+
+--
+-- Indici per le tabelle `user_manage_invoice`
+--
+ALTER TABLE `user_manage_invoice`
+  ADD KEY `ID_Fattura(FK)` (`ID_Invoice`),
+  ADD KEY `ID_User(FK)` (`ID_User`);
 
 --
 -- AUTO_INCREMENT per le tabelle scaricate
 --
 
 --
--- AUTO_INCREMENT per la tabella `cliente`
+-- AUTO_INCREMENT per la tabella `client`
 --
-ALTER TABLE `cliente`
-  MODIFY `ID_Cliente` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `client`
+  MODIFY `ID_Client` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT per la tabella `fattura`
+-- AUTO_INCREMENT per la tabella `invoice`
 --
-ALTER TABLE `fattura`
-  MODIFY `ID_Fattura` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `invoice`
+  MODIFY `ID_Invoice` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT per la tabella `user`
 --
 ALTER TABLE `user`
-  MODIFY `ID_User` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID_User` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Limiti per le tabelle scaricate
 --
 
 --
--- Limiti per la tabella `fattura`
+-- Limiti per la tabella `invoice`
 --
-ALTER TABLE `fattura`
-  ADD CONSTRAINT `ID_Cliente(FK)` FOREIGN KEY (`ID_Cliente`) REFERENCES `cliente` (`ID_Cliente`),
-  ADD CONSTRAINT `ID_User(FK)` FOREIGN KEY (`ID_User`) REFERENCES `user` (`ID_User`);
+ALTER TABLE `invoice`
+  ADD CONSTRAINT `ID_Cliente(FK)` FOREIGN KEY (`ID_Client`) REFERENCES `client` (`ID_Client`);
 
 --
--- Limiti per la tabella `permesso_appartiene_ruolo`
+-- Limiti per la tabella `permission_belong_to_role`
 --
-ALTER TABLE `permesso_appartiene_ruolo`
-  ADD CONSTRAINT `Permesso(FK)` FOREIGN KEY (`Permesso`) REFERENCES `permesso` (`Permesso`),
-  ADD CONSTRAINT `Ruolo_FK` FOREIGN KEY (`Ruolo`) REFERENCES `ruolo` (`Ruolo`);
+ALTER TABLE `permission_belong_to_role`
+  ADD CONSTRAINT `Permesso(FK)` FOREIGN KEY (`Permission`) REFERENCES `permission` (`Permission`),
+  ADD CONSTRAINT `Ruolo_FK` FOREIGN KEY (`Role`) REFERENCES `role` (`Role`);
 
 --
 -- Limiti per la tabella `user`
 --
 ALTER TABLE `user`
-  ADD CONSTRAINT `Ruolo(FK)` FOREIGN KEY (`Ruolo`) REFERENCES `ruolo` (`Ruolo`);
+  ADD CONSTRAINT `Ruolo(FK)` FOREIGN KEY (`Role`) REFERENCES `role` (`Role`);
+
+--
+-- Limiti per la tabella `user_manage_invoice`
+--
+ALTER TABLE `user_manage_invoice`
+  ADD CONSTRAINT `ID_Fattura(FK)` FOREIGN KEY (`ID_Invoice`) REFERENCES `invoice` (`ID_Invoice`),
+  ADD CONSTRAINT `ID_User(FK)` FOREIGN KEY (`ID_User`) REFERENCES `user` (`ID_User`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
