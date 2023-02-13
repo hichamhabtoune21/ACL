@@ -185,7 +185,6 @@ include("../../BACK END/connect.php");
                                                         }
                                                     }
                                                     ?>
-                                                    <option value="bello" data-tokens="prova">prova</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -495,7 +494,7 @@ include("../../BACK END/connect.php");
             document.getElementById("exampleModalToggleLabel").innerHTML = "Modify invoice";
 
             document.getElementById("changeable").innerHTML = "";
-            document.getElementById("changeable").innerHTML = "<button class='btn btn-primary' id='save' type='submit'' data-bs-target='#exampleModalToggle' data-bs-toggle=''>Modify</button>"
+            document.getElementById("changeable").innerHTML = "<button class='btn btn-secondary' id='save' type='submit'' data-bs-target='#exampleModalToggle' data-bs-toggle=''>Edit</button>"
 
             $.ajax({
                 type: "POST",
