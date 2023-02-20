@@ -49,6 +49,10 @@ include("../../BACK END/connect.php");
             }
 
         }
+        .bootstrap-select .btn {
+  background-color: white;
+  
+}
 
 
 
@@ -165,7 +169,7 @@ include("../../BACK END/connect.php");
                                             <div class="mb-3">
                                                 <label for="client" class="form-label">Client</label>
                                                 <select name="client" id="client" class="form-control selectpicker"
-                                                    data-live-search="true" required>
+                                                    data-live-search="true" data-style="btn-white" required>
                                                     <option value="" selected disabled hidden>Choose here</option>
 
                                                     <?php
@@ -192,7 +196,7 @@ include("../../BACK END/connect.php");
                                         <div class="form-group">
                                             <div class="mb-3">
                                                 <label for="num" class="form-label">Progressive number</label>
-                                                <input type="number" id="num" name="num" class="form-control" required>
+                                                <input type="num" id="num" name="num" class="form-control" required>
                                             </div>
                                         </div>
 
@@ -253,11 +257,12 @@ include("../../BACK END/connect.php");
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Are you sure to delete it?</h1>
+                                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Are you sure to delete it?
+                                    </h1>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                                 </div>
-                              
+
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-light" data-bs-target="#exampleModalToggle1"
                                         data-bs-toggle="modal">Cancel</button>
@@ -322,15 +327,19 @@ include("../../BACK END/connect.php");
                                             <td>
                                                 <?= $invoice["Payment type"]; ?>
                                             </td>
-                                            <td>
-                                                <button type='button' class='btn btn-secondary'
-                                                    onclick=invoiceInfo(<?= $invoice['ID_Invoice'] ?>) data-bs-toggle='modal'
-                                                    href='#exampleModalToggle'><i class='bi bi-pencil-fill'></i>Edit</button>
-                                                <button type='button' class='btn btn-danger' data-bs-toggle='modal'
-                                                    href='#exampleModalToggle1' onclick=addDelete(<?= $invoice['ID_Invoice'] ?>)><i
-                                                        class='bi bi-trash text-light'></i>Delete</button>
+                                            <td nowrap>
+                                                <div class='d-flex flex-row bd-highlight mb-3 gap-2'>
 
+                                                    <button type='button' class='btn btn-secondary p-2 justify-content-center'
+                                                        onclick=invoiceInfo(<?= $invoice['ID_Invoice'] ?>) data-bs-toggle='modal'
+                                                        href='#exampleModalToggle'><i
+                                                            class='bi bi-pencil-fill'></i>Edit</button>
 
+                                                    <button type='button' class='btn btn-danger p-2 justify-content-center'
+                                                        data-bs-toggle='modal' href='#exampleModalToggle1'
+                                                        onclick=addDelete(<?= $invoice['ID_Invoice'] ?>)><i
+                                                            class='bi bi-trash text-light'></i>Delete</button>
+                                                </div>
                                             </td>
                                         </tr>
                                         <?php
@@ -369,33 +378,15 @@ include("../../BACK END/connect.php");
 
 
             let errors = "";
-            let checkErrors = false;
+            let checkErrors = true;
 
             for (var key in inputSignup) {
                 if (isEmpty(inputSignup[key])) {
                     errors += inputSignup[key].substring(5) + " empty\n";
-                    checkErrors = true;
+                    checkErrors = false;
                 }
             }
             return checkErrors;
-            /*
-            const save = document.getElementById("save");
-            const modal = document.getElementById("exampleModalToggle");
- 
-            
- 
-            if (!checkErrors) {
-                //modal.setAttribute("type","button");
-                const truck_modal = document.querySelector('#exampleModalToggle');
-                const modal = bootstrap.Modal.getInstance(truck_modal);
-                modal.hide();
-                //modal.hide();
-                //save.dataset.bsToggle = "modal"; //se tutti i dati nel form di inserimento fatture sono stati inseriti posso farlo chiudere
-                console.log("bello");
-                checkForm();
-            }
-            */
-            //console.log(document.getElementById("inputRepeatPassword").value);
 
         }
 
@@ -412,7 +403,7 @@ include("../../BACK END/connect.php");
             const modal = document.getElementById("exampleModalToggle");
 
 
-            if (!validate()) {
+            if (validate()) {
                 //modal.setAttribute("type","button");
                 const save = document.getElementById("save");
                 const truck_modal = document.querySelector('#exampleModalToggle');
@@ -439,7 +430,7 @@ include("../../BACK END/connect.php");
                                 "<td>" + message.date + "</td>" +
                                 "<td>" + message.bus_name + "</td>" +
                                 "<td>" + message.amount + "</td>" +
-                                "<td>" + message.pay_type + "</td><td><button type='button' class='btn btn-secondary' onclick=invoiceInfo(" + message.ID_Invoice + ") data-bs-toggle='modal' href='#exampleModalToggle'><i class='bi bi-pencil-fill'></i>Edit</button> <button type='button' class='btn btn-danger' data-bs-toggle='modal' href='#exampleModalToggle1' onclick='addDelete(" + message.ID_Invoice + ")'><i class='bi bi-trash text-light'></i>Delete</button></td></tr>"
+                                "<td>" + message.pay_type + "</td><td nowrap><div class='d-flex flex-row bd-highlight mb-3 gap-2'><button type='button' class='btn btn-secondary p-2' onclick=invoiceInfo(" + message.ID_Invoice + ") data-bs-toggle='modal' href='#exampleModalToggle'><i class='bi bi-pencil-fill'></i>Edit</button> <button type='button' class='btn btn-danger p-2' data-bs-toggle='modal' href='#exampleModalToggle1' onclick='addDelete(" + message.ID_Invoice + ")'><i class='bi bi-trash text-light'></i>Delete</button></div></td></tr>"
                             );
                             console.log(message.ID_Invoice);
 
@@ -454,19 +445,90 @@ include("../../BACK END/connect.php");
             }
         }
 
+
+        function editInvoice(id) {
+
+
+            const modal = document.getElementById("exampleModalToggle");
+
+
+            if (validate()) {
+                //modal.setAttribute("type","button");
+                const save = document.getElementById("save");
+                const truck_modal = document.querySelector('#exampleModalToggle');
+                const modal = bootstrap.Modal.getInstance(truck_modal);
+
+                const client = $("#client").val();
+                const num = $("#num").val();
+                const amount = $("#amount").val();
+                const date = $("#date").val();
+                const bus_name = $("#bus_name").val();
+                const pay_type = $("#pay_type").val();
+
+
+                modal.hide();
+
+                $('#form1').submit(function (e) {
+                    e.preventDefault();
+                    $.ajax({
+                        /*
+                        manda richiesta al server di aggiungere la fattura, una volta aggiunta nel server verrà visualizzata anche sulla pagina attuale
+                        */
+                        type: "POST",
+                        url: '../../BACK END/editInvoice.php',
+                        data: {
+                            id: id,
+                            num: num,
+                            date: date,
+                            amount: amount,
+                            pay_type: pay_type,
+                            client: client,
+                            bus_name: bus_name
+                        },
+                        success: function (message) {
+                            console.log(message);
+                            message = JSON.parse(message);
+
+                            // user is logged in successfully in the back-end 
+                            // let's redirect 
+                            if (message.text = "success") {
+                                console.log(message.ID_Invoice);
+                                var editedInvoice = document.getElementById(message.ID_Invoice);
+                                editedInvoice.innerHTML = "";
+
+                                editedInvoice.innerHTML = "<td>" + message.clientName + " " + message.clientSurname + "</td>" +
+                                    "<td>" + message.num + "</td>" +
+                                    "<td>" + message.date + "</td>" +
+                                    "<td>" + message.bus_name + "</td>" +
+                                    "<td>" + message.amount + "</td>" +
+                                    "<td>" + message.pay_type + "</td><td nowrap><div class='d-flex flex-row bd-highlight mb-3 gap-2'><button type='button' class='btn btn-secondary p-2' onclick=invoiceInfo(" + message.ID_Invoice + ") data-bs-toggle='modal' href='#exampleModalToggle'><i class='bi bi-pencil-fill'></i>Edit</button> <button type='button' class='btn btn-danger p-2' data-bs-toggle='modal' href='#exampleModalToggle1' onclick='addDelete(" + message.ID_Invoice + ")'><i class='bi bi-trash text-light'></i>Delete</button></div></td>"
+
+                                //console.log(message.ID_Invoice);
+                            }
+                            else if (message.text = "failed") {
+                                console.log("failed");
+                            }
+                        }
+                    });
+
+                    //console.log("bello")
+                })
+            }
+        }
+
         //resetta modal
         $(".modal").on("hidden.bs.modal", function () {
             $(this).find('form').trigger('reset');
         });
 
-        function addDelete(id){
-            document.getElementById("addDeleteButton").innerHTML= "<button class='btn btn-danger' data-bs-toggle='modal' data-bs-target='#exampleModalToggle1' onclick='deleteInvoice(" + id + ")'>Delete</button>";
+        function addDelete(id) {
+            document.getElementById("addDeleteButton").innerHTML = "<button class='btn btn-danger' data-bs-toggle='modal' data-bs-target='#exampleModalToggle1' onclick='deleteInvoice(" + id + ")'>Delete</button>";
         }
 
         function deleteInvoice(id) {
             //rimuove fatture prendendo come paramentro l'id della riga della tabella e della tabella padre
             console.log(id);
-            
+
             var row = document.getElementById(id);
             row.parentNode.removeChild(row);
 
@@ -494,7 +556,7 @@ include("../../BACK END/connect.php");
             document.getElementById("exampleModalToggleLabel").innerHTML = "Modify invoice";
 
             document.getElementById("changeable").innerHTML = "";
-            document.getElementById("changeable").innerHTML = "<button class='btn btn-secondary' id='save' type='submit'' data-bs-target='#exampleModalToggle' data-bs-toggle=''>Edit</button>"
+            document.getElementById("changeable").innerHTML = "<button class='btn btn-secondary' id='save' type='submit'' data-bs-target='#exampleModalToggle' data-bs-toggle='' onclick=editInvoice(" + id + ")>Edit</button>"
 
             $.ajax({
                 type: "POST",
@@ -504,8 +566,9 @@ include("../../BACK END/connect.php");
                 },
                 success: function (message) {
                     message = JSON.parse(message);
-                    //console.log(message);
-
+                    console.log(message.clientID);
+                    //document.getElementById("client").value = message.clientID;
+                    $('.selectpicker').selectpicker('val', message.clientID);
                     document.getElementById("num").value = message.num;
                     document.getElementById("amount").value = message.amount;
                     document.getElementById("date").value = message.date;
