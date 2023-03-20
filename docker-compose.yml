@@ -18,9 +18,9 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: acl
-      MYSQL_USER: admin
-      MYSQL_PASSWORD: admin
+      MYSQL_DATABASE: crud
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
     ports:
       - "9906:3306"
 
