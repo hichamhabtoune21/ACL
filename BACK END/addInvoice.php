@@ -12,8 +12,7 @@ $amount=$_POST["amount"];
 mysqli_query($connect, "SET FOREIGN_KEY_CHECKS=0");
 
 
-$query= "insert into invoice values ('NULL', '$number', '$date', '$bus_name',
-        '$amount','$pay_type', '$clientID')"; 
+$query= "INSERT INTO `invoice` (`Progressive number`, `Issuing date`, `Business name`, `Amount`, `Payment type`, `ID_Client`) VALUES ('$number', '$date', '$bus_name','$amount','$pay_type', '$clientID')"; 
 
 
 $result=mysqli_query($connect,$query);

@@ -124,7 +124,7 @@
                     url: '../../BACK END/script_login.php',
                     data: $(this).serialize(),
                     success: function (response) {
-                        console.log("ok");
+                        console.log(response);
                         var message = JSON.parse(response);
                         //var message = JSON.parse(response);
 

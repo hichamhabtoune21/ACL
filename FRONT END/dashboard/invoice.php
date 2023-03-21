@@ -420,7 +420,9 @@ include("../../BACK END/connect.php");
                         url: '../../BACK END/addInvoice.php',
                         data: $(this).serialize(),
                         success: function (response) {
+                            console.log(response);
                             var message = JSON.parse(response);
+                            
 
                             // user is logged in successfully in the back-end 
                             // let's redirect 
