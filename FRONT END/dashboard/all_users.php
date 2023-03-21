@@ -37,6 +37,7 @@ include("../../BACK END/connect.php");
             }
 
         }
+
         /*
         .table{
    display: block !important;
@@ -44,8 +45,6 @@ include("../../BACK END/connect.php");
    width: 100% !important;
  }
  */
- 
-   
     </style>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
         integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
@@ -53,158 +52,166 @@ include("../../BACK END/connect.php");
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
         integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
         crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.js"
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
 
 </head>
 
 <body class="d-flex flex-column" style="min-height: 100vh">
 
-<?php if(isset($_SESSION["id"]) && isset($_SESSION["ruolo"])){
-        if($_SESSION["ruolo"]=="Admin"){?>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12 bg-dark vh-10 show d-none d-md-block overflow-hidden"
-                style="color: white;padding-left: 18px;padding-top: 10px;font-size: 25px; width:100%;">
+    <?php if (isset($_SESSION["id"]) && isset($_SESSION["ruolo"])) {
+        if ($_SESSION["ruolo"] == "Admin") { ?>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 bg-dark vh-10 show d-none d-md-block overflow-hidden"
+                        style="color: white;padding-left: 18px;padding-top: 10px;font-size: 25px; width:100%;">
 
-                <i class="bi bi-bounding-box"></i><span>ACME</span>
-            </div>
-        </div>
-        
-        <div class="row bg-dark" >
-            <div class="col-md-12 col-lg-12 col-xl-12 bg-dark float-left" style="color: beige;">
-                <div class="row d-md-none">
+                        <i class="bi bi-bounding-box"></i><span>ACME</span>
+                    </div>
+                </div>
 
-                    <div class="col-12 inline d-flex justify-content-between">
+                <div class="row bg-dark">
+                    <div class="col-md-12 col-lg-12 col-xl-12 bg-dark float-left" style="color: beige;">
+                        <div class="row d-md-none">
+
+                            <div class="col-12 inline d-flex justify-content-between">
 
 
-                        <nav class="navbar navbar-dark">
-                            <button class="navbar-toggler" data-bs-toggle="collapse" href="#nav" role="button"
-                                aria-expanded="true" aria-controls="nav" data-toggle="collapse">
-                                <i class="navbar-toggler-icon"></i>
-                            </button>
-                            <div style="padding-left: 20px;padding-top: 5px;font-size: 25px;">
-                                <i class="bi bi-bounding-box"></i><span>ACME</span>
+                                <nav class="navbar navbar-dark">
+                                    <button class="navbar-toggler" data-bs-toggle="collapse" href="#nav" role="button"
+                                        aria-expanded="true" aria-controls="nav" data-toggle="collapse">
+                                        <i class="navbar-toggler-icon"></i>
+                                    </button>
+                                    <div style="padding-left: 20px;padding-top: 5px;font-size: 25px;">
+                                        <i class="bi bi-bounding-box"></i><span>ACME</span>
+                                    </div>
+
+                                </nav>
+
                             </div>
 
-                        </nav>
 
-                    </div>
-
-                   
-                </div>
-            </div>
-        </div>
-
-
-        <div class="row">
-            <div class="col-md-2 col-lg-2 col-xl-2 bg-dark collapse show d-md-block text-nowrap"
-                style="color: beige; padding-right: 10px; align-items: center;" id="nav">
-                <div class="vh-100">
-                    <div class="navbar navbar-dark bg-dark">
-                        <div class="align-middle" style="font-size: 18px; padding-left: 18px; padding-top: 20px;">
-                            <ul class="navbar-nav">
-                                <li class="nav-item" style="padding-bottom: 20px;">
-                                    <a class="nav-link" aria-current="page"
-                                        href="admin-dashboard.php"><i
-                                            class="bi bi-house"></i>Home</a>
-                                </li>
-
-                                <li class="nav-item" style="padding-bottom: 20px;">
-                                    <a class="nav-link active" aria-current="page" href="#"><i
-                                            class="bi bi-people"></i>Users</a>
-                                </li>
-
-                                <li class="nav-item" style="padding-bottom: 20px;">
-                                    <a class="nav-link" href="#"><i class="bi bi-journal-check"></i>Clients</a>
-                                </li>
-                                <li class="nav-item" style="padding-bottom: 20px;">
-                                    <a class="nav-link" href="invoice.php"><i class="bi bi-bar-chart"></i>Invoices</a>
-                                </li>
-
-                                <li class="nav-item" style="padding-bottom: 20px;">
-                                    <a class="nav-link" href="#"><i class="bi bi-question-square"></i>Help</a>
-                                </li>
-                                <hr style="width: 200%; background-color: white;">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#"><i class="bi bi-person-square"></i></i>Profile</a>
-                                </li>
-
-
-                            </ul>
                         </div>
                     </div>
                 </div>
 
 
-            </div>
-            <div class="col-md-10 col-lg-10 col-xl-10" style="background-color: white; padding:20px">
-                <h1>Users</h1>
-                <div class="overflow-auto" style="padding-top:20px">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">Email</th>
-                            <th scope="col">Password</th>
-                            <th scope="col">Username</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Surname</th>
-                            <th scope="col">Role</th>
-                            <th scope="col"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        $result = mysqli_query($connect, "SELECT * from user");
-                        if (mysqli_num_rows($result)) {
-                            while($user=mysqli_fetch_array($result)){
-                                ?>
-                                <tr>
-                                    <td>
-                                        <?= $user["Email"]; ?>
-                                    </td>
-                                    <td>
-                                        <?= $user["Password"]; ?>
-                                    </td>
-                                    <td>
-                                        <?= $user["Username"]; ?>
-                                    </td>
-                                    <td>
-                                        <?= $user["Name"]; ?>
-                                    </td>
-                                    <td>
-                                        <?= $user["Surname"]; ?>
-                                    </td>
-                                    <td >
-                                        <select class="form-select" aria-label="Default select example" name="role" id="role" onchange="changeRole()">
-                                            <?php
-                                            if ($user["Role"] == "NULL") {
-                                                echo "
-                                                        <option selected>Senza ruolo</option>
-                                                        <option value='ad'>Admin</option>
-                                                        <option value='commercial'>Commerciale</option>
-                                                        <option value='capo'>Capo area</option>
-                                                        <option value='amministrazione'>Amministrazione</option>";
-                                            } elseif ($user["Role"] == "Amministratore") {
-                                                echo "
-                                                        <option selected>Amministrazione</option>
-                                                        <option value='ad'>Admin</option>
-                                                        <option value='commercial'>Commerciale</option>
-                                                        <option value='capo'>Capo area</option>";
-                                            } elseif ($user["Role"] == "Admin") {
-                                                echo "
-                                                <option selected>Admin</option>
-                                                <option value='commercial'>Commerciale</option>
-                                                <option value='capo'>Capo area</option>
-                                                <option value='amministrazione'>Amministrazione</option>";
-                                            } elseif ($user["Role"] == "Commerciale") {
-                                                echo "
-                                                <option selected>Commerciale</option>
-                                                <option value='ad'>Admin</option>
-                                                <option value='capo'>Capo area</option>
-                                                <option value='amministrazione'>Amministrazione</option>";
-                                            }elseif($user[""])
+                <div class="row">
+                    <div class="col-md-2 col-lg-2 col-xl-2 bg-dark collapse d-md-block text-nowrap"
+                        style="color: beige; padding-right: 10px; align-items: center;" id="nav">
+                        <div class="vh-100">
+                            <div class="navbar navbar-dark bg-dark">
+                                <div class="align-middle" style="font-size: 18px; padding-left: 18px; padding-top: 20px;">
+                                    <ul class="navbar-nav">
+                                        <li class="nav-item" style="padding-bottom: 20px;">
+                                            <a class="nav-link" aria-current="page" href="admin-dashboard.php"><i
+                                                    class="bi bi-house"></i>Home</a>
+                                        </li>
 
+                                        <li class="nav-item" style="padding-bottom: 20px;">
+                                            <a class="nav-link active" aria-current="page" href="#"><i
+                                                    class="bi bi-people"></i>Users</a>
+                                        </li>
+
+                                        <li class="nav-item" style="padding-bottom: 20px;">
+                                            <a class="nav-link" href="#"><i class="bi bi-journal-check"></i>Clients</a>
+                                        </li>
+                                        <li class="nav-item" style="padding-bottom: 20px;">
+                                            <a class="nav-link" href="invoice.php"><i class="bi bi-bar-chart"></i>Invoices</a>
+                                        </li>
+
+                                        <li class="nav-item" style="padding-bottom: 20px;">
+                                            <a class="nav-link" href="#"><i class="bi bi-question-square"></i>Help</a>
+                                        </li>
+                                        <hr style="width: 200%; background-color: white;">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#"><i class="bi bi-person-square"></i></i>Profile</a>
+                                        </li>
+
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="col-md-10 col-lg-10 col-xl-10" style="background-color: white; padding:20px">
+                        <h1>Users</h1>
+                        <div class="overflow-auto" style="padding-top:20px">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Password</th>
+                                        <th scope="col">Username</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Surname</th>
+                                        <th scope="col">Role</th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $result = mysqli_query($connect, "SELECT * from user");
+                                    if (mysqli_num_rows($result)) {
+                                        while ($user = mysqli_fetch_array($result)) {
                                             ?>
-                                            <!--
+                                            <tr>
+                                                <td>
+                                                    <?= $user["Email"]; ?>
+                                                </td>
+                                                <td>
+                                                    <?= $user["Password"]; ?>
+                                                </td>
+                                                <td>
+                                                    <?= $user["Username"]; ?>
+                                                </td>
+                                                <td>
+                                                    <?= $user["Name"]; ?>
+                                                </td>
+                                                <td>
+                                                    <?= $user["Surname"]; ?>
+                                                </td>
+                                                <td>
+                                                    <select class="form-select" aria-label="Default select example" name="role"
+                                                        id=<?= $user["ID_User"]; ?> onchange='changeRole(<?= $user["ID_User"]; ?>)'>
+                                                        <?php
+                                                        if ($user["Role"] == "NULL") {
+                                                            echo "
+                                                        <option selected>Senza ruolo</option>
+                                                        <option value='Admin'>Admin</option>
+                                                        <option value='Commercial'>Commercial</option>
+                                                        <option value='Area Manager'>Area Manager</option>
+                                                        <option value='Administration'>Administration</option>";
+                                                        } elseif ($user["Role"] == "Administration") {
+                                                            echo "
+                                                        <option selected>Administration</option>
+                                                        <option value='Admin'>Admin</option>
+                                                        <option value='Commercial'>Commercial</option>
+                                                        <option value='Area Manager'>Area Manager</option>";
+                                                        } elseif ($user["Role"] == "Admin") {
+                                                            echo "
+                                                <option selected>Admin</option>
+                                                <option value='Commercial'>Commerciale</option>
+                                                <option value='Area Manager'>Area Manager</option>
+                                                <option value='Administration'>Administration</option>";
+                                                        } elseif ($user["Role"] == "Commercial") {
+                                                            echo "
+                                                <option selected>Commercial</option>
+                                                <option value='Admin'>Admin</option>
+                                                <option value='Area Manager'>Area Manager</option>
+                                                <option value='Administration'>Administration</option>";
+                                                        } elseif ($user["Role"] == "Area Manager"){
+                                                            echo "
+                                                <option selected>Area Manager</option>
+                                                <option value='Admin'>Admin</option>
+                                                <option value='Administration'>Administration</option>";
+                                                            
+                                                        }
+
+                                                        ?>
+                                                        <!--
                                                             <option selected>
                                                                 <?= $user["Ruolo"] ?>
                                                             </option>
@@ -214,69 +221,62 @@ include("../../BACK END/connect.php");
                                                             <option value='capo'>Capo area</option>
                                                             <option value='amministrazione'>Amministrazione</option>
                                                         -->
-                                        </select>
-                                    </td>
+                                                    </select>
+                                                </td>
 
-                                    <td>
-                                        <button type="button" class="btn btn-danger">Delete</button>
+                                                <td>
+                                                    <button type="button" class="btn btn-danger">Delete</button>
 
-                                    </td>
-                                </tr>
-                                <?php
-                            }
+                                                </td>
+                                            </tr>
+                                            <?php
+                                        }
 
-                        }
+                                    }
 
-                        ?>
+                                    ?>
 
-                    </tbody>
-                </table>
+                                </tbody>
+                            </table>
+                        </div>
+
+
+
+                    </div>
                 </div>
-
-
-
             </div>
-        </div>
-    </div>
-    <?php
-    }
-}
-else{
-    echo "Access denied";}?>
+            <?php
+        }
+    } else {
+        echo "Access denied";
+    } ?>
 
 </body>
 <script>
-    /* Storing user's device details in a variable*/
-    let details = navigator.userAgent;
+    function changeRole(id) {
+        //rimuove fatture prendendo come paramentro l'id della riga della tabella e della tabella padre
+        console.log(id);
+        role = document.getElementById(id).value;
+        console.log(role);
+        $.ajax({
+            type: "POST",
+            url: '../../BACK END/changeUserRole.php',
+            data: {
+                ID_User: id,
+                Role: role,
+            },
+            success: function (response) {
+                console.log(response);
+                
+                //alert("oooo");
+            },
+            error: function () {
+                alert("failed");
+            }
 
-    /* Creating a regular expression 
-    containing some mobile devices keywords 
-    to search it in details string*/
-    let regexp = /android|iphone|kindle|ipad/i;
-
-    /* Using test() method to search regexp in details
-    it returns boolean value*/
-    let isMobileDevice = regexp.test(details);
-
-    const a = ["desktop", "mobile"];
-    if (isMobileDevice) {
-        //document.write("You are using a Mobile Device");
-        //var x = document.getElementById("select").value;
-
-
-
-    } else {
-        // document.write("You are using Desktop");
-        // document.getElementById("nav").classList.add('collapse-horizontal');
-
+        })
+        
     }
-    function change() {
-
-
-    }
-
-
-
 
 </script>
 
