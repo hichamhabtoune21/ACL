@@ -52,19 +52,19 @@ include("../../BACK END/connect.php");
     <?php if (isset($_SESSION["id"]) && isset($_SESSION["ruolo"])) {
         if ($_SESSION["ruolo"] == "Admin") { ?>
             <div class="container-fluid">
-                <div class="row">
+            <div class="row">
                     <div class="col-12 bg-dark vh-10 show d-none d-md-block overflow-hidden"
-                        style="color: white;padding-left: 18px;padding-top: 10px;font-size: 25px;">
+                        style="color: white;padding-left: 18px;padding-top: 10px;font-size: 25px; width:100%;">
 
                         <i class="bi bi-bounding-box"></i><span>ACME</span>
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-md-2 col-lg-2 col-xl-2 bg-dark float-left" style="color: beige;">
+                <div class="row bg-dark">
+                    <div class="col-md-12 col-lg-12 col-xl-12 bg-dark float-left" style="color: beige;">
                         <div class="row d-md-none">
 
-                            <div class="col-6 inline d-flex justify-content-between">
+                            <div class="col-12 inline d-flex justify-content-between">
 
 
                                 <nav class="navbar navbar-dark">
@@ -80,8 +80,6 @@ include("../../BACK END/connect.php");
 
                             </div>
 
-                            <div class="col-6">
-                            </div>
 
                         </div>
                     </div>
@@ -90,7 +88,7 @@ include("../../BACK END/connect.php");
 
 
                 <div class="row">
-                    <div class="col-md-2 col-lg-2 col-xl-2 bg-dark collapse show d-md-block text-nowrap"
+                    <div class="col-md-2 col-lg-2 col-xl-2 bg-dark collapse d-md-block text-nowrap"
                         style="color: beige; padding-right: 10px; align-items: center;" id="nav">
                         <div class="vh-100">
                             <div class="navbar navbar-dark bg-dark">
@@ -120,8 +118,6 @@ include("../../BACK END/connect.php");
                                         <li class="nav-item">
                                             <a class="nav-link" href="#"><i class="bi bi-person-square"></i></i>Profile</a>
                                         </li>
-
-
                                     </ul>
                                 </div>
                             </div>
@@ -146,35 +142,8 @@ include("../../BACK END/connect.php");
         echo "Access denied";
     } ?>
 </body>
-<script>
-    /* Storing user's device details in a variable*/
-    let details = navigator.userAgent;
+</html>
 
-    /* Creating a regular expression 
-    containing some mobile devices keywords 
-    to search it in details string*/
-    let regexp = /android|iphone|kindle|ipad/i;
-
-    /* Using test() method to search regexp in details
-    it returns boolean value*/
-    let isMobileDevice = regexp.test(details);
-
-    const a = ["desktop", "mobile"];
-    if (isMobileDevice) {
-        //document.write("You are using a Mobile Device");
-        //var x = document.getElementById("select").value;
-
-
-
-    } else {
-        // document.write("You are using Desktop");
-        // document.getElementById("nav").classList.add('collapse-horizontal');
-
-    }
-    function change() {
-
-
-    }
 
 
 
