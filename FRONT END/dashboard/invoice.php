@@ -326,15 +326,15 @@ include("../../BACK END/connect.php");
                                             <td nowrap>
                                                 <div class='d-flex flex-row bd-highlight mb-3 gap-2'>
 
-                                                    <button type='button' class='btn btn-secondary p-2 justify-content-center'
+                                                    <button type='button' class='btn btn-dark p-2 justify-content-center'
                                                         onclick=invoiceInfo(<?= $invoice['ID_Invoice'] ?>) data-bs-toggle='modal'
-                                                        href='#exampleModalToggle'><i
-                                                            class='bi bi-pencil-fill'></i>Edit</button>
+                                                        href='#exampleModalToggle' style="color:white"><i
+                                                            class='bi bi-pencil'></i>Edit</button>
 
                                                     <button type='button' class='btn btn-danger p-2 justify-content-center'
                                                         data-bs-toggle='modal' href='#exampleModalToggle1'
-                                                        onclick=addDelete(<?= $invoice['ID_Invoice'] ?>)><i
-                                                            class='bi bi-trash text-light'></i>Delete</button>
+                                                        onclick=addDelete(<?= $invoice['ID_Invoice']?>) style="color:white;"><i
+                                                            class='bi bi-x-square'></i>Delete</button>
                                                 </div>
                                             </td>
                                         </tr>
