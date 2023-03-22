@@ -328,12 +328,12 @@ include("../../BACK END/connect.php");
 
                                                     <button type='button' class='btn btn-dark p-2 justify-content-center'
                                                         onclick=invoiceInfo(<?= $invoice['ID_Invoice'] ?>) data-bs-toggle='modal'
-                                                        href='#exampleModalToggle' style="color:white"><i
+                                                        href='#exampleModalToggle'><i
                                                             class='bi bi-pencil'></i>Edit</button>
 
                                                     <button type='button' class='btn btn-danger p-2 justify-content-center'
                                                         data-bs-toggle='modal' href='#exampleModalToggle1'
-                                                        onclick=addDelete(<?= $invoice['ID_Invoice']?>) style="color:white;"><i
+                                                        onclick=addDelete(<?= $invoice['ID_Invoice']?>)><i
                                                             class='bi bi-x-square'></i>Delete</button>
                                                 </div>
                                             </td>
@@ -362,7 +362,7 @@ include("../../BACK END/connect.php");
             document.getElementById("exampleModalToggleLabel").innerHTML = "New invoice";
 
             document.getElementById("changeable").innerHTML = "";
-            document.getElementById("changeable").innerHTML = "<button class='btn btn-secondary' id='save' type='submit'' data-bs-target='#exampleModalToggle' data-bs-toggle='' onclick='addInvoice()'>Save</button>"
+            document.getElementById("changeable").innerHTML = "<button class='btn btn-dark' id='save' type='submit'' data-bs-target='#exampleModalToggle' data-bs-toggle='' onclick='addInvoice()'>Save</button>"
         }
 
 
@@ -428,7 +428,7 @@ include("../../BACK END/connect.php");
                                 "<td>" + message.date + "</td>" +
                                 "<td>" + message.bus_name + "</td>" +
                                 "<td>" + message.amount + "</td>" +
-                                "<td>" + message.pay_type + "</td><td nowrap><div class='d-flex flex-row bd-highlight mb-3 gap-2'><button type='button' class='btn btn-secondary p-2' onclick=invoiceInfo(" + message.ID_Invoice + ") data-bs-toggle='modal' href='#exampleModalToggle'><i class='bi bi-pencil-fill'></i>Edit</button> <button type='button' class='btn btn-danger p-2' data-bs-toggle='modal' href='#exampleModalToggle1' onclick='addDelete(" + message.ID_Invoice + ")'><i class='bi bi-trash text-light'></i>Delete</button></div></td></tr>"
+                                "<td>" + message.pay_type + "</td><td nowrap><div class='d-flex flex-row bd-highlight mb-3 gap-2'><button type='button' class='btn btn-dark p-2' onclick=invoiceInfo(" + message.ID_Invoice + ") data-bs-toggle='modal' href='#exampleModalToggle'><i class='bi bi-pencil-fill'></i>Edit</button> <button type='button' class='btn btn-danger p-2' data-bs-toggle='modal' href='#exampleModalToggle1' onclick='addDelete(" + message.ID_Invoice + ")'><i class='bi bi-trash text-light'></i>Delete</button></div></td></tr>"
                             );
                             console.log(message.ID_Invoice);
 
@@ -499,7 +499,7 @@ include("../../BACK END/connect.php");
                                     "<td>" + message.date + "</td>" +
                                     "<td>" + message.bus_name + "</td>" +
                                     "<td>" + message.amount + "</td>" +
-                                    "<td>" + message.pay_type + "</td><td nowrap><div class='d-flex flex-row bd-highlight mb-3 gap-2'><button type='button' class='btn btn-secondary p-2' onclick=invoiceInfo(" + message.ID_Invoice + ") data-bs-toggle='modal' href='#exampleModalToggle'><i class='bi bi-pencil-fill'></i>Edit</button> <button type='button' class='btn btn-danger p-2' data-bs-toggle='modal' href='#exampleModalToggle1' onclick='addDelete(" + message.ID_Invoice + ")'><i class='bi bi-trash text-light'></i>Delete</button></div></td>"
+                                    "<td>" + message.pay_type + "</td><td nowrap><div class='d-flex flex-row bd-highlight mb-3 gap-2'><button type='button' class='btn btn-dark p-2' onclick=invoiceInfo(" + message.ID_Invoice + ") data-bs-toggle='modal' href='#exampleModalToggle'><i class='bi bi-pencil-fill'></i>Edit</button> <button type='button' class='btn btn-danger p-2' data-bs-toggle='modal' href='#exampleModalToggle1' onclick='addDelete(" + message.ID_Invoice + ")'><i class='bi bi-trash text-light'></i>Delete</button></div></td>"
 
                                 //console.log(message.ID_Invoice);
                             }
@@ -554,7 +554,7 @@ include("../../BACK END/connect.php");
             document.getElementById("exampleModalToggleLabel").innerHTML = "Modify invoice";
 
             document.getElementById("changeable").innerHTML = "";
-            document.getElementById("changeable").innerHTML = "<button class='btn btn-secondary' id='save' type='submit'' data-bs-target='#exampleModalToggle' data-bs-toggle='' onclick=editInvoice(" + id + ")>Edit</button>"
+            document.getElementById("changeable").innerHTML = "<button class='btn btn-dark' id='save' type='submit'' data-bs-target='#exampleModalToggle' data-bs-toggle='' onclick=editInvoice(" + id + ")>Edit</button>"
 
             $.ajax({
                 type: "POST",
