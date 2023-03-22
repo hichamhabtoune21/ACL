@@ -11,6 +11,9 @@ include("../../BACK END/connect.php");
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.js"
         integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
@@ -30,6 +33,8 @@ include("../../BACK END/connect.php");
     <style>
         body {
             font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: #2B3036;
+            color: white;
         }
 
         i {
@@ -49,20 +54,11 @@ include("../../BACK END/connect.php");
             }
 
         }
+
         .bootstrap-select .btn {
-  background-color: white;
-  
-}
+            background-color: white;
 
-
-
-        /*
-        .table{
-   display: block !important;
-   overflow-x: auto !important;
-   width: 100% !important;
- }
- */
+        }
     </style>
 
 
@@ -132,7 +128,7 @@ include("../../BACK END/connect.php");
                                 <li class="nav-item" style="padding-bottom: 20px;">
                                     <a class="nav-link" href="#"><i class="bi bi-question-square"></i>Help</a>
                                 </li>
-                                <hr style="width: 200%; background-color: white;">
+                                <hr style="width: 100%;color:white;">
                                 <li class="nav-item">
                                     <a class="nav-link" href="#"><i class="bi bi-person-square"></i></i>Profile</a>
                                 </li>
@@ -145,8 +141,8 @@ include("../../BACK END/connect.php");
 
 
             </div>
-            <div class="col-md-10 col-lg-10 col-xl-10" style="background-color: white;padding:20px">
-                <h1>Invoice management</h1>
+            <div class="col-md-10 col-lg-10 col-xl-10" style="padding:25px">
+                <h3 style="padding-bottom:25px">INVOICE MANAGEMENT</h3>
 
                 <div class="overflow-auto">
 
@@ -276,13 +272,13 @@ include("../../BACK END/connect.php");
                         </div>
                     </div>
 
-                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" href="#exampleModalToggle"
+                    <button type="button" class="btn btn-dark" data-bs-toggle="modal" href="#exampleModalToggle"
                         onclick="add()"><i class="bi bi-plus-square"></i>Add</button>
                     <div class="overflow-auto" style="padding-top:20px">
 
-                        <table class="table">
+                        <table class="table table-dark table-striped">
                             <thead>
-                                <tr>
+                                <tr style="">
                                     <th scope="col">Client</th>
                                     <th scope="col">Progressive number</th>
                                     <th scope="col">Issuing date</th>
@@ -422,7 +418,7 @@ include("../../BACK END/connect.php");
                         success: function (response) {
                             console.log(response);
                             var message = JSON.parse(response);
-                            
+
 
                             // user is logged in successfully in the back-end 
                             // let's redirect 
