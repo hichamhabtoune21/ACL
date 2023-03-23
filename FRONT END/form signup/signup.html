@@ -175,13 +175,14 @@
                         url: '../../BACK END/script_signup.php',
                         data: $(this).serialize(),
                         success: function (response) {
-                            console.log("ok");
+                            console.log(response);
                             /*
-                            var message = JSON.parse(response);
                             */
 
                             // user is logged in successfully in the back-end 
                             // let's redirect 
+                            var message = JSON.parse(response);
+
                             var warning="";
                             if(message.text.includes("Thanks")){
                                 warning = "<p class='text-success'>" +message.text+ "</p>";

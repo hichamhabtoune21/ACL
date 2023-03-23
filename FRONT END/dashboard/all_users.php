@@ -18,25 +18,76 @@ include("../../BACK END/connect.php");
     <style>
         body {
             font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: #2B3036;
+            color: white;
         }
 
         i {
             padding-right: 10px;
         }
 
-        @media(prefers-reduced-motion: reduce) {
-            .collapsing {
-                transition-property: height, visibility;
-                transition-duration: .999s;
-            }
-        }
-
-        @media (max-width: 450px) {
-            .h-custom {
-                height: 100%;
-            }
+        .modal-backdrop {
+            background-color: black;
 
         }
+
+        .modal-content {
+            background-color: white;
+            color: #fff;
+            border: none;
+        }
+
+        .modal-header {
+            background-color: #2B3036;
+            color: #fff;
+        }
+
+        .close {
+            background-color: white;
+
+            color: #fff;
+        }
+
+        .modal-body {
+            background-color: white;
+            color: black;
+
+        }
+
+        .modal-footer {
+            background-color: white;
+            color: #fff;
+
+        }
+
+        .modal a {
+            color: black;
+        }
+
+        select.form-select {
+            background-color: #333;
+            color: #fff;
+            border-color: #666;
+        }
+
+        /* Stile per l'elemento "form-select" */
+
+
+        /* Stile per l'opzione selezionata dell'elemento "form-select" */
+        select.form-select option:checked {
+            background-color: #666;
+            color: #fff;
+        }
+
+
+
+        /* Stile per il bordo dell'elemento "form-select" quando ha lo stato di focus */
+        select.form-select:focus {
+            box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.25);
+            border-color: #fff;
+            outline: none;
+        }
+
 
         /*
         .table{
@@ -52,7 +103,7 @@ include("../../BACK END/connect.php");
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
         integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
         crossorigin="anonymous"></script>
-        <script src="https://code.jquery.com/jquery-3.3.1.js"
+    <script src="https://code.jquery.com/jquery-3.3.1.js"
         integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
 
 </head>
@@ -136,10 +187,59 @@ include("../../BACK END/connect.php");
 
 
                     </div>
-                    <div class="col-md-10 col-lg-10 col-xl-10" style="background-color: white; padding:20px">
-                        <h1>Users</h1>
+                    <div class="col-md-10 col-lg-10 col-xl-10" style="padding:25px">
+
+                        <div class="modal fade" id="exampleModalToggle1" aria-hidden="true"
+                            aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Are you sure to delete it?
+                                        </h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-outline-secondary"
+                                            data-bs-target="#exampleModalToggle1" data-bs-toggle="modal">Cancel</button>
+                                        <div id="addDeleteButton">
+                                            <button class="btn btn-danger" data-bs-toggle="modal"
+                                                data-bs-target="#exampleModalToggle1"
+                                                onclick="deletUser(<?= $invoice['ID_User'] ?>)">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal fade" id="exampleModalToggle" aria-hidden="true"
+                            aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Are you sure to delete it?
+                                        </h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-outline-secondary"
+                                            data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Cancel</button>
+                                        <div id="addDeleteButton">
+                                            <button class="btn btn-dark" data-bs-toggle="modal"
+                                                data-bs-target="#exampleModalToggle"
+                                                onclick="changeRole()">Save</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3>USERS</h3>
                         <div class="overflow-auto" style="padding-top:20px">
-                            <table class="table">
+                            <table class="table table-dark">
                                 <thead>
                                     <tr>
                                         <th scope="col">Email</th>
@@ -174,8 +274,9 @@ include("../../BACK END/connect.php");
                                                     <?= $user["Surname"]; ?>
                                                 </td>
                                                 <td>
-                                                    <select class="form-select" aria-label="Default select example" name="role"
-                                                        id=<?= $user["ID_User"]; ?> onchange='changeRole(<?= $user["ID_User"]; ?>)'>
+                                                    <select class="form-select form-select-sm" aria-label="Default select example" name="role"
+                                                        id=<?= $user["ID_User"]; ?> onchange='saveChanges(<?= $user["ID_User"] ?>)'>
+                                                        
                                                         <?php
                                                         if ($user["Role"] == "NULL") {
                                                             echo "
@@ -202,12 +303,14 @@ include("../../BACK END/connect.php");
                                                 <option value='Admin'>Admin</option>
                                                 <option value='Area Manager'>Area Manager</option>
                                                 <option value='Administration'>Administration</option>";
-                                                        } elseif ($user["Role"] == "Area Manager"){
+                                                        } elseif ($user["Role"] == "Area Manager") {
                                                             echo "
                                                 <option selected>Area Manager</option>
                                                 <option value='Admin'>Admin</option>
-                                                <option value='Administration'>Administration</option>";
-                                                            
+                                                <option value='Administration'>Administration</option>
+                                                <option value>Commercial</option>";
+
+
                                                         }
 
                                                         ?>
@@ -225,7 +328,9 @@ include("../../BACK END/connect.php");
                                                 </td>
 
                                                 <td>
-                                                    <button type="button" class="btn btn-danger">Delete</button>
+                                                    <button type="button" class="btn btn-danger" data-bs-toggle='modal'
+                                                        href='#exampleModalToggle1'
+                                                        onclick='deleteUser(<?= $user["ID_User"] ?>)'>Delete</button>
 
                                                 </td>
                                             </tr>
@@ -238,6 +343,9 @@ include("../../BACK END/connect.php");
 
                                 </tbody>
                             </table>
+                        </div>
+                        <div id="saveButton">
+
                         </div>
 
 
@@ -253,29 +361,48 @@ include("../../BACK END/connect.php");
 
 </body>
 <script>
-    function changeRole(id) {
-        //rimuove fatture prendendo come paramentro l'id della riga della tabella e della tabella padre
-        console.log(id);
-        role = document.getElementById(id).value;
-        console.log(role);
-        $.ajax({
-            type: "POST",
-            url: '../../BACK END/changeUserRole.php',
-            data: {
-                ID_User: id,
-                Role: role,
-            },
-            success: function (response) {
-                console.log(response);
-                
-                //alert("oooo");
-            },
-            error: function () {
-                alert("failed");
-            }
+    var save = false;
 
-        })
-        
+    function changeRole() {
+        var role;
+        for (let i = 0; i < userModified.length; i++) {
+            id = userModified[i];
+            console.log(role);
+            role = document.getElementById(id).value;
+            $.ajax({
+                type: "POST",
+                url: '../../BACK END/changeUserRole.php',
+                data: {
+                    ID_User: id,
+                    Role: role,
+                },
+                success: function (response) {
+                    console.log(response);
+
+                    //alert("oooo");
+                },
+                error: function () {
+                    alert("failed");
+                }
+
+            })
+        }
+        document.getElementById("saveButton").innerHTML = "";
+        save=false;
+
+
+
+    }
+    var userModified = [];
+
+    function saveChanges(id) {
+        if (!save) {
+            save = true;
+            var button = "<button type='button' class='btn btn-outline-info' data-bs-toggle='modal' href='#exampleModalToggle'>Save</button>";
+            document.getElementById("saveButton").innerHTML = button;
+        }
+        userModified.push(id);
+
     }
 
 </script>

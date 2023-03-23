@@ -41,24 +41,74 @@ include("../../BACK END/connect.php");
             padding-right: 10px;
         }
 
-        @media(prefers-reduced-motion: reduce) {
-            .collapsing {
-                transition-property: height, visibility;
-                transition-duration: .999s;
-            }
-        }
-
-        @media (max-width: 450px) {
-            .h-custom {
-                height: 100%;
-            }
+        .modal-backdrop {
+            background-color: black;
 
         }
 
-        .bootstrap-select .btn {
+        .modal-content {
+            background-color: white;
+            color: #fff;
+            border: none;
+        }
+
+        .modal-header {
+            background-color: #2B3036;
+            color: #fff;
+        }
+
+        .close {
             background-color: white;
 
+            color: #fff;
         }
+
+        .modal-body {
+            background-color: white;
+            color: black;
+
+        }
+
+        .modal-footer {
+            background-color: white;
+            color: #fff;
+
+        }
+
+        .modal a {
+            color: black;
+        }
+
+        /*
+        label {
+            color: #fff;
+        }
+
+        
+
+        .form-control {
+            background-color: #343a40;
+            border: none;
+            color: #fff;
+        }
+
+        .form-control:focus {
+            box-shadow: none;
+            border-color: #17a2b8;
+        }
+
+        .form-control:disabled {
+            opacity: 0.5;
+        }
+
+        .invalid-feedback {
+            color: #dc3545;
+        }
+
+        .valid-feedback {
+            color: #28a745;
+        }
+        */
     </style>
 
 
@@ -147,7 +197,7 @@ include("../../BACK END/connect.php");
                 <div class="overflow-auto">
 
                     <!--Modal -->
-                    <div class="modal fade" id="exampleModalToggle" aria-hidden="true"
+                    <div class="modal fade " id="exampleModalToggle" aria-hidden="true"
                         aria-labelledby="exampleModalToggleLabel" tabindex="-1">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
@@ -165,7 +215,7 @@ include("../../BACK END/connect.php");
                                             <div class="mb-3">
                                                 <label for="client" class="form-label">Client</label>
                                                 <select name="client" id="client" class="form-control selectpicker"
-                                                    data-live-search="true" data-style="btn-white" required>
+                                                    data-live-search="true" data-style="btn-black" style="color:black;" required>
                                                     <option value="" selected disabled hidden>Choose here</option>
 
                                                     <?php
@@ -231,8 +281,8 @@ include("../../BACK END/connect.php");
                                     </div>
 
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-light" data-bs-target="#exampleModalToggle"
-                                            data-bs-toggle="modal">Cancel</button>
+                                        <button type="button" class="btn btn-outline-secondary"
+                                            data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Cancel</button>
 
                                         <div class="form-group" id="changeable">
                                             <button class="btn btn-secondary" id="save" type="submit"
@@ -260,7 +310,7 @@ include("../../BACK END/connect.php");
                                 </div>
 
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-light" data-bs-target="#exampleModalToggle1"
+                                    <button type="button" class="btn btn-outline-secondary" data-bs-target="#exampleModalToggle1"
                                         data-bs-toggle="modal">Cancel</button>
                                     <div id="addDeleteButton">
                                         <button class="btn btn-danger" data-bs-toggle="modal"
@@ -276,7 +326,7 @@ include("../../BACK END/connect.php");
                         onclick="add()"><i class="bi bi-plus-square"></i>Add</button>
                     <div class="overflow-auto" style="padding-top:20px">
 
-                        <table class="table table-dark table-striped">
+                        <table class="table table-dark">
                             <thead>
                                 <tr style="">
                                     <th scope="col">Client</th>
@@ -326,14 +376,14 @@ include("../../BACK END/connect.php");
                                             <td nowrap>
                                                 <div class='d-flex flex-row bd-highlight mb-3 gap-2'>
 
-                                                    <button type='button' class='btn btn-dark p-2 justify-content-center'
+                                                    <button type='button' class='btn btn-light p-2 justify-content-center'
                                                         onclick=invoiceInfo(<?= $invoice['ID_Invoice'] ?>) data-bs-toggle='modal'
                                                         href='#exampleModalToggle'><i
-                                                            class='bi bi-pencil'></i>Edit</button>
+                                                            class='bi bi-pencil-fill'></i>Edit</button>
 
                                                     <button type='button' class='btn btn-danger p-2 justify-content-center'
                                                         data-bs-toggle='modal' href='#exampleModalToggle1'
-                                                        onclick=addDelete(<?= $invoice['ID_Invoice']?>)><i
+                                                        onclick=addDelete(<?= $invoice['ID_Invoice'] ?>)><i
                                                             class='bi bi-x-square'></i>Delete</button>
                                                 </div>
                                             </td>
