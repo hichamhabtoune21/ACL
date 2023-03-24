@@ -18,23 +18,12 @@ include("../../BACK END/connect.php");
     <style>
         body {
             font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: #2B3036;
+            color: white;
         }
 
         i {
             padding-right: 10px;
-        }
-
-        @media(prefers-reduced-motion: reduce) {
-            .collapsing {
-                transition-property: height, visibility;
-                transition-duration: .999s;
-            }
-        }
-
-        @media (max-width: 450px) {
-            .h-custom {
-                height: 100%;
-            }
         }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
@@ -105,7 +94,7 @@ include("../../BACK END/connect.php");
                                         </li>
 
                                         <li class="nav-item" style="padding-bottom: 20px;">
-                                            <a class="nav-link" href="#"><i class="bi bi-journal-check"></i>Clients</a>
+                                            <a class="nav-link" href="clients.php"><i class="bi bi-journal-check"></i>Clients</a>
                                         </li>
                                         <li class="nav-item" style="padding-bottom: 20px;">
                                             <a class="nav-link" href="invoice.php"><i class="bi bi-bar-chart"></i>Invoices</a>
@@ -125,7 +114,7 @@ include("../../BACK END/connect.php");
 
 
                     </div>
-                    <div class="col-md-10 col-lg-10 col-xl-10" style="background-color: white; padding: 20px;">
+                    <div class="col-md-10 col-lg-10 col-xl-10">
                         <h1 style="font-size: 50px;">Welcome
                             <?php echo $_SESSION["username"] ?>
                         </h1>
