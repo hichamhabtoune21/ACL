@@ -22,21 +22,22 @@ if (mysqli_num_rows($query) > 0) {
             echo json_encode(array("text" => "../dashboard/admin-dashboard.php"));
 
             break;
-        case "Commerciale":
+        case "Commercial":
             //header("Location: ../FRONT END/dashboard/admin-dashboard.php");
             echo json_encode(array("text" => "../dashboard/admin-dashboard.php"));
 
             break;
-        case "Amministrazione":
+        case "Administration":
             //header("Location: ../FRONT END/dashboard/admin-dashboard.php");
             echo json_encode(array("text" => "../dashboard/admin-dashboard.php"));
 
             break;
-        case "Capo area":
+        case "Area Manager":
             //header("Location: ../FRONT END/dashboard/admin-dashboard.php");
             echo json_encode(array("text" => "../dashboard/admin-dashboard.php"));
             break;
         case "NULL":
+        case "null":
         default:
             //header("Location: ../FRONT END/dashboard/null-dashboard.php");
             echo json_encode(array("text" => "../dashboard/null-dashboard.php"));

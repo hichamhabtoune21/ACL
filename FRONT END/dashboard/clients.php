@@ -39,9 +39,9 @@ include("../../BACK END/connect.php");
 
 
     <?php if (isset($_SESSION["id"]) && isset($_SESSION["ruolo"])) {
-        if ($_SESSION["ruolo"] == "Admin") { ?>
+        if ($_SESSION["ruolo"] != 'NULL') { ?>
             <div class="container-fluid">
-            <div class="row">
+                <div class="row">
                     <div class="col-12 bg-dark vh-10 show d-none d-md-block overflow-hidden"
                         style="color: white;padding-left: 18px;padding-top: 10px;font-size: 25px; width:100%;">
 
@@ -115,39 +115,30 @@ include("../../BACK END/connect.php");
 
                     </div>
                     <div class="col-md-10 col-lg-10 col-xl-10">
-                    <h3>USERS</h3>
+                        <h3>USERS</h3>
                         <div class="overflow-auto" style="padding-top:20px">
                             <table class="table table-dark">
                                 <thead>
                                     <tr>
-                                        <th scope="col">Email</th>
-                                        <th scope="col">Password</th>
-                                        <th scope="col">Username</th>
                                         <th scope="col">Name</th>
                                         <th scope="col">Surname</th>
-                                        <th scope="col">Role</th>
-                                        <th scope="col"></th>
+                                        <th scope="col">Phone</th>
+                                        <th scope="col">Address</th>
+                                        <th scope="col">Actions</th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $query="SELECT * FROM user INNER JOIN user_manage_invoice ON user_manage_invoice.ID_User=user.ID_User
-                                                                INNER JOIN invoice ON invoice.ID_Invoice= user_manage_invoice.ID_Invoice";
-                                                                
-                                    $result = mysqli_query($connect, "SELECT * from user ");
+                                    if ($_SESSION["ruolo"]=="Admin") {
+                                        $query = "SELECT * FROM client ";
+                                    }
+
+                                    $result = mysqli_query($connect, "SELECT * from client ");
                                     if (mysqli_num_rows($result)) {
                                         while ($user = mysqli_fetch_array($result)) {
                                             ?>
                                             <tr>
-                                                <td>
-                                                    <?= $user["Email"]; ?>
-                                                </td>
-                                                <td>
-                                                    <?= $user["Password"]; ?>
-                                                </td>
-                                                <td>
-                                                    <?= $user["Username"]; ?>
-                                                </td>
                                                 <td>
                                                     <?= $user["Name"]; ?>
                                                 </td>
@@ -155,57 +146,10 @@ include("../../BACK END/connect.php");
                                                     <?= $user["Surname"]; ?>
                                                 </td>
                                                 <td>
-                                                    <select class="form-select form-select-sm" aria-label="Default select example" name="role"
-                                                        id=<?= $user["ID_User"]; ?> onchange='saveChanges(<?= $user["ID_User"] ?>)'>
-                                                        
-                                                        <?php
-                                                        if ($user["Role"] == "NULL") {
-                                                            echo "
-                                                        <option selected>Senza ruolo</option>
-                                                        <option value='Admin'>Admin</option>
-                                                        <option value='Commercial'>Commercial</option>
-                                                        <option value='Area Manager'>Area Manager</option>
-                                                        <option value='Administration'>Administration</option>";
-                                                        } elseif ($user["Role"] == "Administration") {
-                                                            echo "
-                                                        <option selected>Administration</option>
-                                                        <option value='Admin'>Admin</option>
-                                                        <option value='Commercial'>Commercial</option>
-                                                        <option value='Area Manager'>Area Manager</option>";
-                                                        } elseif ($user["Role"] == "Admin") {
-                                                            echo "
-                                                <option selected>Admin</option>
-                                                <option value='Commercial'>Commerciale</option>
-                                                <option value='Area Manager'>Area Manager</option>
-                                                <option value='Administration'>Administration</option>";
-                                                        } elseif ($user["Role"] == "Commercial") {
-                                                            echo "
-                                                <option selected>Commercial</option>
-                                                <option value='Admin'>Admin</option>
-                                                <option value='Area Manager'>Area Manager</option>
-                                                <option value='Administration'>Administration</option>";
-                                                        } elseif ($user["Role"] == "Area Manager") {
-                                                            echo "
-                                                <option selected>Area Manager</option>
-                                                <option value='Admin'>Admin</option>
-                                                <option value='Administration'>Administration</option>
-                                                <option value>Commercial</option>";
-
-
-                                                        }
-
-                                                        ?>
-                                                        <!--
-                                                            <option selected>
-                                                                <?= $user["Ruolo"] ?>
-                                                            </option>
-
-                                                            <option value='ad'>Admin</option>
-                                                            <option value='commercial'>Commerciale</option>
-                                                            <option value='capo'>Capo area</option>
-                                                            <option value='amministrazione'>Amministrazione</option>
-                                                        -->
-                                                    </select>
+                                                    <?= $user["Phone"]; ?>
+                                                </td>
+                                                <td>
+                                                    <?= $user["Address"]; ?>
                                                 </td>
 
                                                 <td>
@@ -240,6 +184,7 @@ include("../../BACK END/connect.php");
         echo "Access denied";
     } ?>
 </body>
+
 </html>
 
 

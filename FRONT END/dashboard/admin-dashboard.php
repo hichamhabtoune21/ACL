@@ -39,98 +39,100 @@ include("../../BACK END/connect.php");
 
 
     <?php if (isset($_SESSION["id"]) && isset($_SESSION["ruolo"])) {
-        if ($_SESSION["ruolo"] == "Admin") { ?>
-            <div class="container-fluid">
+        ?>
+        <div class="container-fluid">
             <div class="row">
-                    <div class="col-12 bg-dark vh-10 show d-none d-md-block overflow-hidden"
-                        style="color: white;padding-left: 18px;padding-top: 10px;font-size: 25px; width:100%;">
+                <div class="col-12 bg-dark vh-10 show d-none d-md-block overflow-hidden"
+                    style="color: white;padding-left: 18px;padding-top: 10px;font-size: 25px; width:100%;">
 
-                        <i class="bi bi-bounding-box"></i><span>ACME</span>
-                    </div>
+                    <i class="bi bi-bounding-box"></i><span>ACME</span>
                 </div>
+            </div>
 
-                <div class="row bg-dark">
-                    <div class="col-md-12 col-lg-12 col-xl-12 bg-dark float-left" style="color: beige;">
-                        <div class="row d-md-none">
+            <div class="row bg-dark">
+                <div class="col-md-12 col-lg-12 col-xl-12 bg-dark float-left" style="color: beige;">
+                    <div class="row d-md-none">
 
-                            <div class="col-12 inline d-flex justify-content-between">
-
-
-                                <nav class="navbar navbar-dark">
-                                    <button class="navbar-toggler" data-bs-toggle="collapse" href="#nav" role="button"
-                                        aria-expanded="true" aria-controls="nav" data-toggle="collapse">
-                                        <i class="navbar-toggler-icon"></i>
-                                    </button>
-                                    <div style="padding-left: 20px;padding-top: 5px;font-size: 25px;">
-                                        <i class="bi bi-bounding-box"></i><span>ACME</span>
-                                    </div>
-
-                                </nav>
-
-                            </div>
+                        <div class="col-12 inline d-flex justify-content-between">
 
 
-                        </div>
-                    </div>
-                </div>
-
-
-
-                <div class="row">
-                    <div class="col-md-2 col-lg-2 col-xl-2 bg-dark collapse d-md-block text-nowrap"
-                        style="color: beige; padding-right: 10px; align-items: center;" id="nav">
-                        <div class="vh-100">
-                            <div class="navbar navbar-dark bg-dark">
-                                <div class="align-middle" style="font-size: 18px; padding-left: 18px; padding-top: 20px;">
-                                    <ul class="navbar-nav">
-                                        <li class="nav-item" style="padding-bottom: 20px;">
-                                            <a class="nav-link active" aria-current="page" href="#"><i
-                                                    class="bi bi-house"></i>Home</a>
-                                        </li>
-
-                                        <li class="nav-item" style="padding-bottom: 20px;">
-                                            <a class="nav-link" aria-current="page" href="all_users.php"><i
-                                                    class="bi bi-people"></i>Users</a>
-                                        </li>
-
-                                        <li class="nav-item" style="padding-bottom: 20px;">
-                                            <a class="nav-link" href="clients.php"><i class="bi bi-journal-check"></i>Clients</a>
-                                        </li>
-                                        <li class="nav-item" style="padding-bottom: 20px;">
-                                            <a class="nav-link" href="invoice.php"><i class="bi bi-bar-chart"></i>Invoices</a>
-                                        </li>
-
-                                        <li class="nav-item" style="padding-bottom: 20px;">
-                                            <a class="nav-link" href="#"><i class="bi bi-question-square"></i>Help</a>
-                                        </li>
-                                        <hr style="width: 200%; background-color: white;">
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="#"><i class="bi bi-person-square"></i></i>Profile</a>
-                                        </li>
-                                    </ul>
+                            <nav class="navbar navbar-dark">
+                                <button class="navbar-toggler" data-bs-toggle="collapse" href="#nav" role="button"
+                                    aria-expanded="true" aria-controls="nav" data-toggle="collapse">
+                                    <i class="navbar-toggler-icon"></i>
+                                </button>
+                                <div style="padding-left: 20px;padding-top: 5px;font-size: 25px;">
+                                    <i class="bi bi-bounding-box"></i><span>ACME</span>
                                 </div>
-                            </div>
+
+                            </nav>
+
                         </div>
-
-
-                    </div>
-                    <div class="col-md-10 col-lg-10 col-xl-10">
-                        <h1 style="font-size: 50px;">Welcome
-                            <?php echo $_SESSION["username"] ?>
-                        </h1>
-
-
 
 
                     </div>
                 </div>
             </div>
-            <?php
-        }
+
+
+
+            <div class="row">
+                <div class="col-md-2 col-lg-2 col-xl-2 bg-dark collapse d-md-block text-nowrap"
+                    style="color: beige; padding-right: 10px; align-items: center;" id="nav">
+                    <div class="vh-100">
+                        <div class="navbar navbar-dark bg-dark">
+                            <div class="align-middle" style="font-size: 18px; padding-left: 18px; padding-top: 20px;">
+                                <ul class="navbar-nav">
+                                    <li class="nav-item" style="padding-bottom: 20px;">
+                                        <a class="nav-link active" aria-current="page" href="#"><i
+                                                class="bi bi-house"></i>Home</a>
+                                    </li>
+
+                                    <li class="nav-item" style="padding-bottom: 20px;">
+                                        <a class="nav-link" aria-current="page" href="all_users.php"><i
+                                                class="bi bi-people"></i>Users</a>
+                                    </li>
+
+                                    <li class="nav-item" style="padding-bottom: 20px;">
+                                        <a class="nav-link" href="clients.php"><i
+                                                class="bi bi-journal-check"></i>Clients</a>
+                                    </li>
+                                    <li class="nav-item" style="padding-bottom: 20px;">
+                                        <a class="nav-link" href="invoice.php"><i class="bi bi-bar-chart"></i>Invoices</a>
+                                    </li>
+
+                                    <li class="nav-item" style="padding-bottom: 20px;">
+                                        <a class="nav-link" href="#"><i class="bi bi-question-square"></i>Help</a>
+                                    </li>
+                                    <hr style="width: 200%; background-color: white;">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#"><i class="bi bi-person-square"></i></i>Profile</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="col-md-10 col-lg-10 col-xl-10">
+                    <h1 style="font-size: 50px;">Welcome
+                        <?php echo $_SESSION["username"] ?>
+                    </h1>
+
+
+
+
+                </div>
+            </div>
+        </div>
+        <?php
+
     } else {
         echo "Access denied";
     } ?>
 </body>
+
 </html>
 
 
