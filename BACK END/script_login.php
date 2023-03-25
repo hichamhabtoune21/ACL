@@ -12,6 +12,8 @@ if (mysqli_num_rows($query) > 0) {
     $_SESSION["id"] = session_id();
 
     $user = mysqli_fetch_array($query);
+    $_SESSION["ID_User"] = $user["ID_User"];
+
     $_SESSION["username"] = $user["Username"];
     $_SESSION["ruolo"] = $user["Role"];
 

@@ -87,11 +87,16 @@ include("../../BACK END/connect.php");
                                         <a class="nav-link active" aria-current="page" href="#"><i
                                                 class="bi bi-house"></i>Home</a>
                                     </li>
-
+                                    <?php
+                                    if($_SESSION["ruolo"]=="Admin"){
+                                    ?>
                                     <li class="nav-item" style="padding-bottom: 20px;">
                                         <a class="nav-link" aria-current="page" href="all_users.php"><i
                                                 class="bi bi-people"></i>Users</a>
                                     </li>
+                                    <?php
+                                    }
+                                    ?>
 
                                     <li class="nav-item" style="padding-bottom: 20px;">
                                         <a class="nav-link" href="clients.php"><i

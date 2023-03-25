@@ -87,11 +87,16 @@ include("../../BACK END/connect.php");
                                             <a class="nav-link" aria-current="page" href="admin-dashboard.php"><i
                                                     class="bi bi-house"></i>Home</a>
                                         </li>
-
-                                        <li class="nav-item" style="padding-bottom: 20px;">
-                                            <a class="nav-link" aria-current="page" href="all_users.php"><i
-                                                    class="bi bi-people"></i>Users</a>
-                                        </li>
+                                        <?php
+                                        if ($_SESSION["ruolo"]=="Admin") {
+                                            ?>
+                                            <li class="nav-item" style="padding-bottom: 20px;">
+                                                <a class="nav-link" aria-current="page" href="all_users.php"><i
+                                                        class="bi bi-people"></i>Users</a>
+                                            </li>
+                                            <?php
+                                        }
+                                        ?>
 
                                         <li class="nav-item" style="padding-bottom: 20px;">
                                             <a class="nav-link active" href="#"><i class="bi bi-journal-check"></i>Clients</a>
@@ -115,7 +120,7 @@ include("../../BACK END/connect.php");
 
                     </div>
                     <div class="col-md-10 col-lg-10 col-xl-10">
-                        <h3>USERS</h3>
+                        <h3>CLIENTS</h3>
                         <div class="overflow-auto" style="padding-top:20px">
                             <table class="table table-dark">
                                 <thead>
@@ -130,32 +135,35 @@ include("../../BACK END/connect.php");
                                 </thead>
                                 <tbody>
                                     <?php
-                                    if ($_SESSION["ruolo"]=="Admin") {
-                                        $query = "SELECT * FROM client ";
+                                    $query="";
+                                    if ($_SESSION["ruolo"] == "Admin" || $_SESSION["ruolo"] == "Administration") {
+                                        $query = "SELECT * FROM client";
                                     }
-
-                                    $result = mysqli_query($connect, "SELECT * from client ");
+                                    elseif($_SESSION["ruolo"]=="Commercial"){
+                                        $query = "SELECT * FROM client INNER JOIN user_manage_client ON user_manage_client.ID_Client = client.ID_Client and user_manage_client.ID_User=" . $_SESSION["ID_User"];
+                                    }
+                                    $result = mysqli_query($connect, $query);
                                     if (mysqli_num_rows($result)) {
-                                        while ($user = mysqli_fetch_array($result)) {
+                                        while ($client = mysqli_fetch_array($result)) {
                                             ?>
                                             <tr>
                                                 <td>
-                                                    <?= $user["Name"]; ?>
+                                                    <?= $client["Name"]; ?>
                                                 </td>
                                                 <td>
-                                                    <?= $user["Surname"]; ?>
+                                                    <?= $client["Surname"]; ?>
                                                 </td>
                                                 <td>
-                                                    <?= $user["Phone"]; ?>
+                                                    <?= $client["Phone"]; ?>
                                                 </td>
                                                 <td>
-                                                    <?= $user["Address"]; ?>
+                                                    <?= $client["Address"]; ?>
                                                 </td>
 
                                                 <td>
                                                     <button type="button" class="btn btn-danger" data-bs-toggle='modal'
                                                         href='#exampleModalToggle1'
-                                                        onclick='deleteUser(<?= $user["ID_User"] ?>)'>Delete</button>
+                                                        onclick='deleteUser(<?= $client["ID_Client"] ?>)'>Delete</button>
 
                                                 </td>
                                             </tr>

@@ -165,7 +165,7 @@ include("../../BACK END/connect.php");
                                         </li>
 
                                         <li class="nav-item" style="padding-bottom: 20px;">
-                                            <a class="nav-link" href="#"><i class="bi bi-journal-check"></i>Clients</a>
+                                            <a class="nav-link" href="clients.php"><i class="bi bi-journal-check"></i>Clients</a>
                                         </li>
                                         <li class="nav-item" style="padding-bottom: 20px;">
                                             <a class="nav-link" href="invoice.php"><i class="bi bi-bar-chart"></i>Invoices</a>
