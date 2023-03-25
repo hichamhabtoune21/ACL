@@ -88,7 +88,7 @@ include("../../BACK END/connect.php");
                                                     class="bi bi-house"></i>Home</a>
                                         </li>
                                         <?php
-                                        if ($_SESSION["ruolo"]=="Admin") {
+                                        if ($_SESSION["ruolo"] == "Admin") {
                                             ?>
                                             <li class="nav-item" style="padding-bottom: 20px;">
                                                 <a class="nav-link" aria-current="page" href="all_users.php"><i
@@ -119,7 +119,7 @@ include("../../BACK END/connect.php");
 
 
                     </div>
-                    <div class="col-md-10 col-lg-10 col-xl-10">
+                    <div class="col-md-10 col-lg-10 col-xl-10" style="padding:25px">
                         <h3>CLIENTS</h3>
                         <div class="overflow-auto" style="padding-top:20px">
                             <table class="table table-dark">
@@ -129,17 +129,17 @@ include("../../BACK END/connect.php");
                                         <th scope="col">Surname</th>
                                         <th scope="col">Phone</th>
                                         <th scope="col">Address</th>
+                                        <th scope="col">VAT Number</th>
                                         <th scope="col">Actions</th>
 
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $query="";
+                                    $query = "";
                                     if ($_SESSION["ruolo"] == "Admin" || $_SESSION["ruolo"] == "Administration") {
                                         $query = "SELECT * FROM client";
-                                    }
-                                    elseif($_SESSION["ruolo"]=="Commercial"){
+                                    } elseif ($_SESSION["ruolo"] == "Commercial") {
                                         $query = "SELECT * FROM client INNER JOIN user_manage_client ON user_manage_client.ID_Client = client.ID_Client and user_manage_client.ID_User=" . $_SESSION["ID_User"];
                                     }
                                     $result = mysqli_query($connect, $query);
@@ -158,6 +158,9 @@ include("../../BACK END/connect.php");
                                                 </td>
                                                 <td>
                                                     <?= $client["Address"]; ?>
+                                                </td>
+                                                <td>
+                                                    <?= $client["VAT number"]; ?>
                                                 </td>
 
                                                 <td>
