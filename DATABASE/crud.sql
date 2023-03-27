@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: db
--- Generation Time: Mar 27, 2023 at 04:44 PM
--- Server version: 8.0.32
--- PHP Version: 8.1.15
+-- Host: 127.0.0.1
+-- Generation Time: Mar 27, 2023 at 08:31 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,13 +28,13 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `client` (
-  `ID_Client` int NOT NULL,
-  `VAT number` int NOT NULL,
+  `ID_Client` int(11) NOT NULL,
+  `VAT number` int(11) NOT NULL,
   `Name` varchar(20) NOT NULL,
   `Surname` varchar(20) NOT NULL,
   `Phone` varchar(15) NOT NULL,
   `Address` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `client`
@@ -55,14 +55,14 @@ INSERT INTO `client` (`ID_Client`, `VAT number`, `Name`, `Surname`, `Phone`, `Ad
 --
 
 CREATE TABLE `invoice` (
-  `ID_Invoice` int NOT NULL,
-  `Progressive number` int NOT NULL,
+  `ID_Invoice` int(11) NOT NULL,
+  `Progressive number` int(11) NOT NULL,
   `Issuing date` date NOT NULL,
-  `Business name` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `Amount` int NOT NULL,
-  `Payment type` enum('Credit Card','Bank Transfer','Cash','') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `ID_Client` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `Business name` text NOT NULL,
+  `Amount` int(11) NOT NULL,
+  `Payment type` enum('Credit Card','Bank Transfer','Cash','') NOT NULL,
+  `ID_Client` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `invoice`
@@ -85,7 +85,7 @@ INSERT INTO `invoice` (`ID_Invoice`, `Progressive number`, `Issuing date`, `Busi
 
 CREATE TABLE `permission` (
   `Permission` varchar(15) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -96,7 +96,7 @@ CREATE TABLE `permission` (
 CREATE TABLE `permission_belong_to_role` (
   `Permission` varchar(15) NOT NULL,
   `Role` varchar(15) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -106,7 +106,7 @@ CREATE TABLE `permission_belong_to_role` (
 
 CREATE TABLE `role` (
   `Role` varchar(15) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `role`
@@ -125,14 +125,14 @@ INSERT INTO `role` (`Role`) VALUES
 --
 
 CREATE TABLE `user` (
-  `ID_User` int NOT NULL,
+  `ID_User` int(11) NOT NULL,
   `Email` varchar(30) NOT NULL,
   `Password` varchar(30) NOT NULL,
   `Username` varchar(20) NOT NULL,
   `Name` varchar(20) NOT NULL,
   `Surname` varchar(20) NOT NULL,
   `Role` varchar(15) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `user`
@@ -153,9 +153,9 @@ INSERT INTO `user` (`ID_User`, `Email`, `Password`, `Username`, `Name`, `Surname
 --
 
 CREATE TABLE `user_manage_client` (
-  `ID_User` int NOT NULL,
-  `ID_Client` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `ID_User` int(11) NOT NULL,
+  `ID_Client` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `user_manage_client`
@@ -173,9 +173,9 @@ INSERT INTO `user_manage_client` (`ID_User`, `ID_Client`) VALUES
 --
 
 CREATE TABLE `user_manage_invoice` (
-  `ID_Invoice` int NOT NULL,
-  `ID_User` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `ID_Invoice` int(11) NOT NULL,
+  `ID_User` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `user_manage_invoice`
@@ -260,19 +260,19 @@ ALTER TABLE `user_manage_invoice`
 -- AUTO_INCREMENT for table `client`
 --
 ALTER TABLE `client`
-  MODIFY `ID_Client` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ID_Client` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `invoice`
 --
 ALTER TABLE `invoice`
-  MODIFY `ID_Invoice` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `ID_Invoice` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `ID_User` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `ID_User` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- Constraints for dumped tables
@@ -285,13 +285,6 @@ ALTER TABLE `invoice`
   ADD CONSTRAINT `ID_Cliente(FK)` FOREIGN KEY (`ID_Client`) REFERENCES `client` (`ID_Client`);
 
 --
--- Constraints for table `permission_belong_to_role`
---
-ALTER TABLE `permission_belong_to_role`
-  ADD CONSTRAINT `Permesso(FK)` FOREIGN KEY (`Permission`) REFERENCES `permission` (`Permission`),
-  ADD CONSTRAINT `Ruolo_FK` FOREIGN KEY (`Role`) REFERENCES `role` (`Role`);
-
---
 -- Constraints for table `user`
 --
 ALTER TABLE `user`
@@ -301,8 +294,8 @@ ALTER TABLE `user`
 -- Constraints for table `user_manage_client`
 --
 ALTER TABLE `user_manage_client`
-  ADD CONSTRAINT `fk_client` FOREIGN KEY (`ID_Client`) REFERENCES `client` (`ID_Client`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  ADD CONSTRAINT `fk_user` FOREIGN KEY (`ID_User`) REFERENCES `user` (`ID_User`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `fk_client` FOREIGN KEY (`ID_Client`) REFERENCES `client` (`ID_Client`),
+  ADD CONSTRAINT `fk_user` FOREIGN KEY (`ID_User`) REFERENCES `user` (`ID_User`);
 
 --
 -- Constraints for table `user_manage_invoice`
