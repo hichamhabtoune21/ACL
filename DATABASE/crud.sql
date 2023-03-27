@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
--- Generation Time: Mar 24, 2023 at 05:32 PM
+-- Generation Time: Mar 27, 2023 at 04:44 PM
 -- Server version: 8.0.32
 -- PHP Version: 8.1.15
 
@@ -58,9 +58,9 @@ CREATE TABLE `invoice` (
   `ID_Invoice` int NOT NULL,
   `Progressive number` int NOT NULL,
   `Issuing date` date NOT NULL,
-  `Business name` varchar(30) NOT NULL,
+  `Business name` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `Amount` int NOT NULL,
-  `Payment type` varchar(20) NOT NULL,
+  `Payment type` enum('Credit Card','Bank Transfer','Cash','') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `ID_Client` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -69,12 +69,13 @@ CREATE TABLE `invoice` (
 --
 
 INSERT INTO `invoice` (`ID_Invoice`, `Progressive number`, `Issuing date`, `Business name`, `Amount`, `Payment type`, `ID_Client`) VALUES
-(1, 100, '2023-03-01', 'ABC Company', 500, 'Credit Card', 1),
-(2, 101, '2023-03-05', 'XYZ Inc', 1000, 'Cash', 2),
-(3, 102, '2023-03-10', 'ACME Ltd', 750, 'Credit Card', 3),
-(4, 103, '2023-03-15', '123 Corporation', 1250, 'Bank Transfer', 4),
-(5, 104, '2023-03-20', 'QWERTY Co.', 2500, 'PayPal', 5),
-(6, 105, '2023-03-25', 'GHI Group', 900, 'Credit Card', 6);
+(1, 70, '2023-03-10', 'ABC Company', 100, 'Cash', 1),
+(2, 101, '2023-03-05', 'XYZ Inc', 1000, 'Credit Card', 2),
+(3, 102, '2023-03-10', 'ACME Ltd', 750, 'Bank Transfer', 3),
+(4, 103, '2023-03-15', '124 Corporation', 1250, 'Bank Transfer', 4),
+(5, 104, '2023-03-20', 'QWERTY Co.', 2500, 'Bank Transfer', 5),
+(6, 95, '2023-03-25', 'ABC Company', 900, 'Bank Transfer', 1),
+(38, 97, '2023-03-04', 'ABC Company', 999, 'Bank Transfer', 1);
 
 -- --------------------------------------------------------
 
@@ -139,11 +140,11 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`ID_User`, `Email`, `Password`, `Username`, `Name`, `Surname`, `Role`) VALUES
 (1, 'admin@admin.com', 'admin', 'admin', 'admin', 'admin', 'Admin'),
-(2, 'jane.smith@example.com', 'password2', 'janesmith', 'Jane', 'Smith', 'Administration'),
+(2, 'jane.smith@example.com', 'password2', 'administration', 'Jane', 'Smith', 'Administration'),
 (3, 'mark.johnson@example.com', 'password3', 'markjohnson', 'Mark', 'Johnson', 'Administration'),
 (4, 'sarah.green@example.com', 'password4', 'sarahgreen', 'Sarah', 'Green', 'Area Manager'),
 (5, 'chris.wilson@example.com', 'password5', 'chriswilson', 'Chris', 'Wilson', 'Area Manager'),
-(6, 'emily.davis@example.com', 'password6', 'emilydavis', 'Emily', 'Davis', 'Commercial');
+(6, 'emily.davis@example.com', 'password6', 'commercial', 'Emily', 'Davis', 'Commercial');
 
 -- --------------------------------------------------------
 
@@ -161,13 +162,9 @@ CREATE TABLE `user_manage_client` (
 --
 
 INSERT INTO `user_manage_client` (`ID_User`, `ID_Client`) VALUES
-(1, 1),
-(2, 2),
-(2, 3),
-(3, 1),
-(4, 4),
-(5, 5),
-(6, 6);
+(6, 1),
+(6, 2),
+(6, 3);
 
 -- --------------------------------------------------------
 
@@ -269,13 +266,13 @@ ALTER TABLE `client`
 -- AUTO_INCREMENT for table `invoice`
 --
 ALTER TABLE `invoice`
-  MODIFY `ID_Invoice` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ID_Invoice` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `ID_User` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `ID_User` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- Constraints for dumped tables

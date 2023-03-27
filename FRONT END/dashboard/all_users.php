@@ -133,7 +133,7 @@ include("../../BACK END/connect.php");
                                         aria-expanded="true" aria-controls="nav" data-toggle="collapse">
                                         <i class="navbar-toggler-icon"></i>
                                     </button>
-                                    <div style="padding-left: 20px;padding-top: 5px;font-size: 25px;">
+                                    <div style="padding-left: 20px;margin-top: -5px;font-size: 25px;">
                                         <i class="bi bi-bounding-box"></i><span>ACME</span>
                                     </div>
 
@@ -176,7 +176,7 @@ include("../../BACK END/connect.php");
                                         </li>
                                         <hr style="width: 200%; background-color: white;">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="#"><i class="bi bi-person-square"></i></i>Profile</a>
+                                            <a class="nav-link" href="profile.php"><i class="bi bi-person-square"></i></i>Profile</a>
                                         </li>
 
 

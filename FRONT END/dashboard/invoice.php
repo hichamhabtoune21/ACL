@@ -10,21 +10,27 @@ include("../../BACK END/connect.php");
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" />
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+
+
+   
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.js"
-        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    
 
-    <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/css/bootstrap-select.min.css">
+        <link rel="stylesheet" href="../style-css/data-table.css" />
 
-    <!-- Latest compiled and minified JavaScript -->
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/css/bootstrap-select.min.css">
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/js/bootstrap-select.min.js"></script>
 
-    <!-- (Optional) Latest compiled and minified JavaScript translation files -->
 
 
 
@@ -139,7 +145,7 @@ include("../../BACK END/connect.php");
                                     aria-controls="nav" data-toggle="collapse">
                                     <i class="navbar-toggler-icon"></i>
                                 </button>
-                                <div style="padding-left: 20px;padding-top: 5px;font-size: 25px;">
+                                <div style="padding-left: 20px;margin-top: -5px;font-size: 25px;">
                                     <i class="bi bi-bounding-box"></i><span>ACME</span>
                                 </div>
 
@@ -188,7 +194,7 @@ include("../../BACK END/connect.php");
                                     </li>
                                     <hr style="width: 100%;color:white;">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#"><i class="bi bi-person-square"></i></i>Profile</a>
+                                        <a class="nav-link" href="profile.php"><i class="bi bi-person-square"></i></i>Profile</a>
                                     </li>
 
 
@@ -228,11 +234,10 @@ include("../../BACK END/connect.php");
                                                         <option value="" selected disabled hidden>Choose here</option>
 
                                                         <?php
-                                                        $query="";
+                                                        $query = "";
                                                         if ($_SESSION["ruolo"] == "Admin" || $_SESSION["ruolo"] == "Administration") {
                                                             $query = "SELECT * FROM client";
-                                                        }
-                                                        elseif($_SESSION["ruolo"]=="Commercial"){
+                                                        } elseif ($_SESSION["ruolo"] == "Commercial") {
                                                             $query = "SELECT * FROM client INNER JOIN user_manage_client ON user_manage_client.ID_Client = client.ID_Client and user_manage_client.ID_User=" . $_SESSION["ID_User"];
                                                         }
                                                         $result = mysqli_query($connect, $query);
@@ -350,7 +355,7 @@ include("../../BACK END/connect.php");
                         ?>
                         <div class="overflow-auto" style="padding-top:20px">
 
-                            <table class="table table-dark">
+                            <table class="table table-dark" id="tableInvoice">
                                 <thead>
                                     <tr style="">
                                         <th scope="col">Client</th>
@@ -364,11 +369,10 @@ include("../../BACK END/connect.php");
                                 </thead>
                                 <tbody id="invoices">
                                     <?php
-                                    $query="";
+                                    $query = "";
                                     if ($_SESSION["ruolo"] == "Admin" || $_SESSION["ruolo"] == "Administration") {
                                         $query = "SELECT * from invoice ORDER BY ID_Client";
-                                    }
-                                    elseif($_SESSION["ruolo"]=="Commercial"){
+                                    } elseif ($_SESSION["ruolo"] == "Commercial") {
                                         $query = "SELECT * FROM invoice INNER JOIN user_manage_client ON user_manage_client.ID_Client = invoice.ID_Client and user_manage_client.ID_User=" . $_SESSION["ID_User"];
                                     }
                                     $result = mysqli_query($connect, $query);
@@ -439,7 +443,10 @@ include("../../BACK END/connect.php");
             </div>
         </div>
         <script>
-            //document.getElementById("save").addEventListener("click", CheckForm);
+
+            $(document).ready(function () {
+                $('#tableInvoice').DataTable();
+            });
 
             function add() {
                 document.getElementById("exampleModalToggleLabel").innerHTML = "";
@@ -477,7 +484,7 @@ include("../../BACK END/connect.php");
             // data: $('#form1').serialize(),
 
 
-            function addInvoice( event) {
+            function addInvoice(event) {
                 event.preventDefault();
 
                 const modal = document.getElementById("exampleModalToggle");
@@ -523,15 +530,15 @@ include("../../BACK END/connect.php");
                             else {
                                 button = "<div class='d-flex flex-row bd-highlight mb-3 gap-2'><button type='button' class='btn btn-light p-2' onclick=invoiceInfo(" + message.ID_Invoice + ") data-bs-toggle='modal' href='#exampleModalToggle'><i class='bi bi-pencil-fill'></i>Edit</button>"
                             }
-                            console.log(button)<
-                            $("#invoices").append(
-                                "<tr id=" + message.ID_Invoice + "><td>" + message.clientName + " " + message.clientSurname + "</td>" +
-                                "<td>" + message.number + "</td>" +
-                                "<td>" + message.date + "</td>" +
-                                "<td>" + message.bus_name + "</td>" +
-                                "<td>" + message.amount + "</td>" +
-                                "<td>" + message.pay_type + "</td><td nowrap>" + button + "</td></tr>"
-                            );
+                            console.log(button) <
+                                $("#invoices").append(
+                                    "<tr id=" + message.ID_Invoice + "><td>" + message.clientName + " " + message.clientSurname + "</td>" +
+                                    "<td>" + message.number + "</td>" +
+                                    "<td>" + message.date + "</td>" +
+                                    "<td>" + message.bus_name + "</td>" +
+                                    "<td>" + message.amount + "</td>" +
+                                    "<td>" + message.pay_type + "</td><td nowrap>" + button + "</td></tr>"
+                                );
 
                             /*
  
@@ -544,7 +551,7 @@ include("../../BACK END/connect.php");
             }
 
 
-            function editInvoice(id,event) {
+            function editInvoice(id, event) {
                 event.preventDefault();
                 const modal = document.getElementById("exampleModalToggle");
 
@@ -560,43 +567,43 @@ include("../../BACK END/connect.php");
                     const pay_type = $("#pay_type").val();
 
                     modal.hide();
-                    $(document).ready(function(){
-                    $.ajax({
-                        type: "POST",
-                        url: '../../BACK END/editInvoice.php',
-                        data: {
-                            id: id,
-                            num: num,
-                            date: date,
-                            amount: amount,
-                            pay_type: pay_type,
-                            client: client,
-                            bus_name: bus_name
-                        },
-                        success: function (message) {
-                            message = JSON.parse(message);
-                            console.log("EDITED");
-                            var button="";
-                            if (message.role != "Administration" && message.role != "Commercial") {
-                                button = "<div class='d-flex flex-row bd-highlight mb-3 gap-2'><button type='button' class='btn btn-light p-2' onclick=invoiceInfo(" + message.ID_Invoice + ") data-bs-toggle='modal' href='#exampleModalToggle'><i class='bi bi-pencil-fill'></i>Edit</button> <button type='button' class='btn btn-danger p-2' data-bs-toggle='modal' href='#exampleModalToggle1' onclick='addDelete(" + message.ID_Invoice + ")'><i class='bi bi-x-square'></i>Delete</button></div>"
-                            }
-                            else {
-                                button = "<div class='d-flex flex-row bd-highlight mb-3 gap-2'><button type='button' class='btn btn-light p-2' onclick=invoiceInfo(" + message.ID_Invoice + ") data-bs-toggle='modal' href='#exampleModalToggle'><i class='bi bi-pencil-fill'></i>Edit</button>"
-                            }
-                            if (message.text === "success") {
-                                var editedInvoice = document.getElementById(message.ID_Invoice);
-                                if (editedInvoice) {
-                                    editedInvoice.innerHTML = "<td>" + message.clientName + " " + message.clientSurname + "</td>" +
-                                        "<td>" + message.num + "</td>" +
-                                        "<td>" + message.date + "</td>" +
-                                        "<td>" + message.bus_name + "</td>" +
-                                        "<td>" + message.amount + "</td>" +
-                                        "<td>" + message.pay_type + "</td><td nowrap>" + button + "</td></tr>"
+                    $(document).ready(function () {
+                        $.ajax({
+                            type: "POST",
+                            url: '../../BACK END/editInvoice.php',
+                            data: {
+                                id: id,
+                                num: num,
+                                date: date,
+                                amount: amount,
+                                pay_type: pay_type,
+                                client: client,
+                                bus_name: bus_name
+                            },
+                            success: function (message) {
+                                message = JSON.parse(message);
+                                console.log("EDITED");
+                                var button = "";
+                                if (message.role != "Administration" && message.role != "Commercial") {
+                                    button = "<div class='d-flex flex-row bd-highlight mb-3 gap-2'><button type='button' class='btn btn-light p-2' onclick=invoiceInfo(" + message.ID_Invoice + ") data-bs-toggle='modal' href='#exampleModalToggle'><i class='bi bi-pencil-fill'></i>Edit</button> <button type='button' class='btn btn-danger p-2' data-bs-toggle='modal' href='#exampleModalToggle1' onclick='addDelete(" + message.ID_Invoice + ")'><i class='bi bi-x-square'></i>Delete</button></div>"
+                                }
+                                else {
+                                    button = "<div class='d-flex flex-row bd-highlight mb-3 gap-2'><button type='button' class='btn btn-light p-2' onclick=invoiceInfo(" + message.ID_Invoice + ") data-bs-toggle='modal' href='#exampleModalToggle'><i class='bi bi-pencil-fill'></i>Edit</button>"
+                                }
+                                if (message.text === "success") {
+                                    var editedInvoice = document.getElementById(message.ID_Invoice);
+                                    if (editedInvoice) {
+                                        editedInvoice.innerHTML = "<td>" + message.clientName + " " + message.clientSurname + "</td>" +
+                                            "<td>" + message.num + "</td>" +
+                                            "<td>" + message.date + "</td>" +
+                                            "<td>" + message.bus_name + "</td>" +
+                                            "<td>" + message.amount + "</td>" +
+                                            "<td>" + message.pay_type + "</td><td nowrap>" + button + "</td></tr>"
+                                    }
                                 }
                             }
-                        }
-                    });
-                })
+                        });
+                    })
                 }
             }
 
