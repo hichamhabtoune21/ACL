@@ -190,7 +190,7 @@ include("../../BACK END/connect.php");
 
 
                     <form>
-                        <div id="<?=$_SESSION["ID_User"]?>"></div>
+                        <div id="<?= $_SESSION["ID_User"] ?>"></div>
                         <?php
                         $query = "SELECT * FROM user WHERE ID_User=" . $_SESSION['ID_User'];
 
@@ -242,7 +242,10 @@ include("../../BACK END/connect.php");
                                     onkeyup="saveChanges()" value="<?= $user["Password"] ?>" required>
                             </div>
                         </div>
-                        <div id="saveButton"></div>
+                        <div id="saveButton" style="display: none">
+                            <button type='button' class='btn btn-outline-info' data-bs-toggle='modal'
+                                href='#exampleModalToggle'>Save</button>
+                        </div>
 
                         <div class="modal fade" id="exampleModalToggle" aria-hidden="true"
                             aria-labelledby="exampleModalToggleLabel" tabindex="-1">
@@ -283,17 +286,18 @@ include("../../BACK END/connect.php");
     var save = false;
     var userModified = [];
 
-    function changeProfile(id,event) {
+    function changeProfile(id, event) {
         event.preventDefault();
         const name = $('#inputName').val();
         const surname = $('#inputSurname').val();
         const email = $('#inputEmail').val();
         const password = $('#inputPassword').val();
         const username = $('#inputUsername').val();
-        save=false;
+        save = false;
+        document.getElementById("saveButton").style.display = 'none';
         $.ajax({
             type: "POST",
-            url: "../../BACKE END/changeProfile.php",
+            url: '../../BACK END/changeProfile.php',
             data: {
                 ID_User: id,
                 name: name,
@@ -303,7 +307,7 @@ include("../../BACK END/connect.php");
                 username: username
             },
             success: function (response) {
-                console.log('success');
+                //console.log(response);
             }
         })
     }
@@ -311,8 +315,8 @@ include("../../BACK END/connect.php");
     function saveChanges() {
         if (!save) {
             save = true;
-            var button = "<button type='button' class='btn btn-outline-info' data-bs-toggle='modal' href='#exampleModalToggle'>Save</button>";
-            document.getElementById("saveButton").innerHTML = button;
+            document.getElementById("saveButton").style.display = 'block';
+
         }
 
     }

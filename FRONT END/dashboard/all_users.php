@@ -344,8 +344,9 @@ include("../../BACK END/connect.php");
                                 </tbody>
                             </table>
                         </div>
-                        <div id="saveButton">
-
+                        <div id="saveButton" style="display: none">
+                            <button type='button' class='btn btn-outline-info' data-bs-toggle='modal'
+                                href='#exampleModalToggle'>Save</button>
                         </div>
 
 
@@ -388,7 +389,7 @@ include("../../BACK END/connect.php");
 
             })
         }
-        document.getElementById("saveButton").innerHTML = "";
+        document.getElementById("saveButton").style.display = 'none';
         save=false;
 
 
@@ -399,8 +400,7 @@ include("../../BACK END/connect.php");
     function saveChanges(id) {
         if (!save) {
             save = true;
-            var button = "<button type='button' class='btn btn-outline-info' data-bs-toggle='modal' href='#exampleModalToggle'>Save</button>";
-            document.getElementById("saveButton").innerHTML = button;
+            document.getElementById("saveButton").style.display = 'block';
         }
         userModified.push(id);
 
