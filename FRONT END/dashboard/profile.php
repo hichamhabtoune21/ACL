@@ -197,55 +197,68 @@ include("../../BACK END/connect.php");
                         $result = mysqli_query($connect, $query);
                         $user = mysqli_fetch_array($result);
                         ?>
-
-
-
-                        <div class="form-group w-50">
-                            <div class="mb-3">
-                                <label for="inputName" class="form-label">Name</label>
-                                <input type="text" class="form-control" id="inputName" name="name"
-                                    value="<?= $user["Name"] ?>" onkeyup="saveChanges()" required>
+                        <form id="novalidate">
+                            <div class="form-group w-50">
+                                <div class="mb-3">
+                                    <label for="inputName" class="form-label">Name</label>
+                                    <input type="text" class="form-control" id="inputName" name="name"
+                                        value="<?= $user["Name"] ?>" required>
+                                </div>
                             </div>
-                        </div>
 
 
-                        <div class="form-group w-50">
-                            <div class="mb-3">
-                                <label for="inputSurname" class="form-label">Surname</label>
-                                <input type="text" class="form-control" id="inputSurname" name="surname"
-                                    onkeyup="saveChanges()" value="<?= $user["Surname"] ?>" required>
+                            <div class="form-group w-50">
+                                <div class="mb-3">
+                                    <label for="inputSurname" class="form-label">Surname</label>
+                                    <input type="text" class="form-control" id="inputSurname" name="surname"
+                                        value="<?= $user["Surname"] ?>" required>
+                                </div>
                             </div>
+
+                            <div class="form-group w-50">
+                                <div class="mb-3">
+                                    <label for="inputUsername" class="form-label">Username</label>
+                                    <input type="text" class="form-control" id="inputUsername" name="username"
+                                        value="<?= $user["Username"] ?>" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group w-50">
+                                <div class="mb-3">
+                                    <label for="inputEmail" class="form-label">Email address</label>
+                                    <input type="email" class="form-control" id="inputEmail" name="email"
+                                        aria-describedby="emailHelp" value="<?= $user["Email"] ?>" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group w-50">
+                                <div class="mb-3">
+                                    <label for="inputPassword" class="form-label">Password</label>
+                                    <input type="password" class="form-control" id="inputPassword" name="password"
+                                        pattern=".{8,}"
+                                        oninvalid="this.setCustomValidity('Password must be 8 characters long')"
+                                        value="<?= $user["Password"] ?>" required>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="d-flex flex-row bd-highlight mb-3">
+                            <div class="p-2 bd-highlight">
+                                <form action="../../BACK END/logout.php" method="POST">
+                                    <button type='submit' class='btn btn-outline-danger'
+                                        formnovalidate="novalidate">Logout</button>
+                                </form>
+                            </div>
+                            <div class="p-2 bd-highlight">
+                                <div id="saveButton" style="display: none">
+                                    <button type='button' class='btn btn-outline-info' data-bs-toggle='modal'
+                                        href='#exampleModalToggle'>Save</button>
+                                </div>
+                            </div>
+
+
                         </div>
 
-                        <div class="form-group w-50">
-                            <div class="mb-3">
-                                <label for="inputUsername" class="form-label">Username</label>
-                                <input type="text" class="form-control" id="inputUsername" name="username"
-                                    onkeyup="saveChanges()" value="<?= $user["Username"] ?>" required>
-                            </div>
-                        </div>
 
-                        <div class="form-group w-50">
-                            <div class="mb-3">
-                                <label for="inputEmail" class="form-label">Email address</label>
-                                <input type="email" class="form-control" id="inputEmail" name="email"
-                                    onkeyup="saveChanges()" aria-describedby="emailHelp" value="<?= $user["Email"] ?>"
-                                    required>
-                            </div>
-                        </div>
-
-                        <div class="form-group w-50">
-                            <div class="mb-3">
-                                <label for="inputPassword" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="inputPassword" name="password"
-                                    pattern=".{8,}" oninvalid="this.setCustomValidity('Password must be 8 characters long')"
-                                    onkeyup="saveChanges()" value="<?= $user["Password"] ?>" required>
-                            </div>
-                        </div>
-                        <div id="saveButton" style="display: none">
-                            <button type='button' class='btn btn-outline-info' data-bs-toggle='modal'
-                                href='#exampleModalToggle'>Save</button>
-                        </div>
 
                         <div class="modal fade" id="exampleModalToggle" aria-hidden="true"
                             aria-labelledby="exampleModalToggleLabel" tabindex="-1">
@@ -311,6 +324,9 @@ include("../../BACK END/connect.php");
             }
         })
     }
+
+    $('#inputName, #inputSurname,#inputUsername,#inputEmail,#inputPassword').on('input', saveChanges);
+
 
     function saveChanges() {
         if (!save) {
