@@ -6,6 +6,7 @@ include("../../BACK END/connect.php");
 <html>
 
 <head>
+    <title>Dashboard</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -13,7 +14,14 @@ include("../../BACK END/connect.php");
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 
-    <title>Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+        integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
 
     <style>
         body {
@@ -25,13 +33,70 @@ include("../../BACK END/connect.php");
         i {
             padding-right: 10px;
         }
+
+        .modal-backdrop {
+            background-color: black;
+
+        }
+
+        .modal-content {
+            background-color: white;
+            color: #fff;
+            border: none;
+        }
+
+        .modal-header {
+            background-color: #2B3036;
+            color: #fff;
+        }
+
+        .close {
+            background-color: white;
+
+            color: #fff;
+        }
+
+        .modal-body {
+            background-color: white;
+            color: black;
+
+        }
+
+        .modal-footer {
+            background-color: white;
+            color: #fff;
+
+        }
+
+        .modal a {
+            color: black;
+        }
+
+        select.form-select {
+            background-color: #333;
+            color: #fff;
+            border-color: #666;
+        }
+
+        /* Stile per l'elemento "form-select" */
+
+
+        /* Stile per l'opzione selezionata dell'elemento "form-select" */
+        select.form-select option:checked {
+            background-color: #666;
+            color: #fff;
+        }
+
+
+
+        /* Stile per il bordo dell'elemento "form-select" quando ha lo stato di focus */
+        select.form-select:focus {
+            box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.25);
+            border-color: #fff;
+            outline: none;
+        }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
-        integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
-        crossorigin="anonymous"></script>
+
 
 </head>
 
@@ -122,51 +187,87 @@ include("../../BACK END/connect.php");
                 </div>
                 <div class="col-md-10 col-lg-10 col-xl-10" style="padding:25px">
                     <h3 style="padding-bottom:25px">YOUR PROFILE</h3>
-                    <?php
-                    $query = "SELECT * FROM user WHERE ID_User=" . $_SESSION['ID_User'];
 
-                    $result = mysqli_query($connect, $query);
-                    $user = mysqli_fetch_array($result);
-                    ?>
 
-                    <div class="form-group w-50">
-                        <div class="mb-3">
-                            <label for="inputName" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="inputName" name="name" value="<?=$user["Name"]?>" required>
+                    <form>
+                        <div id="<?=$_SESSION["ID_User"]?>"></div>
+                        <?php
+                        $query = "SELECT * FROM user WHERE ID_User=" . $_SESSION['ID_User'];
+
+                        $result = mysqli_query($connect, $query);
+                        $user = mysqli_fetch_array($result);
+                        ?>
+
+
+
+                        <div class="form-group w-50">
+                            <div class="mb-3">
+                                <label for="inputName" class="form-label">Name</label>
+                                <input type="text" class="form-control" id="inputName" name="name"
+                                    value="<?= $user["Name"] ?>" onkeyup="saveChanges()" required>
+                            </div>
                         </div>
-                    </div>
 
 
-                    <div class="form-group w-50">
-                        <div class="mb-3">
-                            <label for="inputSurname" class="form-label">Surname</label>
-                            <input type="text" class="form-control" id="inputSurname" name="surname" value="<?=$user["Surname"]?>" required>
+                        <div class="form-group w-50">
+                            <div class="mb-3">
+                                <label for="inputSurname" class="form-label">Surname</label>
+                                <input type="text" class="form-control" id="inputSurname" name="surname"
+                                    onkeyup="saveChanges()" value="<?= $user["Surname"] ?>" required>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-group w-50">
-                        <div class="mb-3">
-                            <label for="inputUsername" class="form-label">Username</label>
-                            <input type="text" class="form-control" id="inputUsername" name="username" value="<?=$user["Username"]?>" required>
+                        <div class="form-group w-50">
+                            <div class="mb-3">
+                                <label for="inputUsername" class="form-label">Username</label>
+                                <input type="text" class="form-control" id="inputUsername" name="username"
+                                    onkeyup="saveChanges()" value="<?= $user["Username"] ?>" required>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-group w-50">
-                        <div class="mb-3">
-                            <label for="inputEmail" class="form-label">Email address</label>
-                            <input type="email" class="form-control" id="inputEmail" name="email"
-                                aria-describedby="emailHelp" value="<?=$user["Email"]?>" required>
+                        <div class="form-group w-50">
+                            <div class="mb-3">
+                                <label for="inputEmail" class="form-label">Email address</label>
+                                <input type="email" class="form-control" id="inputEmail" name="email"
+                                    onkeyup="saveChanges()" aria-describedby="emailHelp" value="<?= $user["Email"] ?>"
+                                    required>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-group w-50">
-                        <div class="mb-3">
-                            <label for="inputPassword" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="inputPassword" name="password" pattern=".{8,}"
-                                oninvalid="this.setCustomValidity('Password must be 8 characters long')" value="<?=$user["Password"]?>" required>
+                        <div class="form-group w-50">
+                            <div class="mb-3">
+                                <label for="inputPassword" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="inputPassword" name="password"
+                                    pattern=".{8,}" oninvalid="this.setCustomValidity('Password must be 8 characters long')"
+                                    onkeyup="saveChanges()" value="<?= $user["Password"] ?>" required>
+                            </div>
                         </div>
-                    </div>
+                        <div id="saveButton"></div>
 
+                        <div class="modal fade" id="exampleModalToggle" aria-hidden="true"
+                            aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Are you sure to delete it?
+                                        </h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-outline-secondary"
+                                            data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Cancel</button>
+                                        <div>
+                                            <button class="btn btn-dark" data-bs-toggle="modal"
+                                                data-bs-target="#exampleModalToggle"
+                                                onclick='changeProfile(<?= $_SESSION["ID_User"] ?>,event)'>Save</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
             <?php
@@ -178,8 +279,43 @@ include("../../BACK END/connect.php");
 
 </html>
 
+<script>
+    var save = false;
+    var userModified = [];
 
+    function changeProfile(id,event) {
+        event.preventDefault();
+        const name = $('#inputName').val();
+        const surname = $('#inputSurname').val();
+        const email = $('#inputEmail').val();
+        const password = $('#inputPassword').val();
+        const username = $('#inputUsername').val();
+        save=false;
+        $.ajax({
+            type: "POST",
+            url: "../../BACKE END/changeProfile.php",
+            data: {
+                ID_User: id,
+                name: name,
+                surname: surname,
+                email: email,
+                password: password,
+                username: username
+            },
+            success: function (response) {
+                console.log('success');
+            }
+        })
+    }
 
+    function saveChanges() {
+        if (!save) {
+            save = true;
+            var button = "<button type='button' class='btn btn-outline-info' data-bs-toggle='modal' href='#exampleModalToggle'>Save</button>";
+            document.getElementById("saveButton").innerHTML = button;
+        }
+
+    }
 
 
 </script>

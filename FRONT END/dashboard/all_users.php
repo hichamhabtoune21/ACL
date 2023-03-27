@@ -230,7 +230,7 @@ include("../../BACK END/connect.php");
                                         <div id="addDeleteButton">
                                             <button class="btn btn-dark" data-bs-toggle="modal"
                                                 data-bs-target="#exampleModalToggle"
-                                                onclick="changeRole()">Save</button>
+                                                onclick="changeRole(event)">Save</button>
                                         </div>
                                     </div>
                                 </div>
@@ -363,7 +363,8 @@ include("../../BACK END/connect.php");
 <script>
     var save = false;
 
-    function changeRole() {
+    function changeRole(event) {
+        event.preventDefault();
         var role;
         for (let i = 0; i < userModified.length; i++) {
             id = userModified[i];
