@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
+-- Host: db
 -- Generation Time: Mar 27, 2023 at 08:31 PM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.2.0
+-- Server version: 8.0.32
+-- PHP Version: 8.1.15
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,12 +28,12 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `client` (
-  `ID_Client` int(11) NOT NULL,
-  `VAT number` int(11) NOT NULL,
-  `Name` varchar(20) NOT NULL,
-  `Surname` varchar(20) NOT NULL,
-  `Phone` varchar(15) NOT NULL,
-  `Address` varchar(30) NOT NULL
+  `ID_Client` int NOT NULL,
+  `VAT number` int NOT NULL,
+  `Name` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Surname` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Phone` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Address` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -55,13 +55,13 @@ INSERT INTO `client` (`ID_Client`, `VAT number`, `Name`, `Surname`, `Phone`, `Ad
 --
 
 CREATE TABLE `invoice` (
-  `ID_Invoice` int(11) NOT NULL,
-  `Progressive number` int(11) NOT NULL,
+  `ID_Invoice` int NOT NULL,
+  `Progressive number` int NOT NULL,
   `Issuing date` date NOT NULL,
-  `Business name` text NOT NULL,
-  `Amount` int(11) NOT NULL,
-  `Payment type` enum('Credit Card','Bank Transfer','Cash','') NOT NULL,
-  `ID_Client` int(11) NOT NULL
+  `Business name` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Amount` int NOT NULL,
+  `Payment type` enum('Credit Card','Bank Transfer','Cash','') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ID_Client` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -75,7 +75,10 @@ INSERT INTO `invoice` (`ID_Invoice`, `Progressive number`, `Issuing date`, `Busi
 (4, 103, '2023-03-15', '124 Corporation', 1250, 'Bank Transfer', 4),
 (5, 104, '2023-03-20', 'QWERTY Co.', 2500, 'Bank Transfer', 5),
 (6, 95, '2023-03-25', 'ABC Company', 900, 'Bank Transfer', 1),
-(38, 97, '2023-03-04', 'ABC Company', 999, 'Bank Transfer', 1);
+(7, 97, '2023-03-04', 'ABC Company', 999, 'Bank Transfer', 1),
+(51, 100, '2023-03-10', 'NONON', 10, 'Credit Card', 1),
+(52, 100, '2023-03-01', 'ABC Company', 999999, 'Credit Card', 2),
+(53, 100, '2023-03-11', 'NONON', 101, 'Credit Card', 2);
 
 -- --------------------------------------------------------
 
@@ -84,7 +87,7 @@ INSERT INTO `invoice` (`ID_Invoice`, `Progressive number`, `Issuing date`, `Busi
 --
 
 CREATE TABLE `permission` (
-  `Permission` varchar(15) NOT NULL
+  `Permission` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -94,8 +97,8 @@ CREATE TABLE `permission` (
 --
 
 CREATE TABLE `permission_belong_to_role` (
-  `Permission` varchar(15) NOT NULL,
-  `Role` varchar(15) NOT NULL
+  `Permission` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Role` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -105,7 +108,7 @@ CREATE TABLE `permission_belong_to_role` (
 --
 
 CREATE TABLE `role` (
-  `Role` varchar(15) NOT NULL
+  `Role` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -125,13 +128,13 @@ INSERT INTO `role` (`Role`) VALUES
 --
 
 CREATE TABLE `user` (
-  `ID_User` int(11) NOT NULL,
-  `Email` varchar(30) NOT NULL,
-  `Password` varchar(30) NOT NULL,
-  `Username` varchar(20) NOT NULL,
-  `Name` varchar(20) NOT NULL,
-  `Surname` varchar(20) NOT NULL,
-  `Role` varchar(15) NOT NULL
+  `ID_User` int NOT NULL,
+  `Email` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `Password` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `Username` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `Name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `Surname` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `Role` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -142,9 +145,9 @@ INSERT INTO `user` (`ID_User`, `Email`, `Password`, `Username`, `Name`, `Surname
 (1, 'admin@admin.com', 'admin', 'admin', 'admin', 'admin', 'Admin'),
 (2, 'jane.smith@example.com', 'password2', 'administration', 'Jane', 'Smith', 'Administration'),
 (3, 'mark.johnson@example.com', 'password3', 'markjohnson', 'Mark', 'Johnson', 'Administration'),
-(4, 'sarah.green@example.com', 'password4', 'sarahgreen', 'Sarah', 'Green', 'Area Manager'),
-(5, 'chris.wilson@example.com', 'password5', 'chriswilson', 'Chris', 'Wilson', 'Area Manager'),
-(6, 'emily.davis@example.com', 'password6', 'commercial', 'Emily', 'Davis', 'Commercial');
+(4, 'sarah.green@example.com', 'password4', 'sarahgreen', 'Sarah', 'Green', 'Commercial'),
+(5, 'chris.wilson@example.com', 'password5', 'chriswilson', 'Chris', 'Wilson', 'Administration'),
+(6, 'commercial@commercial.com', 'commercial', 'commercial', 'Emily', 'Davis', 'Commercial');
 
 -- --------------------------------------------------------
 
@@ -153,8 +156,8 @@ INSERT INTO `user` (`ID_User`, `Email`, `Password`, `Username`, `Name`, `Surname
 --
 
 CREATE TABLE `user_manage_client` (
-  `ID_User` int(11) NOT NULL,
-  `ID_Client` int(11) NOT NULL
+  `ID_User` int NOT NULL,
+  `ID_Client` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -173,8 +176,8 @@ INSERT INTO `user_manage_client` (`ID_User`, `ID_Client`) VALUES
 --
 
 CREATE TABLE `user_manage_invoice` (
-  `ID_Invoice` int(11) NOT NULL,
-  `ID_User` int(11) NOT NULL
+  `ID_Invoice` int NOT NULL,
+  `ID_User` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -260,19 +263,19 @@ ALTER TABLE `user_manage_invoice`
 -- AUTO_INCREMENT for table `client`
 --
 ALTER TABLE `client`
-  MODIFY `ID_Client` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ID_Client` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `invoice`
 --
 ALTER TABLE `invoice`
-  MODIFY `ID_Invoice` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `ID_Invoice` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `ID_User` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `ID_User` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- Constraints for dumped tables
@@ -294,8 +297,8 @@ ALTER TABLE `user`
 -- Constraints for table `user_manage_client`
 --
 ALTER TABLE `user_manage_client`
-  ADD CONSTRAINT `fk_client` FOREIGN KEY (`ID_Client`) REFERENCES `client` (`ID_Client`),
-  ADD CONSTRAINT `fk_user` FOREIGN KEY (`ID_User`) REFERENCES `user` (`ID_User`);
+  ADD CONSTRAINT `fk_client` FOREIGN KEY (`ID_Client`) REFERENCES `client` (`ID_Client`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `fk_user` FOREIGN KEY (`ID_User`) REFERENCES `user` (`ID_User`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
 -- Constraints for table `user_manage_invoice`
