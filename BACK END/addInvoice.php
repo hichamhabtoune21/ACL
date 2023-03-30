@@ -24,7 +24,7 @@ $query= "SELECT * FROM client where ID_Client='$clientID'";
 $result = mysqli_query($connect,$query);
 $client = mysqli_fetch_array($result);
 $values= array('clientName'=>$client["Name"], 'clientSurname'=>$client["Surname"],'number'=>$_POST["num"], 'date'=>$_POST["date"], 'bus_name'=> $_POST["bus_name"], 'pay_type' => $_POST["pay_type"],'amount'=>$_POST["amount"],
-                'ID_Invoice' => $last_id, "role" => $_SESSION["ruolo"]);
+                'ID_Invoice' => $last_id, "canDelete" => in_array("DELETE",$_SESSION["Permissions"]));
 
 
 if($result){

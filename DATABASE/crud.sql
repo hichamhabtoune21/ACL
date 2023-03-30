@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
--- Generation Time: Mar 27, 2023 at 08:31 PM
+-- Generation Time: Mar 30, 2023 at 04:56 PM
 -- Server version: 8.0.32
 -- PHP Version: 8.1.15
 
@@ -24,29 +24,50 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `area`
+--
+
+CREATE TABLE `area` (
+  `Area` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `area`
+--
+
+INSERT INTO `area` (`Area`) VALUES
+('Center'),
+('North-East'),
+('North-West'),
+('South');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `client`
 --
 
 CREATE TABLE `client` (
   `ID_Client` int NOT NULL,
   `VAT number` int NOT NULL,
-  `Name` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Surname` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Phone` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Address` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL
+  `Name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Surname` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Phone` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Address` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Area` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `client`
 --
 
-INSERT INTO `client` (`ID_Client`, `VAT number`, `Name`, `Surname`, `Phone`, `Address`) VALUES
-(1, 123456789, 'Mario', 'Rossi', '1234567890', 'Via Roma, 1'),
-(2, 234567890, 'Luigi', 'Bianchi', '2345678901', 'Piazza del Popolo, 2'),
-(3, 345678901, 'Paolo', 'Verdi', '3456789012', 'Corso Italia, 3'),
-(4, 456789012, 'Giovanna', 'Neri', '4567890123', 'Via Garibaldi, 4'),
-(5, 567890123, 'Silvia', 'Ferrari', '5678901234', 'Via Dante, 5'),
-(6, 678901234, 'Riccardo', 'Baldi', '6789012345', 'Viale dei Tigli, 6');
+INSERT INTO `client` (`ID_Client`, `VAT number`, `Name`, `Surname`, `Phone`, `Address`, `Area`) VALUES
+(1, 123456789, 'Mario', 'Rossi', '1234567890', 'Via Roma, 1', 'Center'),
+(2, 234567890, 'Luigi', 'Bianchi', '2345678901', 'Piazza del Popolo, 2', 'Center'),
+(3, 345678901, 'Paolo', 'Verdi', '3456789012', 'Corso Italia, 3', 'North-East'),
+(4, 456789012, 'Giovanna', 'Neri', '4567890123', 'Via Garibaldi, 4', 'North-West'),
+(5, 567890123, 'Silvia', 'Ferrari', '5678901234', 'Via Dante, 5', 'South'),
+(6, 678901234, 'Riccardo', 'Baldi', '6789012345', 'Viale dei Tigli, 6', 'South');
 
 -- --------------------------------------------------------
 
@@ -78,7 +99,8 @@ INSERT INTO `invoice` (`ID_Invoice`, `Progressive number`, `Issuing date`, `Busi
 (7, 97, '2023-03-04', 'ABC Company', 999, 'Bank Transfer', 1),
 (51, 100, '2023-03-10', 'NONON', 10, 'Credit Card', 1),
 (52, 100, '2023-03-01', 'ABC Company', 999999, 'Credit Card', 2),
-(53, 100, '2023-03-11', 'NONON', 101, 'Credit Card', 2);
+(53, 100, '2023-03-11', 'NONON', 101, 'Credit Card', 2),
+(54, 11, '2023-03-11', 'ABC Company', 21, 'Cash', 1);
 
 -- --------------------------------------------------------
 
@@ -87,19 +109,48 @@ INSERT INTO `invoice` (`ID_Invoice`, `Progressive number`, `Issuing date`, `Busi
 --
 
 CREATE TABLE `permission` (
-  `Permission` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL
+  `Permission` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `permission`
+--
+
+INSERT INTO `permission` (`Permission`) VALUES
+('CREATE'),
+('DELETE'),
+('READ'),
+('UPDATE');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `permission_belong_to_role`
+-- Table structure for table `permission_to_role`
 --
 
-CREATE TABLE `permission_belong_to_role` (
-  `Permission` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Role` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL
+CREATE TABLE `permission_to_role` (
+  `Role` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Permission` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `permission_to_role`
+--
+
+INSERT INTO `permission_to_role` (`Role`, `Permission`) VALUES
+('Admin', 'CREATE'),
+('Admin', 'READ'),
+('Admin', 'UPDATE'),
+('Admin', 'DELETE'),
+('Commercial', 'CREATE'),
+('Commercial', 'READ'),
+('Commercial', 'UPDATE'),
+('Administration', 'READ'),
+('Administration', 'UPDATE'),
+('Area Manager', 'CREATE'),
+('Area Manager', 'READ'),
+('Area Manager', 'UPDATE'),
+('Area Manager', 'DELETE');
 
 -- --------------------------------------------------------
 
@@ -108,7 +159,7 @@ CREATE TABLE `permission_belong_to_role` (
 --
 
 CREATE TABLE `role` (
-  `Role` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL
+  `Role` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -129,25 +180,27 @@ INSERT INTO `role` (`Role`) VALUES
 
 CREATE TABLE `user` (
   `ID_User` int NOT NULL,
-  `Email` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `Password` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `Username` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `Name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `Surname` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `Role` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL
+  `Email` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Password` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Username` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Surname` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Role` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Area` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`ID_User`, `Email`, `Password`, `Username`, `Name`, `Surname`, `Role`) VALUES
-(1, 'admin@admin.com', 'admin', 'admin', 'admin', 'admin', 'Admin'),
-(2, 'jane.smith@example.com', 'password2', 'administration', 'Jane', 'Smith', 'Administration'),
-(3, 'mark.johnson@example.com', 'password3', 'markjohnson', 'Mark', 'Johnson', 'Administration'),
-(4, 'sarah.green@example.com', 'password4', 'sarahgreen', 'Sarah', 'Green', 'Commercial'),
-(5, 'chris.wilson@example.com', 'password5', 'chriswilson', 'Chris', 'Wilson', 'Administration'),
-(6, 'commercial@commercial.com', 'commercial', 'commercial', 'Emily', 'Davis', 'Commercial');
+INSERT INTO `user` (`ID_User`, `Email`, `Password`, `Username`, `Name`, `Surname`, `Role`, `Area`) VALUES
+(1, 'admin@admin.com', 'admin', 'admin', 'admin', 'admin', 'Admin', NULL),
+(2, 'area@area.com', 'password2', 'area manager', 'Jane', 'Smith', 'Area Manager', 'Center'),
+(3, 'mark.johnson@example.com', 'password3', 'markjohnson', 'Mark', 'Johnson', 'Administration', NULL),
+(4, 'sarah.green@example.com', 'password4', 'sarahgreen', 'Sarah', 'Green', 'Commercial', NULL),
+(5, 'chris.wilson@example.com', 'password5', 'chriswilson', 'Chris', 'Wilson', 'Administration', NULL),
+(6, 'commercial@commercial.com', 'commercial', 'commercial', 'Emily', 'Davis', 'Commercial', NULL),
+(44, 'bellino21@gmail.com', 'bellino21', 'bellino', 'bellino', 'Bellino', 'NULL', NULL);
 
 -- --------------------------------------------------------
 
@@ -203,10 +256,17 @@ INSERT INTO `user_manage_invoice` (`ID_Invoice`, `ID_User`) VALUES
 --
 
 --
+-- Indexes for table `area`
+--
+ALTER TABLE `area`
+  ADD PRIMARY KEY (`Area`);
+
+--
 -- Indexes for table `client`
 --
 ALTER TABLE `client`
-  ADD PRIMARY KEY (`ID_Client`);
+  ADD PRIMARY KEY (`ID_Client`),
+  ADD KEY `fk_area` (`Area`);
 
 --
 -- Indexes for table `invoice`
@@ -222,11 +282,11 @@ ALTER TABLE `permission`
   ADD PRIMARY KEY (`Permission`);
 
 --
--- Indexes for table `permission_belong_to_role`
+-- Indexes for table `permission_to_role`
 --
-ALTER TABLE `permission_belong_to_role`
-  ADD KEY `Permesso(FK)` (`Permission`),
-  ADD KEY `Ruolo_FK` (`Role`);
+ALTER TABLE `permission_to_role`
+  ADD KEY `fk_role` (`Role`),
+  ADD KEY `fk_permission` (`Permission`);
 
 --
 -- Indexes for table `role`
@@ -239,7 +299,8 @@ ALTER TABLE `role`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`ID_User`),
-  ADD KEY `Ruolo(FK)` (`Role`);
+  ADD KEY `Ruolo(FK)` (`Role`),
+  ADD KEY `Area(FK)` (`Area`);
 
 --
 -- Indexes for table `user_manage_client`
@@ -269,17 +330,23 @@ ALTER TABLE `client`
 -- AUTO_INCREMENT for table `invoice`
 --
 ALTER TABLE `invoice`
-  MODIFY `ID_Invoice` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `ID_Invoice` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `ID_User` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `ID_User` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `client`
+--
+ALTER TABLE `client`
+  ADD CONSTRAINT `fk_area` FOREIGN KEY (`Area`) REFERENCES `area` (`Area`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
 -- Constraints for table `invoice`
@@ -288,10 +355,18 @@ ALTER TABLE `invoice`
   ADD CONSTRAINT `ID_Cliente(FK)` FOREIGN KEY (`ID_Client`) REFERENCES `client` (`ID_Client`);
 
 --
+-- Constraints for table `permission_to_role`
+--
+ALTER TABLE `permission_to_role`
+  ADD CONSTRAINT `fk_permission` FOREIGN KEY (`Permission`) REFERENCES `permission` (`Permission`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `fk_role` FOREIGN KEY (`Role`) REFERENCES `role` (`Role`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+--
 -- Constraints for table `user`
 --
 ALTER TABLE `user`
-  ADD CONSTRAINT `Ruolo(FK)` FOREIGN KEY (`Role`) REFERENCES `role` (`Role`);
+  ADD CONSTRAINT `Area(FK)` FOREIGN KEY (`Area`) REFERENCES `area` (`Area`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `Ruolo_FK` FOREIGN KEY (`Role`) REFERENCES `role` (`Role`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
 -- Constraints for table `user_manage_client`

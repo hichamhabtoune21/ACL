@@ -110,7 +110,8 @@ include("../../BACK END/connect.php");
                                         </li>
                                         <hr style="width: 200%; background-color: white;">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="profile.php"><i class="bi bi-person-square"></i></i>Profile</a>
+                                            <a class="nav-link" href="profile.php"><i
+                                                    class="bi bi-person-square"></i></i>Profile</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -130,6 +131,7 @@ include("../../BACK END/connect.php");
                                         <th scope="col">Phone</th>
                                         <th scope="col">Address</th>
                                         <th scope="col">VAT Number</th>
+                                        <th scope="col">Area</th>
                                         <th scope="col">Actions</th>
 
                                     </tr>
@@ -141,6 +143,9 @@ include("../../BACK END/connect.php");
                                         $query = "SELECT * FROM client";
                                     } elseif ($_SESSION["ruolo"] == "Commercial") {
                                         $query = "SELECT * FROM client INNER JOIN user_manage_client ON user_manage_client.ID_Client = client.ID_Client and user_manage_client.ID_User=" . $_SESSION["ID_User"];
+                                    } elseif ($_SESSION["ruolo"] == "Area Manager") {
+                                        $area = $_SESSION["Area"];
+                                        $query = "SELECT * FROM client WHERE Area ='$area'";
                                     }
                                     $result = mysqli_query($connect, $query);
                                     if (mysqli_num_rows($result)) {
@@ -161,6 +166,9 @@ include("../../BACK END/connect.php");
                                                 </td>
                                                 <td>
                                                     <?= $client["VAT number"]; ?>
+                                                </td>
+                                                <td>
+                                                    <?= $client["Area"]; ?>
                                                 </td>
 
                                                 <td>

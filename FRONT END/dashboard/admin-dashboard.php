@@ -87,13 +87,13 @@ include("../../BACK END/connect.php");
                                                 class="bi bi-house"></i>Home</a>
                                     </li>
                                     <?php
-                                    if($_SESSION["ruolo"]=="Admin"){
-                                    ?>
-                                    <li class="nav-item" style="padding-bottom: 20px;">
-                                        <a class="nav-link" aria-current="page" href="all_users.php"><i
-                                                class="bi bi-people"></i>Users</a>
-                                    </li>
-                                    <?php
+                                    if ($_SESSION["ruolo"] == "Admin") {
+                                        ?>
+                                        <li class="nav-item" style="padding-bottom: 20px;">
+                                            <a class="nav-link" aria-current="page" href="all_users.php"><i
+                                                    class="bi bi-people"></i>Users</a>
+                                        </li>
+                                        <?php
                                     }
                                     ?>
 
@@ -110,7 +110,8 @@ include("../../BACK END/connect.php");
                                     </li>
                                     <hr style="width: 200%; background-color: white;">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="profile.php"><i class="bi bi-person-square"></i></i>Profile</a>
+                                        <a class="nav-link" href="profile.php"><i
+                                                class="bi bi-person-square"></i></i>Profile</a>
                                     </li>
                                 </ul>
                             </div>

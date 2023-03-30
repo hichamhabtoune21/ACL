@@ -10,24 +10,27 @@ include("../../BACK END/connect.php");
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
-        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" />
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 
 
-   
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-    
-
-        <link rel="stylesheet" href="../style-css/data-table.css" />
 
 
+    <link rel="stylesheet" href="../style-css/data-table.css" />
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/css/bootstrap-select.min.css">
+
+
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/css/bootstrap-select.min.css">
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/js/bootstrap-select.min.js"></script>
 
@@ -194,7 +197,8 @@ include("../../BACK END/connect.php");
                                     </li>
                                     <hr style="width: 100%;color:white;">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="profile.php"><i class="bi bi-person-square"></i></i>Profile</a>
+                                        <a class="nav-link" href="profile.php"><i
+                                                class="bi bi-person-square"></i></i>Profile</a>
                                     </li>
 
 
@@ -206,6 +210,8 @@ include("../../BACK END/connect.php");
 
                 </div>
                 <div class="col-md-10 col-lg-10 col-xl-10" style="padding:25px">
+               
+
                     <h3 style="padding-bottom:25px">INVOICE MANAGEMENT</h3>
 
                     <div class="overflow-auto">
@@ -239,6 +245,9 @@ include("../../BACK END/connect.php");
                                                             $query = "SELECT * FROM client";
                                                         } elseif ($_SESSION["ruolo"] == "Commercial") {
                                                             $query = "SELECT * FROM client INNER JOIN user_manage_client ON user_manage_client.ID_Client = client.ID_Client and user_manage_client.ID_User=" . $_SESSION["ID_User"];
+                                                        }elseif($_SESSION["ruolo"]=="Area Manager"){
+                                                            $area=$_SESSION["Area"];
+                                                            $query = "SELECT * FROM client WHERE Area='$area'";
                                                         }
                                                         $result = mysqli_query($connect, $query);
                                                         if (mysqli_num_rows($result)) {
@@ -346,7 +355,7 @@ include("../../BACK END/connect.php");
                             </div>
                         </div>
                         <?php
-                        if ($_SESSION["ruolo"] != "Administration") {
+                        if (in_array("CREATE", $_SESSION["Permissions"])) {
                             ?>
                             <button type="button" class="btn btn-dark" data-bs-toggle="modal" href="#exampleModalToggle"
                                 onclick="add()"><i class="bi bi-plus-square"></i>Add</button>
@@ -374,6 +383,9 @@ include("../../BACK END/connect.php");
                                         $query = "SELECT * from invoice ORDER BY ID_Client";
                                     } elseif ($_SESSION["ruolo"] == "Commercial") {
                                         $query = "SELECT * FROM invoice INNER JOIN user_manage_client ON user_manage_client.ID_Client = invoice.ID_Client and user_manage_client.ID_User=" . $_SESSION["ID_User"];
+                                    } elseif($_SESSION["ruolo"] == "Area Manager"){
+                                        $area = $_SESSION["Area"];
+                                        $query = "SELECT * FROM invoice INNER JOIN client ON client.ID_Client=invoice.ID_Client where client.Area='$area'";
                                     }
                                     $result = mysqli_query($connect, $query);
                                     //$invoice = mysqli_fetch_array($result);
@@ -408,13 +420,18 @@ include("../../BACK END/connect.php");
                                                 </td>
                                                 <td nowrap>
                                                     <div class='d-flex flex-row bd-highlight mb-3 gap-2'>
-
-                                                        <button type='button' class='btn btn-light p-2 justify-content-center'
-                                                            onclick=invoiceInfo(<?= $invoice['ID_Invoice'] ?>) data-bs-toggle='modal'
-                                                            href='#exampleModalToggle'><i
-                                                                class='bi bi-pencil-fill'></i>Edit</button>
                                                         <?php
-                                                        if ($_SESSION["ruolo"] == "Admin") {
+                                                        if (in_array("UPDATE", $_SESSION["Permissions"])) {
+                                                            ?>
+                                                            <button type='button' class='btn btn-light p-2 justify-content-center'
+                                                                onclick=invoiceInfo(<?= $invoice['ID_Invoice'] ?>) data-bs-toggle='modal'
+                                                                href='#exampleModalToggle'><i
+                                                                    class='bi bi-pencil-fill'></i>Edit</button>
+                                                            <?php
+                                                        }
+                                                        ?>
+                                                        <?php
+                                                        if (in_array("DELETE", $_SESSION["Permissions"])) {
                                                             ?>
                                                             <button type='button' class='btn btn-danger p-2 justify-content-center'
                                                                 data-bs-toggle='modal' href='#exampleModalToggle1'
@@ -524,7 +541,7 @@ include("../../BACK END/connect.php");
                             // user is logged in successfully in the back-end 
                             // let's redirect 
                             var button = "";
-                            if (message.role != "Administration" && message.role != "Commercial") {
+                            if (message.canDelete) {
                                 button = "<div class='d-flex flex-row bd-highlight mb-3 gap-2'><button type='button' class='btn btn-light p-2' onclick=invoiceInfo(" + message.ID_Invoice + ") data-bs-toggle='modal' href='#exampleModalToggle'><i class='bi bi-pencil-fill'></i>Edit</button> <button type='button' class='btn btn-danger p-2' data-bs-toggle='modal' href='#exampleModalToggle1' onclick='addDelete(" + message.ID_Invoice + ")'><i class='bi bi-x-square'></i>Delete</button></div>"
                             }
                             else {

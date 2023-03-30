@@ -15,37 +15,34 @@ if (mysqli_num_rows($query) > 0) {
     $_SESSION["ID_User"] = $user["ID_User"];
 
     $_SESSION["username"] = $user["Username"];
+
     $_SESSION["ruolo"] = $user["Role"];
 
 
     switch ($user["Role"]) {
         case "Admin":
-            // header("Location: ../FRONT END/dashboard/admin-dashboard.php");
-            echo json_encode(array("text" => "../dashboard/admin-dashboard.php"));
-
-            break;
         case "Commercial":
-            //header("Location: ../FRONT END/dashboard/admin-dashboard.php");
-            echo json_encode(array("text" => "../dashboard/admin-dashboard.php"));
-
-            break;
-        case "Administration":
-            //header("Location: ../FRONT END/dashboard/admin-dashboard.php");
-            echo json_encode(array("text" => "../dashboard/admin-dashboard.php"));
-
-            break;
         case "Area Manager":
-            //header("Location: ../FRONT END/dashboard/admin-dashboard.php");
+            $_SESSION["Area"]=$user["Area"];
+        case "Administration":
+            $_SESSION["Permissions"]=array();
+            $ruolo = mysqli_real_escape_string($connect, $_SESSION['ruolo']);
+            $query1 = "SELECT Permission FROM permission_to_role WHERE Role='$ruolo'";
+            $result = mysqli_query($connect, $query1);
+            if (mysqli_num_rows($result)) {
+                while ($permission = mysqli_fetch_array($result)) {
+                    array_push($_SESSION['Permissions'],$permission['Permission']);
+                }
+            }
             echo json_encode(array("text" => "../dashboard/admin-dashboard.php"));
+            
             break;
         case "NULL":
         case "null":
         default:
             //header("Location: ../FRONT END/dashboard/null-dashboard.php");
             echo json_encode(array("text" => "../dashboard/null-dashboard.php"));
-
-
-    }
+        }
 
 
 } else {
