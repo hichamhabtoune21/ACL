@@ -5,14 +5,18 @@ $email = $_POST["email"];
 $password = $_POST["password"];
 $hashed_password=md5($password);
 
-$query = mysqli_query($connect, "SELECT * FROM user WHERE Email='$email' AND Password='$hashed_password'");
+$query = "SELECT * FROM user WHERE Email=? AND Password=?";
+$result=$connect->prepare($query);
+$result->bind_param("ss",$email,$hashed_password);
+$result->execute();
+$result=$result->get_result();
 
-if (mysqli_num_rows($query) > 0) {
+if (mysqli_num_rows($result) > 0) {
     session_start();
 
     $_SESSION["id"] = session_id();
 
-    $user = mysqli_fetch_array($query);
+    $user = $result->fetch_array();
     $_SESSION["ID_User"] = $user["ID_User"];
 
     $_SESSION["username"] = $user["Username"];

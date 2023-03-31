@@ -7,8 +7,11 @@ if (isset($_POST["ID_User"], $_POST["Role"], $_POST["Area"])) {
     $newRole = $_POST["Role"];
     $area = $_POST["Area"];
 
-    $query = "SELECT * FROM user WHERE ID_User = '$idUser'";
-    $result = mysqli_query($connect, $query);
+    $query = "SELECT * FROM user WHERE ID_User = ?";
+    $result=$connect->prepare($query);
+    $result->bind_param("i",$idUser);
+    $result->execute();
+    $result=$result->get_result();
 
     if ($result) {
         if (mysqli_num_rows($result) > 0) {
@@ -16,12 +19,14 @@ if (isset($_POST["ID_User"], $_POST["Role"], $_POST["Area"])) {
                 $query = "UPDATE user SET `Role` = ?, `Area` = ? WHERE ID_User = ?";
                 $result = $connect->prepare($query);
                 $result->bind_param("sss", $newRole, $area, $idUser);
+                $result->execute();
             }else{
                 $query = "UPDATE user SET `Role` = ?, `Area` = NULL WHERE ID_User = ?";
                 $result = $connect->prepare($query);
                 $result->bind_param("ss", $newRole, $idUser);
+                $result->execute();
+
             }
-            $result->execute();
             if ($result) {
                 echo json_encode(array("text" => "success"));
             } else {

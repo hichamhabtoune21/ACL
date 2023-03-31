@@ -2,9 +2,11 @@
 include("connect.php");
 $id_invoice=$_POST["ID_Invoice"];
 
-$query="SELECT * FROM invoice WHERE ID_Invoice='$id_invoice'";
-
-$result=mysqli_query($connect,$query);
+$query="SELECT * FROM invoice WHERE ID_Invoice=?";
+$result=$connect->prepare($query);
+$result->bind_param("i",$id_invoice);
+$result->execute();
+$result=$result->get_result();
 
 
 

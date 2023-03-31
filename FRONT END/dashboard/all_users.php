@@ -280,7 +280,7 @@ include("../../BACK END/connect.php");
                                                         onchange='saveChanges(<?= $user["ID_User"] ?>)'>
 
                                                         <?php
-                                                        if ($user["Role"] == "NULL") {
+                                                        if ($user["Role"] == "NULL" || $user["Role"]=="") {
                                                             echo "
                                                         <option value='NULL' selected>No Role</option>
                                                         <option value='Admin'>Admin</option>

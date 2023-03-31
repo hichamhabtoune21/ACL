@@ -535,6 +535,7 @@ include("../../BACK END/connect.php");
                             bus_name: bus_name
                         },
                         success: function (response) {
+                            console.log(response);
                             var message = JSON.parse(response);
 
 
@@ -673,6 +674,7 @@ include("../../BACK END/connect.php");
                         ID_Invoice: id
                     },
                     success: function (message) {
+                        console.log(message);
                         message = JSON.parse(message);
                         //document.getElementById("client").value = message.clientID;
                         $('.selectpicker').selectpicker('val', message.clientID);

@@ -10,9 +10,11 @@ $email = $_POST["email"];
 $password = $_POST["password"];
 $hashed_password=md5($password);
 
-$query="SELECT * FROM user WHERE ID_User='$idUser'";
-$result=mysqli_query($connect,$query);
-
+$query="SELECT * FROM user WHERE ID_User=?";
+$result=$connect->prepare($query);
+$result->bind_param("i",$idUser);
+$result->execute();
+$result=$result->get_result();
 if(mysqli_num_rows($result)>0){
     $user = mysqli_fetch_array($result);
     $query = "UPDATE user SET Email=?, Password=?, Username=?, Name=?, Surname=? WHERE ID_User=?";
