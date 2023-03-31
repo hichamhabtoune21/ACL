@@ -320,7 +320,7 @@ include("../../BACK END/connect.php");
                 username: username
             },
             success: function (response) {
-                //console.log(response);
+                console.log(response);
             }
         })
     }

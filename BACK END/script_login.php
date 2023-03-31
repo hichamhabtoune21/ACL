@@ -3,14 +3,13 @@ include("connect.php");
 
 $email = $_POST["email"];
 $password = $_POST["password"];
-$hashed_password = md5($password);
+$hashed_password=md5($password);
 
-
-$query = mysqli_query($connect, "SELECT * FROM user WHERE email='$email' AND password = '$hashed_password' ");
+$query = mysqli_query($connect, "SELECT * FROM user WHERE Email='$email' AND Password='$hashed_password'");
 
 if (mysqli_num_rows($query) > 0) {
-
     session_start();
+
     $_SESSION["id"] = session_id();
 
     $user = mysqli_fetch_array($query);
@@ -50,6 +49,6 @@ if (mysqli_num_rows($query) > 0) {
 } else {
     session_start();
     session_destroy();
-    echo json_encode(array("text" => "failed"));
+    echo json_encode(array("text" => "failed'$hashed_password'"));
 }
 ?>

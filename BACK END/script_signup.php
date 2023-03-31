@@ -8,7 +8,7 @@ $password = $_POST["password"];
 $password1 = $_POST["password1"];
 $t["text"] = "";
 
-$hashed_password = md5($password);
+$hashed_password=md5($password);
 
 mysqli_query($connect, "SET FOREIGN_KEY_CHECKS=0");
 

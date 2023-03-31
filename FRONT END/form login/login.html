@@ -130,7 +130,7 @@
 
                         // user is logged in successfully in the back-end 
                         // let's redirect 
-                        if (message.text == "failed") {
+                        if (message.text.includes("failed")) {
                             $("#problems").append("<p class='text-danger'>Email or password incorrect</p>");
                         }
                         else{

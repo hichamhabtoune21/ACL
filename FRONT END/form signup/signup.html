@@ -131,7 +131,9 @@
                     <div class="form-group">
                         <div class="mb-3">
                             <label for="inputPassword" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="inputPassword" name="password" pattern="^.{8,}$" oninvalid="this.setCustomValidity('Password must be 8 characters long')" required>
+                            <input type="password" class="form-control" id="inputPassword" name="password"
+                                pattern="^.{8,}$"
+                                oninvalid="this.setCustomValidity('Password must be 8 characters long')" required>
                         </div>
                     </div>
 
@@ -139,7 +141,7 @@
                         <div class="mb-3">
                             <label for="inputRepeatPassword" class="form-label">Repeat Password</label>
                             <input type="password" class="form-control" id="inputRepeatPassword" name="password1"
-                                pattern=".{8,}" required>
+                                required>
                         </div>
                     </div>
 
@@ -164,6 +166,11 @@
     </footer>
 
     <script>
+        const passwordInput = document.getElementById("inputPassword");
+
+        passwordInput.addEventListener("input", function () {
+            passwordInput.setCustomValidity("");
+        });
         $(document).ready(function () {
             $('#form1').submit(function (e) {
                 e.preventDefault();
