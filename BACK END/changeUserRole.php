@@ -21,7 +21,6 @@ if (isset($_POST["ID_User"], $_POST["Role"], $_POST["Area"])) {
                 $result = $connect->prepare($query);
                 $result->bind_param("ss", $newRole, $idUser);
             }
-
             $result->execute();
             if ($result) {
                 echo json_encode(array("text" => "success"));
