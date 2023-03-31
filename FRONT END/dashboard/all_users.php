@@ -165,7 +165,8 @@ include("../../BACK END/connect.php");
                                         </li>
 
                                         <li class="nav-item" style="padding-bottom: 20px;">
-                                            <a class="nav-link" href="clients.php"><i class="bi bi-journal-check"></i>Clients</a>
+                                            <a class="nav-link" href="clients.php"><i
+                                                    class="bi bi-journal-check"></i>Clients</a>
                                         </li>
                                         <li class="nav-item" style="padding-bottom: 20px;">
                                             <a class="nav-link" href="invoice.php"><i class="bi bi-bar-chart"></i>Invoices</a>
@@ -176,7 +177,8 @@ include("../../BACK END/connect.php");
                                         </li>
                                         <hr style="width: 200%; background-color: white;">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="profile.php"><i class="bi bi-person-square"></i></i>Profile</a>
+                                            <a class="nav-link" href="profile.php"><i
+                                                    class="bi bi-person-square"></i></i>Profile</a>
                                         </li>
 
 
@@ -229,8 +231,7 @@ include("../../BACK END/connect.php");
                                             data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Cancel</button>
                                         <div id="addDeleteButton">
                                             <button class="btn btn-dark" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModalToggle"
-                                                onclick="changeRole(event)">Save</button>
+                                                data-bs-target="#exampleModalToggle" onclick="changeRole(event)">Save</button>
                                         </div>
                                     </div>
                                 </div>
@@ -274,41 +275,42 @@ include("../../BACK END/connect.php");
                                                     <?= $user["Surname"]; ?>
                                                 </td>
                                                 <td>
-                                                    <select class="form-select form-select-sm" aria-label="Default select example" name="role"
-                                                        id=<?= $user["ID_User"]; ?> onchange='saveChanges(<?= $user["ID_User"] ?>)'>
-                                                        
+                                                    <select class="form-select form-select-sm" aria-label="Default select example"
+                                                        name="role" id=<?= $user["ID_User"]; ?>
+                                                        onchange='saveChanges(<?= $user["ID_User"] ?>)'>
+
                                                         <?php
                                                         if ($user["Role"] == "NULL") {
                                                             echo "
-                                                        <option selected>Senza ruolo</option>
+                                                        <option value='NULL' selected>No Role</option>
                                                         <option value='Admin'>Admin</option>
                                                         <option value='Commercial'>Commercial</option>
                                                         <option value='Area Manager'>Area Manager</option>
                                                         <option value='Administration'>Administration</option>";
                                                         } elseif ($user["Role"] == "Administration") {
                                                             echo "
-                                                        <option selected>Administration</option>
-                                                        <option value='Admin'>Admin</option>
-                                                        <option value='Commercial'>Commercial</option>
-                                                        <option value='Area Manager'>Area Manager</option>";
+                                                            <option value='Admin'>Admin</option>
+                                                            <option value='Commercial'>Commercial</option>
+                                                            <option value='Area Manager'>Area Manager</option>
+                                                            <option selected value='Administration'>Administration</option>";
                                                         } elseif ($user["Role"] == "Admin") {
                                                             echo "
-                                                <option selected>Admin</option>
-                                                <option value='Commercial'>Commerciale</option>
-                                                <option value='Area Manager'>Area Manager</option>
-                                                <option value='Administration'>Administration</option>";
+                                                            <option selected value='Admin'>Admin</option>
+                                                            <option value='Commercial'>Commercial</option>
+                                                            <option value='Area Manager'>Area Manager</option>
+                                                            <option value='Administration'>Administration</option>";
                                                         } elseif ($user["Role"] == "Commercial") {
                                                             echo "
-                                                <option selected>Commercial</option>
-                                                <option value='Admin'>Admin</option>
-                                                <option value='Area Manager'>Area Manager</option>
-                                                <option value='Administration'>Administration</option>";
+                                                            <option value='Admin'>Admin</option>
+                                                            <option selected value='Commercial'>Commercial</option>
+                                                            <option value='Area Manager'>Area Manager</option>
+                                                            <option value='Administration'>Administration</option>";
                                                         } elseif ($user["Role"] == "Area Manager") {
                                                             echo "
-                                                <option selected>Area Manager</option>
-                                                <option value='Admin'>Admin</option>
-                                                <option value='Administration'>Administration</option>
-                                                <option value>Commercial</option>";
+                                                            <option value='Admin'>Admin</option>
+                                                            <option value='Commercial'>Commercial</option>
+                                                            <option selected value='Area Manager'>Area Manager</option>
+                                                            <option value='Administration'>Administration</option>";
 
 
                                                         }
@@ -325,6 +327,71 @@ include("../../BACK END/connect.php");
                                                             <option value='amministrazione'>Amministrazione</option>
                                                         -->
                                                     </select>
+                                                    <?php
+
+                                                    if ($user['Role'] == "Area Manager") {
+                                                        ?>
+                                                        <select class="form-select form-select-sm" aria-label="Default select example"
+                                                            id='<?= $user['ID_User'] ?>_area'
+                                                            onchange='saveChanges(<?= $user["ID_User"] ?>)'>
+                                                            <?php
+                                                            if ($user['Area'] == "North-West") {
+                                                                echo "
+                                                            <option selected value'North-West'>North-West</option>
+                                                            <option value='North-East'>North-East</option>
+                                                            <option value='Center'>Center</option>
+                                                            <option value='South'>South</option>
+                                                            <option value='NULL'>No Area</option>";
+                                                            } elseif ($user['Area'] == "North-East") {
+                                                                echo "
+                                                            <option value='North-West'>North-West</option>
+                                                            <option selected value='North-East'>North-East</option>
+                                                            <option value='Center'>Center</option>
+                                                            <option value='South'>South</option>
+                                                            <option value='NULL'>No Area</option>";
+                                                            } elseif ($user['Area'] == "Center") {
+                                                                echo "
+                                                            <option value='North-West'>North-West</option>
+                                                            <option value='North-East'>North-East</option>
+                                                            <option selected value='Center'>Center</option>
+                                                            <option value='South'>South</option>
+                                                            <option value='NULL'>No Area</option>";
+                                                            } elseif ($user['Area'] == "South") {
+                                                                echo "
+                                                            <option value='North-West'>North-West</option>
+                                                            <option value='North-East'>North-East</option>
+                                                            <option value='Center'>Center</option>
+                                                            <option selected value='South'>South</option>
+                                                            <option value='NULL'>No Area</option>"
+                                                                ;
+
+                                                            } else {
+                                                                echo "
+                                                                <option value='North-West'>North-West</option>
+                                                                <option value='North-East'>North-East</option>
+                                                                <option value='Center'>Center</option>
+                                                                <option value='South'>South</option>
+                                                                <option selected value='NULL' selected>No Area</option>
+                                                                ";
+                                                            } ?>
+                                                        </select>
+                                                        <?php
+                                                    } else {
+
+
+                                                        ?>
+                                                        <select class="form-select form-select-sm" aria-label="Default select example"
+                                                            id='<?= $user['ID_User'] ?>_area' style="display: none"
+                                                            onchange='saveChanges(<?= $user["ID_User"] ?>)'>
+                                                            <option selected value='NULL' selected>No Area</option>
+                                                            <option value='North-West'>North-West</option>
+                                                            <option value='North-East'>North-East</option>
+                                                            <option value='Center'>Center</option>
+                                                            <option value='South'>South</option>";
+                                                        </select>
+                                                        <?php
+                                                    }
+                                                    ?>
                                                 </td>
 
                                                 <td>
@@ -367,16 +434,20 @@ include("../../BACK END/connect.php");
     function changeRole(event) {
         event.preventDefault();
         var role;
+        var area;
         for (let i = 0; i < userModified.length; i++) {
-            id = userModified[i];
-            console.log(role);
-            role = document.getElementById(id).value;
+            id = userModified[i].id;
+            role = userModified[i].role;
+            area = userModified[i].area;
+            console.log(area);
             $.ajax({
                 type: "POST",
                 url: '../../BACK END/changeUserRole.php',
                 data: {
                     ID_User: id,
                     Role: role,
+                    Area: area,
+
                 },
                 success: function (response) {
                     console.log(response);
@@ -390,7 +461,7 @@ include("../../BACK END/connect.php");
             })
         }
         document.getElementById("saveButton").style.display = 'none';
-        save=false;
+        save = false;
 
 
 
@@ -402,7 +473,29 @@ include("../../BACK END/connect.php");
             save = true;
             document.getElementById("saveButton").style.display = 'block';
         }
-        userModified.push(id);
+        var exists = false;
+        var role = document.getElementById(id).value;
+        var area;
+        if (role == "Area Manager") {
+            area = document.getElementById(id + '_area').value;
+            document.getElementById(id + '_area').style.display = 'block';
+        } else {
+            area = "NULL";
+            document.getElementById(id + '_area').style.display = 'none';
+        }
+        for (let i = 0; i < userModified.length; i++) {
+            if (userModified[i].id == id) {
+                userModified[i].role = role;
+                userModified[i].area = area;
+                exists = true;
+                break;
+            }
+        }
+        if (!exists) {
+            userModified.push({ 'id': id, 'role': role, 'area': area });
+        }
+
+
 
     }
 

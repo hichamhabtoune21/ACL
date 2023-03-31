@@ -8,6 +8,8 @@ $password = $_POST["password"];
 $password1 = $_POST["password1"];
 $t["text"] = "";
 
+$hashed_password = md5($password);
+
 mysqli_query($connect, "SET FOREIGN_KEY_CHECKS=0");
 
 if ($password != $password1) {
@@ -21,7 +23,7 @@ if (mysqli_num_rows($check_email) > 0) { // se esiste già un'email uguale
 } 
 else {
      //altrimenti inserisco i dati nel database
-    $query = "INSERT INTO `user` (`Email`, `Password`, `Username`, `Name`, `Surname`,`Role`) VALUES ('$email', '$password', '$username','$name','$surname','NULL')";
+    $query = "INSERT INTO `user` (`Email`, `Password`, `Username`, `Name`, `Surname`,`Role`) VALUES ('$email', '$hashed_password', '$username','$name','$surname','NULL')";
     $result = mysqli_query($connect, $query);
     
     if ($result) {

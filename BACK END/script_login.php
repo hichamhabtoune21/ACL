@@ -3,8 +3,10 @@ include("connect.php");
 
 $email = $_POST["email"];
 $password = $_POST["password"];
+$hashed_password = md5($password);
 
-$query = mysqli_query($connect, "SELECT * FROM user WHERE email='$email' AND password = '$password' ");
+
+$query = mysqli_query($connect, "SELECT * FROM user WHERE email='$email' AND password = '$hashed_password' ");
 
 if (mysqli_num_rows($query) > 0) {
 
