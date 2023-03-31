@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
--- Generation Time: Mar 30, 2023 at 04:56 PM
+-- Generation Time: Mar 31, 2023 at 05:03 PM
 -- Server version: 8.0.32
 -- PHP Version: 8.1.15
 
@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `area` (
-  `Area` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL
+  `Area` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -54,7 +54,7 @@ CREATE TABLE `client` (
   `Surname` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `Phone` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `Address` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Area` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `Area` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -129,8 +129,8 @@ INSERT INTO `permission` (`Permission`) VALUES
 --
 
 CREATE TABLE `permission_to_role` (
-  `Role` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Permission` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL
+  `Role` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Permission` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -181,7 +181,7 @@ INSERT INTO `role` (`Role`) VALUES
 CREATE TABLE `user` (
   `ID_User` int NOT NULL,
   `Email` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Password` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `Username` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `Name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `Surname` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -194,13 +194,14 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`ID_User`, `Email`, `Password`, `Username`, `Name`, `Surname`, `Role`, `Area`) VALUES
-(1, 'admin@admin.com', 'admin', 'admin', 'admin', 'admin', 'Admin', NULL),
-(2, 'area@area.com', 'password2', 'area manager', 'Jane', 'Smith', 'Area Manager', 'Center'),
-(3, 'mark.johnson@example.com', 'password3', 'markjohnson', 'Mark', 'Johnson', 'Administration', NULL),
-(4, 'sarah.green@example.com', 'password4', 'sarahgreen', 'Sarah', 'Green', 'Commercial', NULL),
-(5, 'chris.wilson@example.com', 'password5', 'chriswilson', 'Chris', 'Wilson', 'Administration', NULL),
-(6, 'commercial@commercial.com', 'commercial', 'commercial', 'Emily', 'Davis', 'Commercial', NULL),
-(44, 'bellino21@gmail.com', 'bellino21', 'bellino', 'bellino', 'Bellino', 'NULL', NULL);
+(1, 'admin@admin.com', '101d9fd14b31a93b06a10421f14dd023', 'admin', 'admin', 'admin', 'Admin', NULL),
+(2, 'area@area.com', '6cb75f652a9b52798eb6cf2201057c73', 'area manager', 'Jane', 'Smith', 'Area Manager', 'Center'),
+(3, 'mark.johnson@example.com', '819b0643d6b89dc9b579fdfc9094f28e', 'markjohnson', 'Mark', 'Johnson', 'Commercial', NULL),
+(4, 'sarah.green@example.com', '34cc93ece0ba9e3f6f235d4af979b16c', 'sarahgreen', 'Sarah', 'Green', 'Administration', NULL),
+(5, 'chris.wilson@example.com', 'db0edd04aaac4506f7edab03ac855d56', 'chriswilson', 'Chris', 'Wilson', 'Administration', NULL),
+(6, 'commercial@commercial.com', 'db0edd04aaac4506f7edab03ac855d56', 'commercial', 'Emily', 'Davis', 'Commercial', NULL),
+(44, 'bellino21@gmail.com', '218dd27aebeccecae69ad8408d9a36bf', 'bellino', 'bellino', 'Bellino', 'NULL', NULL),
+(47, 'ok@ok.com', '00cdb7bb942cf6b290ceb97d6aca64a3', 'ok21', 'ok', 'ok', 'NULL', NULL);
 
 -- --------------------------------------------------------
 
@@ -336,7 +337,7 @@ ALTER TABLE `invoice`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `ID_User` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `ID_User` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- Constraints for dumped tables
