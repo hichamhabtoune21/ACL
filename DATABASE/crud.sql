@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
--- Generation Time: Apr 06, 2023 at 10:54 AM
+-- Generation Time: Mar 31, 2023 at 08:03 PM
 -- Server version: 8.0.32
 -- PHP Version: 8.1.15
 
@@ -82,7 +82,7 @@ CREATE TABLE `invoice` (
   `Business name` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `Amount` int NOT NULL,
   `Payment type` enum('Credit Card','Bank Transfer','Cash','') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ID_Client` int NOT NULL
+  `ID_Client` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -98,131 +98,6 @@ INSERT INTO `invoice` (`ID_Invoice`, `Progressive number`, `Issuing date`, `Busi
 (7, 97, '2023-03-04', 'ABC Company', 999, 'Bank Transfer', 1),
 (52, 100, '2023-03-01', 'ABC Company', 999999, 'Credit Card', 2),
 (55, 10, '2023-03-18', 'ABC Company', 10, 'Credit Card', 3);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `permission`
---
-
-CREATE TABLE `permission` (
-  `Permission` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `permission`
---
-
-INSERT INTO `permission` (`Permission`) VALUES
-('CREATE'),
-('DELETE'),
-('READ'),
-('UPDATE');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `permission_to_role`
---
-
-CREATE TABLE `permission_to_role` (
-  `Role` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Permission` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `permission_to_role`
---
-
-INSERT INTO `permission_to_role` (`Role`, `Permission`) VALUES
-('Admin', 'CREATE'),
-('Admin', 'READ'),
-('Admin', 'UPDATE'),
-('Admin', 'DELETE'),
-('Commercial', 'CREATE'),
-('Commercial', 'READ'),
-('Commercial', 'UPDATE'),
-('Administration', 'READ'),
-('Administration', 'UPDATE'),
-('Area Manager', 'CREATE'),
-('Area Manager', 'READ'),
-('Area Manager', 'UPDATE'),
-('Area Manager', 'DELETE');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `role`
---
-
-CREATE TABLE `role` (
-  `Role` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `role`
---
-
-INSERT INTO `role` (`Role`) VALUES
-('Admin'),
-('Administration'),
-('Area Manager'),
-('Commercial');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `user`
---
-
-CREATE TABLE `user` (
-  `ID_User` int NOT NULL,
-  `Email` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Username` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Surname` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Role` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `Area` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `user`
---
-
-INSERT INTO `user` (`ID_User`, `Email`, `Password`, `Username`, `Name`, `Surname`, `Role`, `Area`) VALUES
-(1, 'admin@admin.com', '21232f297a57a5a743894a0e4a801fc3', 'admin21', 'admin', 'admin', 'Admin', NULL),
-(2, 'area@area.com', '6cb75f652a9b52798eb6cf2201057c73', 'area manager', 'Jane', 'Smith', 'Area Manager', 'Center'),
-(3, 'mark.johnson@example.com', '819b0643d6b89dc9b579fdfc9094f28e', 'markjohnson', 'Mark', 'Johnson', 'Area Manager', 'Center'),
-(4, 'sarah.green@example.com', '34cc93ece0ba9e3f6f235d4af979b16c', 'sarahgreen', 'Sarah', 'Green', 'Administration', NULL),
-(5, 'chris.wilson@example.com', 'db0edd04aaac4506f7edab03ac855d56', 'chriswilson', 'Chris', 'Wilson', 'Administration', NULL),
-(6, 'commercial@commercial.com', 'db0edd04aaac4506f7edab03ac855d56', 'commercial', 'Emily', 'Davis', 'Commercial', NULL),
-(44, 'bellino21@gmail.com', '218dd27aebeccecae69ad8408d9a36bf', 'bellino', 'bellino', 'Bellino', 'NULL', NULL),
-(47, 'ok@ok.com', '00cdb7bb942cf6b290ceb97d6aca64a3', 'ok21', 'ok', 'ok', 'NULL', NULL),
-(48, 'bello@gmail.com', '0d121ce790c57ea8c33fc8c67a26b94b', 'bello', 'bello', 'bello', NULL, NULL),
-(49, 'brutto@gmail.com', '0d121ce790c57ea8c33fc8c67a26b94b', 'brutto', 'brutt', 'brutto', NULL, NULL),
-(50, 'brutto21@gmail.com', '0d121ce790c57ea8c33fc8c67a26b94b', 'brutto', 'brutt', 'brutto', NULL, NULL),
-(51, 'bellino22@gmail.com', '0d121ce790c57ea8c33fc8c67a26b94b', 'bellino', 'Bello', 'Bellino', NULL, NULL);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `user_manage_client`
---
-
-CREATE TABLE `user_manage_client` (
-  `ID_User` int DEFAULT NULL,
-  `ID_Client` int DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `user_manage_client`
---
-
-INSERT INTO `user_manage_client` (`ID_User`, `ID_Client`) VALUES
-(6, 1),
-(6, 2),
-(6, 3);
 
 --
 -- Indexes for dumped tables
@@ -296,7 +171,13 @@ ALTER TABLE `client`
 -- AUTO_INCREMENT for table `invoice`
 --
 ALTER TABLE `invoice`
-  MODIFY `ID_Invoice` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `ID_Invoice` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10000;
+
+--
+-- AUTO_INCREMENT for table `user`
+--
+ALTER TABLE `user`
+  MODIFY `ID_User` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1000015;
 
 --
 -- AUTO_INCREMENT for table `user`
