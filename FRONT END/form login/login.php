@@ -1,6 +1,18 @@
+
+<?php
+
+$lang = "it";
+$locale = "it_IT";
+putenv("LC_ALL=$locale");
+setlocale(LC_ALL, $locale);
+bindtextdomain("login", "../../BACK-END/locale");
+textdomain("login");
+
+?>
 <html>
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="styleLogin.css">
