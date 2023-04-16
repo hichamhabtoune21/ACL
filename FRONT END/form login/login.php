@@ -53,13 +53,13 @@
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Login</a>
+                        <a class="nav-link active" aria-current="page" href="#"><?= _("Login");?></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../form signup/signup.html">Signup</a>
+                        <a class="nav-link" href="../form signup/signup.html"><?= _("Signup");?></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../about page.html">About</a>
+                        <a class="nav-link" href="../about page.html"><?= _("About");?></a>
                     </li>
                 </ul>
             </div>
@@ -70,29 +70,29 @@
         <div class="row d-flex justify-content-center align-items-center" style="height: 100%;">
             <div class="col-md-6 col-lg-6 " style="padding: 100px;">
                 <img src="https://www.mortenhansen.com/wp-content/uploads/2018/09/quiz-intro-image-2000x1720.png"
-                    class="img-fluid d-block w-100" alt="..." >
+                    class="img-fluid d-block w-100" alt="...">
             </div>
             <div class="col-md-6 col-lg-6">
-                <h1 style="font-size: 50px; padding-bottom: 50px;">Login</h1>
+                <h1 style="font-size: 50px; padding-bottom: 50px;"><?= _("Login");?></h1>
                 <div id="problems"></div>
 
                 <form id="form1" method="post">
                     <div class="form-group">
                         <div class="mb-3">
-                            <label for="inputEmail" class="form-label">Email address</label>
+                            <label for="inputEmail" class="form-label"><?= _("Email address");?></label>
                             <input type="email" class="form-control" id="inputEmail" name="email"
                                 aria-describedby="emailHelp" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="mb-3">
-                            <label for="inputPassword" class="form-label">Password</label>
+                            <label for="inputPassword" class="form-label"><?= _("Password");?></label>
                             <input type="password" class="form-control" id="inputPassword" name="password" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="text-center text-lg-start mt-4 pt-2">
-                            <button type="submit" class="btn btn-primary btn-dark">Login</button>
+                            <button type="submit" class="btn btn-primary btn-dark"><?= _("Login");?></button>
                         </div>
                     </div>
 
@@ -131,19 +131,14 @@
                         // user is logged in successfully in the back-end 
                         // let's redirect 
                         if (message.text.includes("failed")) {
-                            $("#problems").append("<p class='text-danger'>Email or password incorrect</p>");
+                            $("#problems").append("<p class='text-danger'><?= _("Incorrect email and/or password");?></p > ");
                         }
-                        else{
-                            window.location=message.text;
+                        else {
+                            window.location = message.text;
                         }
-                        /*
-                        
-                        */
-
                     }
                 });
 
-                //console.log("bello")
             })
         })
     </script>

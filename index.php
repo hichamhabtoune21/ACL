@@ -1,15 +1,16 @@
 <?php
-// Set language to French
-putenv('LC_ALL=    it_IT');
-setlocale(LC_ALL, 'it_IT');
+$lang = "it";
+$locale = "it_IT";
 
-// Specify location of translation tables for 'myPHPApp' domain
-bindtextdomain("myPHPApp", "./BACK END/templates");
-
-// Select 'myPHPApp' domain
-textdomain("myPHPApp");
+//phpinfo();
+/*
+putenv("LC_ALL=$locale");
+setlocale(LC_ALL, $locale);
+bindtextdomain("login", "BACK END/language");
+textdomain("messages");
 
 
 echo _("Login");
-//header("location: FRONT END/form login/login.html");
+*/
+header("location: FRONT END/form login/login.php");
 ?>
