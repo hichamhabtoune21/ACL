@@ -1,10 +1,5 @@
 
 <?php
-
-$lang = "it";
-$locale = "it_IT";
-putenv("LC_ALL=$locale");
-setlocale(LC_ALL, $locale);
 bindtextdomain("login", "../../BACK-END/locale");
 textdomain("login");
 
@@ -68,7 +63,7 @@ textdomain("login");
                         <a class="nav-link active" aria-current="page" href="#"><?= _("Login");?></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../form signup/signup.html"><?= _("Signup");?></a>
+                        <a class="nav-link" href="../form signup/signup.php"><?= _("Signup");?></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../about page.html"><?= _("About");?></a>

@@ -30,9 +30,10 @@ else {
     $result->bind_param("sssss",$email,$hashed_password,$username,$name,$surname);
     $result->execute();    
     if ($result->get_result() || mysqli_affected_rows($connect) > 0) {
-        $t["text"] = "Thanks! You are now registered\n";
+        $t["text"] = true;
     } else {
-        $t["text"] = "Error inserting data into the database: " . mysqli_error($connect) . "\n";
+        $t["text"] = false;
+        $t["problem"] = mysqli_error($connect);
     }
 }
 echo json_encode(array("text" => $t["text"]));

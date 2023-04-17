@@ -1,17 +1,17 @@
 <?php
-/*
-$lang = "it";
-$locale = "it_IT";
+$lang = "en";
+$locale = "en_US";
 
 putenv("LC_ALL=$locale");
 setlocale(LC_ALL, $locale);
-bindtextdomain("login", "/BACK END/locale");
-textdomain("login");
+bindtextdomain('signup', __DIR__.'/BACK END/locale');
+bindtextdomain('login', __DIR__.'/BACK END/locale');
+putenv("LC_ALL=$locale");
+setlocale(LC_ALL, $locale);
+textdomain("signup");
+
+    echo _("Signup")
 
 
-echo _("Login");
-*/
-
-
-header("location: FRONT END/form login/login.php");
+//header("location: FRONT END/form login/login.php");
 ?>

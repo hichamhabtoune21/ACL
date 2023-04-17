@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-16 16:11+0200\n"
+"POT-Creation-Date: 2023-04-17 13:46+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,26 +17,46 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: login.php:56 login.php:76 login.php:95
+#: .\signup.php:81
 msgid "Login"
 msgstr "Login"
 
-#: login.php:59
+#: .\signup.php:84 .\signup.php:97 .\signup.php:150
 msgid "Signup"
 msgstr "Signup"
 
-#: login.php:62
+#: .\signup.php:87
 msgid "About"
 msgstr "About"
 
-#: login.php:82
-msgid "Email address"
-msgstr "Email"
+#: .\signup.php:103
+msgid "Name"
+msgstr "Name"
 
-#: login.php:89
+#: .\signup.php:111
+msgid "Surname"
+msgstr "Surname"
+
+#: .\signup.php:118
+msgid "Username"
+msgstr "Username"
+
+#: .\signup.php:125
+msgid "Email address"
+msgstr "Email address"
+
+#: .\signup.php:133
 msgid "Password"
 msgstr "Password"
 
-#: login.php:134
-msgid "Incorrect email and/or password"
-msgstr "Incorrect email and/or password"
+#: .\signup.php:142
+msgid "Repeat password"
+msgstr "Repeat password"
+
+#: .\signup.php:198
+msgid "Thanks! You are now registered"
+msgstr "Thanks! You are now registered"
+
+#: .\signup.php:201
+msgid "Error inserting data into the database: "
+msgstr "Error inserting data into the database: "
