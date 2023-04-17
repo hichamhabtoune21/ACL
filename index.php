@@ -10,8 +10,8 @@ putenv("LC_ALL=$locale");
 setlocale(LC_ALL, $locale);
 textdomain("signup");
 
-    echo _("Signup")
+echo _("Signup");
 
 
-//header("location: FRONT END/form login/login.php");
+header("location: FRONT END/form login/login.php");
 ?>
