@@ -1,0 +1,6 @@
+{
+    "require": {
+        "symfony/config": "^6.2",
+        "symfony/translation": "^6.2"
+    }
+}

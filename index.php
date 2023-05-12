@@ -17,33 +17,32 @@ textdomain($domain);
 echo _("Signup");
 phpinfo();
 */
-use Davibennun\LaravelTranslationManager\Manager;
-use Symfony\Component\Translation\Loader\PhpFileLoader;
-use Symfony\Component\Translation\Loader\YamlFileLoader;
+// Includi l'autoloader di Composer
+require_once __DIR__ . '/BACK END/translation/lib/vendor/autoload.php';
+
+
+// Crea un'istanza del componente Translation
 use Symfony\Component\Translation\Translator;
-use Symfony\Component\Config\FileLocator;
+use Symfony\Component\Translation\Loader\ArrayLoader;
 
-// Configura la cartella "lang"
-$langPath = __DIR__ . '/lang';
+$translator = new Translator('it_IT');
+$translator->addLoader('array', new ArrayLoader());
 
-// Crea un'istanza del gestore delle traduzioni
-$manager = new Manager();
+// Aggiungi le traduzioni per la lingua italiana
+require 'BACK END/translation/locale/en_US.php';
+require 'BACK END/translation/locale/it_IT.php';
 
-// Carica le traduzioni per la lingua di default (solitamente inglese)
-$translator = new Translator('en');
-$translator->addLoader('php', new PhpFileLoader());
-$translator->addResource('php', $langPath.'/en.php', 'en');
-$manager->addTranslations('en', $translator);
+$translator->addResource('array', $itTranslations, 'it_IT');
 
-// Aggiungi una nuova traduzione o aggiorna una traduzione esistente
-$manager->setTranslation('en', 'key', 'value');
+// Aggiungi le traduzioni per la lingua inglese
 
-// Salva le modifiche apportate ai file di traduzione
-$locator = new FileLocator($langPath);
-$loader = new PhpFileLoader();
-foreach ($manager->translations('en') as $domain => $translations) {
-    $messages = $translator->getCatalogue('en')->all($domain);
-    $loader->dump($messages, ['path' => $langPath, 'resource' => $domain.'.php']);
-}
+$translator->addResource('array', $enTranslations, 'en_US');
 
+// Imposta la lingua corrente dell'utente
+$translator->setLocale('it_IT');
+
+// Utilizza la funzione trans() per tradurre il testo
+echo $translator->trans('hello'); // Output: Ciao
+echo $translator->trans('goodbye'); // Output: Arrivederci
+//header('location: FRONT END/form login/login.php');
 ?>
