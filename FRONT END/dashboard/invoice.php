@@ -195,7 +195,7 @@ include("../../BACK END/connect.php");
                                     <li class="nav-item" style="padding-bottom: 20px;">
                                         <a class="nav-link" href="#"><i class="bi bi-question-square"></i>Help</a>
                                     </li>
-                                    <hr style="width: 100%;color:white;">
+                                    <hr style="width: 120%;color:white;">
                                     <li class="nav-item">
                                         <a class="nav-link" href="profile.php"><i
                                                 class="bi bi-person-square"></i></i>Profile</a>
