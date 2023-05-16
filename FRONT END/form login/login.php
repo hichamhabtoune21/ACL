@@ -72,7 +72,7 @@ require "../../BACK END/translation/init.php";
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../about page.html">
+                        <a class="nav-link" href="../about page.php">
                             <?= $translator->trans("About") ?>
                         </a>
                     </li>
@@ -129,35 +129,44 @@ require "../../BACK END/translation/init.php";
         </div>
     </div>
     <footer class="text-white bg-dark">
-        <div class="container text-center py-3">
-            <div class="dropdown d-inline-block me-3">
-                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    <?php
-                    if ($_SESSION['lang'] == 'en_US') {
-                        $flag = 'gb';
-                    } else {
-                        $flag = substr($_SESSION['lang'], 0, 2);
-                    }
-                    ?>
-                    <i id="lingua-icon" class="flag-icon flag-icon-<?= $flag ?>"></i>
-                    <?= $translator->trans('Select language') ?>
-                </button>
-                <ul class="dropdown-menu" style="left: 0;">
-                    <li><a class="dropdown-item" href="#" onclick="updateLanguage('it_IT',event)"><i
-                                class="flag-icon flag-icon-it"></i> Italiano</a></li>
-                    <li><a class="dropdown-item" href="#" onclick="updateLanguage('en_US',event)"><i
-                                class="flag-icon flag-icon-gb"></i> English</a></li>
-                    <li><a class="dropdown-item" href="#" onclick="updateLanguage('es_ES',event)"><i
-                                class="flag-icon flag-icon-es"></i> Espanol</a></li>
-                </ul>
+
+        <div class="d-flex justify-content-between">
+            <div class="p-2 bd-highlight">
+                <div class="dropdown d-inline-block me-3">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <?php
+                        if ($_SESSION['lang'] == 'en_US') {
+                            $flag = 'gb';
+                        } else {
+                            $flag = substr($_SESSION['lang'], 0, 2);
+                        }
+                        ?>
+                        <i id="lingua-icon" class="flag-icon flag-icon-<?= $flag ?>"></i>
+                        <?= $translator->trans('Select language') ?>
+                    </button>
+                    <ul class="dropdown-menu" style="left: 0;">
+                        <li><a class="dropdown-item" href="#" onclick="updateLanguage('it_IT',event)"><i
+                                    class="flag-icon flag-icon-it"></i> Italiano</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="updateLanguage('en_US',event)"><i
+                                    class="flag-icon flag-icon-gb"></i> English</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="updateLanguage('es_ES',event)"><i
+                                    class="flag-icon flag-icon-es"></i> Espanol</a></li>
+                    </ul>
+
+                </div>
 
             </div>
+            <div class="p-2 bd-highlight">
+                © 2022-23 Copyright: ACL PROJECT GROUP 1
+
+            </div>
+            <div class="p-2 bd-highlight"></div>
         </div>
 
 
 
-        <span class="d-inline-block">&copy; 2022-23 ACL PROJECT GROUP</span>
+
     </footer>
 
 

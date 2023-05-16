@@ -1,3 +1,6 @@
+<?php
+require "../../BACK END/translation/init.php";
+?>
 <html>
 
 <head>
@@ -12,6 +15,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.js"
         integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icon-css@3.5.0/css/flag-icon.min.css">
+    <script src="../update_language.js"></script>
     <title>Signup Page</title>
 
     <style>
@@ -78,13 +83,19 @@
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="../form login/login.php"><?=_("Login")?></a>
+                        <a class="nav-link" aria-current="page" href="../form login/login.php">
+                            <?= _("Login") ?>
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="#"><?=_("Signup")?></a>
+                        <a class="nav-link active" href="#">
+                            <?= _("Signup") ?>
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../about page.html"><?=_("About")?></a>
+                        <a class="nav-link" href="../about page.php">
+                            <?= _("About") ?>
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -94,13 +105,17 @@
     <div class="container-fluid bg-dark" style="color: white;flex: 1 0 auto;">
         <div class="row d-flex justify-content-center align-items-center" style="height: 100%;">
             <div class="col-md-3 col-lg-3 col-xl-3">
-                <h1 style="font-size: 50px; padding-bottom: 50px; padding-top: 50px;"><?=_("Signup")?></h1>
+                <h1 style="font-size: 50px; padding-bottom: 50px; padding-top: 50px;">
+                    <?= _("Signup") ?>
+                </h1>
 
                 <form method="post" id="form1">
 
                     <div class="form-group">
                         <div class="mb-3">
-                            <label for="inputName" class="form-label"><?=_("Name")?></label>
+                            <label for="inputName" class="form-label">
+                                <?=$translator->trans('Name') ?>
+                            </label>
                             <input type="text" class="form-control" id="inputName" name="name" required>
                         </div>
                     </div>
@@ -108,21 +123,27 @@
 
                     <div class="form-group">
                         <div class="mb-3">
-                            <label for="inputSurname" class="form-label"><?=_("Surname")?></label>
+                            <label for="inputSurname" class="form-label">
+                                <?= _("Surname") ?>
+                            </label>
                             <input type="text" class="form-control" id="inputSurname" name="surname" required>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="mb-3">
-                            <label for="inputUsername" class="form-label"><?=_("Username")?></label>
+                            <label for="inputUsername" class="form-label">
+                                <?= _("Username") ?>
+                            </label>
                             <input type="text" class="form-control" id="inputUsername" name="username" required>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="mb-3">
-                            <label for="inputEmail" class="form-label"><?=_("Email address")?></label>
+                            <label for="inputEmail" class="form-label">
+                                <?= _("Email address") ?>
+                            </label>
                             <input type="email" class="form-control" id="inputEmail" name="email"
                                 aria-describedby="emailHelp" required>
                         </div>
@@ -130,7 +151,9 @@
 
                     <div class="form-group">
                         <div class="mb-3">
-                            <label for="inputPassword" class="form-label"><?=_("Password")?></label>
+                            <label for="inputPassword" class="form-label">
+                                <?= _("Password") ?>
+                            </label>
                             <input type="password" class="form-control" id="inputPassword" name="password"
                                 pattern="^.{8,}$"
                                 oninvalid="this.setCustomValidity('Password must be 8 characters long')" required>
@@ -139,7 +162,9 @@
 
                     <div class="form-group">
                         <div class="mb-3">
-                            <label for="inputRepeatPassword" class="form-label"><?=_("Repeat password")?></label>
+                            <label for="inputRepeatPassword" class="form-label">
+                                <?= _("Repeat password") ?>
+                            </label>
                             <input type="password" class="form-control" id="inputRepeatPassword" name="password1"
                                 required>
                         </div>
@@ -147,7 +172,9 @@
 
                     <div class="form-group">
                         <div class="text-center text-lg-start mt-4 pt-2">
-                            <button type="submit" class="btn btn-primary btn-light"><?=_("Signup")?></button>
+                            <button type="submit" class="btn btn-primary btn-light">
+                                <?= _("Signup") ?>
+                            </button>
                         </div>
                     </div>
 
@@ -159,8 +186,38 @@
         </div>
     </div>
     <footer class="text-center text-white bg-dark">
-        <div class="text-center" style="padding: 20px;">
-            © 2022-23 Copyright: ACL PROJECT GROUP 1
+        <div class="d-flex justify-content-between">
+            <div class="p-2 bd-highlight">
+                <div class="dropdown d-inline-block me-3">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <?php
+                        if ($_SESSION['lang'] == 'en_US') {
+                            $flag = 'gb';
+                        } else {
+                            $flag = substr($_SESSION['lang'], 0, 2);
+                        }
+                        ?>
+                        <i id="lingua-icon" class="flag-icon flag-icon-<?= $flag ?>"></i>
+                        <?= $translator->trans('Select language') ?>
+                    </button>
+                    <ul class="dropdown-menu" style="left: 0;">
+                        <li><a class="dropdown-item" href="#" onclick="updateLanguage('it_IT',event)"><i
+                                    class="flag-icon flag-icon-it"></i> Italiano</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="updateLanguage('en_US',event)"><i
+                                    class="flag-icon flag-icon-gb"></i> English</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="updateLanguage('es_ES',event)"><i
+                                    class="flag-icon flag-icon-es"></i> Espanol</a></li>
+                    </ul>
+
+                </div>
+
+            </div>
+            <div class="p-2 bd-highlight">
+                © 2022-23 Copyright: ACL PROJECT GROUP 1
+
+            </div>
+            <div class="p-2 bd-highlight"></div>
         </div>
 
     </footer>
@@ -194,11 +251,11 @@
                         var message = JSON.parse(response);
 
                         var warning = "";
-                        if (message.text==true) {
-                            warning = "<p class='text-success'><?= _("Thanks! You are now registered")?></p>";
+                        if (message.text == true) {
+                            warning = "<p class='text-success'><?= _("Thanks! You are now registered") ?></p>";
 
                         } else {
-                            warning = "<p class='text-danger'><?=_("Error inserting data into the database: ")?>" + message.problem + "</p>";
+                            warning = "<p class='text-danger'><?= _("Error inserting data into the database: ") ?>" + message.problem + "</p>";
 
                         }
                         $("#problems").append(warning);
