@@ -16,7 +16,7 @@ require "../../BACK END/translation/init.php";
     <script src="https://code.jquery.com/jquery-3.3.1.js"
         integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icon-css@3.5.0/css/flag-icon.min.css">
-    <script src="../update_language.js"></script>
+    <script src="../../BACK END/translation/update_language.js"></script>
     <title>Signup Page</title>
 
     <style>
@@ -84,17 +84,17 @@ require "../../BACK END/translation/init.php";
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="../form login/login.php">
-                            <?= _("Login") ?>
+                        <?=$translator->trans("Login") ?>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="#">
-                            <?= _("Signup") ?>
+                        <?=$translator->trans("Signup") ?>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../about page.php">
-                            <?= _("About") ?>
+                        <a class="nav-link" href="../others/about page.php">
+                        <?=$translator->trans("About") ?>
                         </a>
                     </li>
                 </ul>
@@ -106,7 +106,7 @@ require "../../BACK END/translation/init.php";
         <div class="row d-flex justify-content-center align-items-center" style="height: 100%;">
             <div class="col-md-3 col-lg-3 col-xl-3">
                 <h1 style="font-size: 50px; padding-bottom: 50px; padding-top: 50px;">
-                    <?= _("Signup") ?>
+                    <?=$translator->trans("Signup") ?>
                 </h1>
 
                 <form method="post" id="form1">
@@ -124,7 +124,7 @@ require "../../BACK END/translation/init.php";
                     <div class="form-group">
                         <div class="mb-3">
                             <label for="inputSurname" class="form-label">
-                                <?= _("Surname") ?>
+                            <?=$translator->trans('Surname') ?>
                             </label>
                             <input type="text" class="form-control" id="inputSurname" name="surname" required>
                         </div>
@@ -133,7 +133,7 @@ require "../../BACK END/translation/init.php";
                     <div class="form-group">
                         <div class="mb-3">
                             <label for="inputUsername" class="form-label">
-                                <?= _("Username") ?>
+                            <?=$translator->trans('Username') ?>
                             </label>
                             <input type="text" class="form-control" id="inputUsername" name="username" required>
                         </div>
@@ -142,7 +142,7 @@ require "../../BACK END/translation/init.php";
                     <div class="form-group">
                         <div class="mb-3">
                             <label for="inputEmail" class="form-label">
-                                <?= _("Email address") ?>
+                            <?=$translator->trans('Email address') ?>
                             </label>
                             <input type="email" class="form-control" id="inputEmail" name="email"
                                 aria-describedby="emailHelp" required>
@@ -152,7 +152,7 @@ require "../../BACK END/translation/init.php";
                     <div class="form-group">
                         <div class="mb-3">
                             <label for="inputPassword" class="form-label">
-                                <?= _("Password") ?>
+                            <?=$translator->trans('Password') ?>
                             </label>
                             <input type="password" class="form-control" id="inputPassword" name="password"
                                 pattern="^.{8,}$"
@@ -163,7 +163,7 @@ require "../../BACK END/translation/init.php";
                     <div class="form-group">
                         <div class="mb-3">
                             <label for="inputRepeatPassword" class="form-label">
-                                <?= _("Repeat password") ?>
+                            <?=$translator->trans('Repeat password') ?>
                             </label>
                             <input type="password" class="form-control" id="inputRepeatPassword" name="password1"
                                 required>
@@ -173,7 +173,7 @@ require "../../BACK END/translation/init.php";
                     <div class="form-group">
                         <div class="text-center text-lg-start mt-4 pt-2">
                             <button type="submit" class="btn btn-primary btn-light">
-                                <?= _("Signup") ?>
+                            <?=$translator->trans('Signup') ?>
                             </button>
                         </div>
                     </div>
@@ -215,7 +215,6 @@ require "../../BACK END/translation/init.php";
             </div>
             <div class="p-2 bd-highlight">
                 © 2022-23 Copyright: ACL PROJECT GROUP 1
-
             </div>
             <div class="p-2 bd-highlight"></div>
         </div>
@@ -231,20 +230,13 @@ require "../../BACK END/translation/init.php";
         $(document).ready(function () {
             $('#form1').submit(function (e) {
                 e.preventDefault();
-                console.log("prova")
-
                 document.getElementById("problems").innerHTML = "";
                 $.ajax({
-                    /*
-                    manda richiesta al server di aggiungere la fattura, una volta aggiunta nel server verrà visualizzata anche sulla pagina attuale
-                    */
                     type: "POST",
                     url: '../../BACK END/script_signup.php',
                     data: $(this).serialize(),
                     success: function (response) {
-                        console.log(response);
-                        /*
-                        */
+                        console.log(response.text);
 
                         // user is logged in successfully in the back-end 
                         // let's redirect 
@@ -252,21 +244,17 @@ require "../../BACK END/translation/init.php";
 
                         var warning = "";
                         if (message.text == true) {
-                            warning = "<p class='text-success'><?= _("Thanks! You are now registered") ?></p>";
+                            /*warning = "<p class='text-success'><?= $translator->trans("Thanks! You are now registered") ?></p>";*/
+                            alert('<?= $translator->trans("Thanks! You are now registered") ?>');
+                            window.location.href="../form login/login.php";
 
                         } else {
-                            warning = "<p class='text-danger'><?= _("Error inserting data into the database: ") ?>" + message.problem + "</p>";
+                            warning = "<p class='text-danger'><?= $translator->trans("Error inserting data: ") ?>" + "<br>" +<?=$translator->trans('message.text')?> + "</p>";
 
                         }
                         $("#problems").append(warning);
-
-                        /*
-                        
-                        */
                     }
                 });
-
-                //console.log("bello")
             })
         })
     </script>

@@ -23,8 +23,6 @@ function updateLanguage(language,event) {
         },
       success: function (response) {
           console.log(response);
-
-          //alert("oooo");
       },
       error: function () {
           alert("failed");

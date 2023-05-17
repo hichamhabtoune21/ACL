@@ -104,7 +104,7 @@ session_start();
                                 </li>
                                 <hr style="width: 120%; background-color: white;">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#"><i class="bi bi-person-square"></i></i>Profile</a>
+                                    <a class="nav-link" href="profile.php"><i class="bi bi-person-square"></i></i>Profile</a>
                                 </li>
 
 
@@ -127,39 +127,5 @@ session_start();
     </div>
 
 </body>
-<script>
-    /* Storing user's device details in a variable*/
-    let details = navigator.userAgent;
-
-    /* Creating a regular expression 
-    containing some mobile devices keywords 
-    to search it in details string*/
-    let regexp = /android|iphone|kindle|ipad/i;
-
-    /* Using test() method to search regexp in details
-    it returns boolean value*/
-    let isMobileDevice = regexp.test(details);
-
-    const a = ["desktop", "mobile"];
-    if (isMobileDevice) {
-        //document.write("You are using a Mobile Device");
-        //var x = document.getElementById("select").value;
-
-
-
-    } else {
-        // document.write("You are using Desktop");
-        // document.getElementById("nav").classList.add('collapse-horizontal');
-
-    }
-    function change() {
-
-
-    }
-
-
-
-
-</script>
 
 </html>

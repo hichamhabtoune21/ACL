@@ -1,6 +1,8 @@
 <?php
-session_start();
+//session_start();
 include("../../BACK END/connect.php");
+require "../../BACK END/translation/init.php";
+
 ?>
 <!doctype html>
 <html>
@@ -12,6 +14,15 @@ include("../../BACK END/connect.php");
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icon-css@3.5.0/css/flag-icon.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+        integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
+        crossorigin="anonymous"></script>
+    <script src="../../BACK END/translation/update_language.js"></script>
 
     <title>Dashboard</title>
 
@@ -26,12 +37,7 @@ include("../../BACK END/connect.php");
             padding-right: 10px;
         }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
-        integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
-        crossorigin="anonymous"></script>
+
 
 </head>
 
@@ -84,55 +90,80 @@ include("../../BACK END/connect.php");
                                 <div class="align-middle" style="font-size: 18px; padding-left: 18px; padding-top: 20px;">
                                     <ul class="navbar-nav">
                                         <li class="nav-item" style="padding-bottom: 20px;">
-                                            <a class="nav-link" aria-current="page" href="admin-dashboard.php"><i
-                                                    class="bi bi-house"></i>Home</a>
+                                            <a class="nav-link" aria-current="page" href="home.php"><i
+                                                    class="bi bi-house"></i><?=$translator->trans('Home')?></a>
                                         </li>
                                         <?php
                                         if ($_SESSION["ruolo"] == "Admin") {
                                             ?>
                                             <li class="nav-item" style="padding-bottom: 20px;">
                                                 <a class="nav-link" aria-current="page" href="all_users.php"><i
-                                                        class="bi bi-people"></i>Users</a>
+                                                        class="bi bi-people"></i><?=$translator->trans('Users')?></a>
                                             </li>
                                             <?php
                                         }
                                         ?>
 
                                         <li class="nav-item" style="padding-bottom: 20px;">
-                                            <a class="nav-link active" href="#"><i class="bi bi-journal-check"></i>Clients</a>
+                                            <a class="nav-link active" href="#"><i class="bi bi-journal-check"></i><?=$translator->trans('Clients')?></a>
                                         </li>
                                         <li class="nav-item" style="padding-bottom: 20px;">
-                                            <a class="nav-link" href="invoice.php"><i class="bi bi-bar-chart"></i>Invoices</a>
+                                            <a class="nav-link" href="invoice.php"><i class="bi bi-bar-chart"></i><?=$translator->trans('Invoices')?></a>
                                         </li>
 
                                         <li class="nav-item" style="padding-bottom: 20px;">
-                                            <a class="nav-link" href="#"><i class="bi bi-question-square"></i>Help</a>
+                                            <a class="nav-link" href="#"><i class="bi bi-question-square"></i><?=$translator->trans('Clients')?></a>
                                         </li>
                                         <hr style="width: 120%; background-color: white;">
                                         <li class="nav-item">
                                             <a class="nav-link" href="profile.php"><i
-                                                    class="bi bi-person-square"></i></i>Profile</a>
+                                                    class="bi bi-person-square"></i></i><?=$translator->trans('Profile')?></a>
                                         </li>
                                     </ul>
                                 </div>
+
                             </div>
+
+                            <div class="mt-auto position-sticky bottom-0 p-2 bg-dark">
+                            <div class="dropdown d-inline-block me-3">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    <?php
+                                    if ($_SESSION['lang'] == 'en_US') {
+                                        $flag = 'gb';
+                                    } else {
+                                        $flag = substr($_SESSION['lang'], 0, 2);
+                                    }
+                                    ?>
+                                    <i id="lingua-icon" class="flag-icon flag-icon-<?= $flag ?>"></i>
+                                </button>
+                                <ul class="dropdown-menu" style="left: 0;">
+                                    <li><a class="dropdown-item" href="#" onclick="updateLanguage('it_IT',event)"><i
+                                                class="flag-icon flag-icon-it"></i> Italiano</a></li>
+                                    <li><a class="dropdown-item" href="#" onclick="updateLanguage('en_US',event)"><i
+                                                class="flag-icon flag-icon-gb"></i> English</a></li>
+                                    <li><a class="dropdown-item" href="#" onclick="updateLanguage('es_ES',event)"><i
+                                                class="flag-icon flag-icon-es"></i> Espanol</a></li>
+                                </ul>
+                            </div>
+                        </div>
                         </div>
 
 
                     </div>
                     <div class="col-md-10 col-lg-10 col-xl-10" style="padding:25px">
-                        <h3>CLIENTS</h3>
+                        <h3><?=strtoupper($translator->trans('Clients'))?></h3>
                         <div class="overflow-auto" style="padding-top:20px">
                             <table class="table table-dark">
                                 <thead>
                                     <tr>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Surname</th>
-                                        <th scope="col">Phone</th>
-                                        <th scope="col">Address</th>
-                                        <th scope="col">VAT Number</th>
-                                        <th scope="col">Area</th>
-                                        <th scope="col">Actions</th>
+                                        <th scope="col"><?=$translator->trans('Name')?></th>
+                                        <th scope="col"><?=$translator->trans('Surname')?></th>
+                                        <th scope="col"><?=$translator->trans('Phone')?></th>
+                                        <th scope="col"><?=$translator->trans('Address')?></th>
+                                        <th scope="col"><?=$translator->trans('VAT Number')?></th>
+                                        <th scope="col"><?=$translator->trans('Area')?></th>
+                                        <th scope="col"><?=$translator->trans('Actions')?></th>
 
                                     </tr>
                                 </thead>
@@ -174,7 +205,7 @@ include("../../BACK END/connect.php");
                                                 <td>
                                                     <button type="button" class="btn btn-danger" data-bs-toggle='modal'
                                                         href='#exampleModalToggle1'
-                                                        onclick='deleteUser(<?= $client["ID_Client"] ?>)'>Delete</button>
+                                                        onclick='deleteUser(<?= $client["ID_Client"] ?>)'><?=$translator->trans('Delete')?></button>
 
                                                 </td>
                                             </tr>
@@ -200,7 +231,7 @@ include("../../BACK END/connect.php");
             <?php
         }
     } else {
-        echo "Access denied";
+        echo $translator->trans("Access denied");
     } ?>
 </body>
 

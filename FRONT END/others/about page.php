@@ -1,5 +1,5 @@
 <?php
-require "../BACK END/translation/init.php";
+require "../../BACK END/translation/init.php";
 ?>
 <html>
 
@@ -13,7 +13,7 @@ require "../BACK END/translation/init.php";
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icon-css@3.5.0/css/flag-icon.min.css">
-    <script src="update_language.js"></script>
+    <script src="../../BACK END/translation/update_language.js"></script>
 
     <title>Login Page</title>
 
@@ -39,10 +39,10 @@ require "../BACK END/translation/init.php";
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="form login/login.php">Login</a>
+                        <a class="nav-link" aria-current="page" href="../form login/login.php">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="form signup/signup.php">Signup</a>
+                        <a class="nav-link" href="../form signup/signup.php">Signup</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="#">About</a>

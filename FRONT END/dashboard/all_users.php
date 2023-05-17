@@ -1,6 +1,8 @@
 <?php
-session_start();
+//session_start();
 include("../../BACK END/connect.php");
+require "../../BACK END/translation/init.php";
+
 ?>
 
 <html>
@@ -12,6 +14,9 @@ include("../../BACK END/connect.php");
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icon-css@3.5.0/css/flag-icon.min.css">
+
+    <script src="../../BACK END/translation/update_language.js"></script>
 
     <title>Dashboard</title>
 
@@ -155,36 +160,59 @@ include("../../BACK END/connect.php");
                                 <div class="align-middle" style="font-size: 18px; padding-left: 18px; padding-top: 20px;">
                                     <ul class="navbar-nav">
                                         <li class="nav-item" style="padding-bottom: 20px;">
-                                            <a class="nav-link" aria-current="page" href="admin-dashboard.php"><i
-                                                    class="bi bi-house"></i>Home</a>
+                                            <a class="nav-link" aria-current="page" href="home.php"><i
+                                                    class="bi bi-house"></i><?=$translator->trans('Home')?></a>
                                         </li>
 
                                         <li class="nav-item" style="padding-bottom: 20px;">
                                             <a class="nav-link active" aria-current="page" href="#"><i
-                                                    class="bi bi-people"></i>Users</a>
+                                                    class="bi bi-people"></i><?=$translator->trans('Users')?></a>
                                         </li>
 
                                         <li class="nav-item" style="padding-bottom: 20px;">
                                             <a class="nav-link" href="clients.php"><i
-                                                    class="bi bi-journal-check"></i>Clients</a>
+                                                    class="bi bi-journal-check"></i><?=$translator->trans('Clients')?></a>
                                         </li>
                                         <li class="nav-item" style="padding-bottom: 20px;">
-                                            <a class="nav-link" href="invoice.php"><i class="bi bi-bar-chart"></i>Invoices</a>
+                                            <a class="nav-link" href="invoice.php"><i class="bi bi-bar-chart"></i><?=$translator->trans('Invoices')?></a>
                                         </li>
 
                                         <li class="nav-item" style="padding-bottom: 20px;">
-                                            <a class="nav-link" href="#"><i class="bi bi-question-square"></i>Help</a>
+                                            <a class="nav-link" href="#"><i class="bi bi-question-square"></i><?=$translator->trans('Help')?></a>
                                         </li>
                                         <hr style="width: 120%; background-color: white;">
                                         <li class="nav-item">
                                             <a class="nav-link" href="profile.php"><i
-                                                    class="bi bi-person-square"></i></i>Profile</a>
+                                                    class="bi bi-person-square"></i></i><?=$translator->trans('Profile')?></a>
                                         </li>
 
 
                                     </ul>
                                 </div>
                             </div>
+                            <div class="mt-auto position-sticky bottom-0 p-2 bg-dark">
+                            <div class="dropdown d-inline-block me-3">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    <?php
+                                    if ($_SESSION['lang'] == 'en_US') {
+                                        $flag = 'gb';
+                                    } else {
+                                        $flag = substr($_SESSION['lang'], 0, 2);
+                                    }
+                                    ?>
+                                    <i id="lingua-icon" class="flag-icon flag-icon-<?= $flag ?>"></i>
+                                </button>
+                                <ul class="dropdown-menu" style="left: 0;">
+                                    <li><a class="dropdown-item" href="#" onclick="updateLanguage('it_IT',event)"><i
+                                                class="flag-icon flag-icon-it"></i> Italiano</a></li>
+                                    <li><a class="dropdown-item" href="#" onclick="updateLanguage('en_US',event)"><i
+                                                class="flag-icon flag-icon-gb"></i> English</a></li>
+                                    <li><a class="dropdown-item" href="#" onclick="updateLanguage('es_ES',event)"><i
+                                                class="flag-icon flag-icon-es"></i> Espanol</a></li>
+                                </ul>
+                            </div>
+                        </div>
                         </div>
 
 
@@ -196,7 +224,7 @@ include("../../BACK END/connect.php");
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Are you sure to delete it?
+                                        <h1 class="modal-title fs-5" id="exampleModalToggleLabel"><?=$translator->trans('Are you sure to delete it?')?>
                                         </h1>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
@@ -204,11 +232,11 @@ include("../../BACK END/connect.php");
 
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-outline-secondary"
-                                            data-bs-target="#exampleModalToggle1" data-bs-toggle="modal">Cancel</button>
+                                            data-bs-target="#exampleModalToggle1" data-bs-toggle="modal"><?=$translator->trans('Cancel')?></button>
                                         <div id="addDeleteButton">
                                             <button class="btn btn-danger" data-bs-toggle="modal"
                                                 data-bs-target="#exampleModalToggle1"
-                                                onclick="deletUser(<?= $invoice['ID_User'] ?>)">Delete</button>
+                                                onclick="deletUser(<?= $invoice['ID_User'] ?>)"><?=$translator->trans('Delete')?></button>
                                         </div>
                                     </div>
                                 </div>
@@ -220,7 +248,7 @@ include("../../BACK END/connect.php");
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Are you sure to delete it?
+                                        <h1 class="modal-title fs-5" id="exampleModalToggleLabel"><?=$translator->trans('Are you sure to delete it?')?>
                                         </h1>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
@@ -228,27 +256,27 @@ include("../../BACK END/connect.php");
 
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-outline-secondary"
-                                            data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Cancel</button>
+                                            data-bs-target="#exampleModalToggle" data-bs-toggle="modal"><?=$translator->trans('Cancel')?></button>
                                         <div id="addDeleteButton">
                                             <button class="btn btn-dark" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModalToggle" onclick="changeRole(event)">Save</button>
+                                                data-bs-target="#exampleModalToggle" onclick="changeRole(event)"><?=$translator->trans('Save')?></button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <h3>USERS</h3>
+                        <h3><?=strtoupper($translator->trans('Users'))?></h3>
                         <div class="overflow-auto" style="padding-top:20px">
                             <table class="table table-dark">
                                 <thead>
                                     <tr>
-                                        <th scope="col">Email</th>
-                                        <th scope="col">Password</th>
-                                        <th scope="col">Username</th>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Surname</th>
-                                        <th scope="col">Role</th>
+                                        <th scope="col"><?=$translator->trans('Email')?></th>
+                                        <th scope="col"><?=$translator->trans('Password')?></th>
+                                        <th scope="col"><?=$translator->trans('Username')?></th>
+                                        <th scope="col"><?=$translator->trans('Name')?></th>
+                                        <th scope="col"><?=$translator->trans('Surname')?></th>
+                                        <th scope="col"><?=$translator->trans('Role')?></th>
                                         <th scope="col"></th>
                                     </tr>
                                 </thead>
@@ -397,7 +425,7 @@ include("../../BACK END/connect.php");
                                                 <td>
                                                     <button type="button" class="btn btn-danger" data-bs-toggle='modal'
                                                         href='#exampleModalToggle1'
-                                                        onclick='deleteUser(<?= $user["ID_User"] ?>)'>Delete</button>
+                                                        onclick='deleteUser(<?= $user["ID_User"] ?>)'><?=$translator->trans('Delete')?></button>
 
                                                 </td>
                                             </tr>
@@ -413,7 +441,7 @@ include("../../BACK END/connect.php");
                         </div>
                         <div id="saveButton" style="display: none">
                             <button type='button' class='btn btn-outline-info' data-bs-toggle='modal'
-                                href='#exampleModalToggle'>Save</button>
+                                href='#exampleModalToggle'><?=$translator->trans('Save')?></button>
                         </div>
 
 
@@ -424,7 +452,7 @@ include("../../BACK END/connect.php");
             <?php
         }
     } else {
-        echo "Access denied";
+        echo $translator->trans("Access denied");
     } ?>
 
 </body>

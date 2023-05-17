@@ -39,20 +39,20 @@ if (mysqli_num_rows($result) > 0) {
                     array_push($_SESSION['Permissions'],$permission['Permission']);
                 }
             }
-            echo json_encode(array("text" => "../dashboard/admin-dashboard.php"));
+            echo json_encode(array("text" => "../dashboard/home.php"));
             
             break;
         case "NULL":
         case "null":
         default:
             //header("Location: ../FRONT END/dashboard/null-dashboard.php");
-            echo json_encode(array("text" => "../dashboard/null-dashboard.php"));
+            echo json_encode(array("text" => "../dashboard/home.php"));
         }
 
 
 } else {
     session_start();
     session_destroy();
-    echo json_encode(array("text" => "failed'$hashed_password'"));
+    echo json_encode(array("text" => "failed"));
 }
 ?>

@@ -72,7 +72,7 @@ require "../../BACK END/translation/init.php";
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../about page.php">
+                        <a class="nav-link" href="../others/about page.php">
                             <?= $translator->trans("About") ?>
                         </a>
                     </li>
@@ -196,7 +196,7 @@ require "../../BACK END/translation/init.php";
                         // user is logged in successfully in the back-end 
                         // let's redirect 
                         if (message.text.includes("failed")) {
-                            $("#problems").append("<p class='text-danger'><?= _("Incorrect email and/or password"); ?></p > ");
+                            $("#problems").append("<p class='text-danger'><?= $translator->trans("Incorrect email and/or password"); ?></p > ");
                         }
                         else {
                             window.location = message.text;

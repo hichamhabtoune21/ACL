@@ -11,7 +11,7 @@ $itTranslations = [
     'Surname' => 'Cognome',
     'Username' => 'Username',
     'Repeat password' => 'Ripeti password',
-    'Welcome' => 'Benvenuto',
+    'Welcome' => 'Benvenuto/a',
     'Home' => 'Home',
     'Users' => 'Utenti',
     'Clients' => 'Clienti',
@@ -46,5 +46,18 @@ $itTranslations = [
     'YOUR PROFILE' => 'IL TUO PROFILO',
     'Logout' => 'Esci',
     'Select language'=>'Seleziona lingua',
+    'Thanks! You are now registered'=>"Grazie! Ora sei registrato",
+    'Error inserting data: '=>"Errore nell'inserimento dei dati: ",
+    "The username inserted already exists"=> "L'username inserito esiste già",
+    "The email inserted already exists"=> "L'email inserita esiste già",
+    "Incorrect email and/or password"=> "Email e/o password sbagliata/e",
+    "You do not have any role yet"=>"Non hai ancora un ruolo",
+    "Are you sure to delete it?"=>"Sei sicuro di rimuoverlo?",
+    "Access denied"=>"Accesso negato",
+    "Cancel"=>"Annulla",
+    "New Invoice"=>"Nuova fattura",
+    "Choose here"=>"Scegli qui"
 
-];
+
+
+]; 
