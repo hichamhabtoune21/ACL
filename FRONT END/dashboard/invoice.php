@@ -169,7 +169,7 @@ require "../../BACK END/translation/init.php";
             <div class="row">
                 <div class="col-md-2 col-lg-2 col-xl-2 bg-dark collapse d-md-block text-nowrap"
                     style="color: beige; padding-right: 10px; align-items: center;" id="nav">
-                    <div class="vh-100">
+                    <div class="vh-100 d-flex flex-column">
                         <div class="navbar navbar-dark bg-dark">
                             <div class="align-middle" style="font-size: 18px; padding-left: 18px; padding-top: 20px;">
                                 <ul class="navbar-nav">
