@@ -1,5 +1,5 @@
 <?php
-$enTranslations = [
+$enTranslations = array(
     'Hello' => 'Hello',
     'Goodbye' => 'Goodbye',
     'Email address' => 'Email address',
@@ -56,6 +56,21 @@ $enTranslations = [
     "Access denied"=>"Access denied",
     "Cancel"=>"Cancel",
     "New Invoice"=>"New Invoice",
-    "Choose here"=>"Choose here"
-
-];
+    "Choose here"=>"Choose here",
+    "No data available" => "No data available",
+    "Showing _START_ to _END_ of _TOTAL_ entries" => "Showing _START_ to _END_ of _TOTAL_ entries",
+    "Showing 0 to 0 of 0 entries" => "Showing 0 to 0 of 0 entries",
+    "(filtered from _MAX_ total entries)" => "(filtered from _MAX_ total entries)",
+    "Show _MENU_ entries" => "Show _MENU_ entries",
+    "Loading..." => "Loading...",
+    "Processing..." => "Processing...",
+    "Search" => "Search",
+    "No matching records found" => "No matching records found",
+    "First" => "First",
+    "Last" => "Last",
+    "Next" => "Next",
+    "Previous" => "Previous",
+    "activate to sort column ascending" => "activate to sort column ascending",
+    "activate to sort column descending" => "activate to sort column descending"
+);
+?>

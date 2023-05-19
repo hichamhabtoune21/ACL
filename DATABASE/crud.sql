@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
--- Generation Time: Apr 10, 2023 at 12:48 PM
+-- Generation Time: May 19, 2023 at 01:36 PM
 -- Server version: 8.0.32
--- PHP Version: 8.1.15
+-- PHP Version: 8.1.17
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -198,13 +198,7 @@ INSERT INTO `user` (`ID_User`, `Email`, `Password`, `Username`, `Name`, `Surname
 (3, 'mark.johnson@example.com', '819b0643d6b89dc9b579fdfc9094f28e', 'markjohnson', 'Mark', 'Johnson', 'Area Manager', 'Center'),
 (4, 'sarah.green@example.com', '34cc93ece0ba9e3f6f235d4af979b16c', 'sarahgreen', 'Sarah', 'Green', 'Administration', NULL),
 (5, 'chris.wilson@example.com', 'db0edd04aaac4506f7edab03ac855d56', 'chriswilson', 'Chris', 'Wilson', 'Administration', NULL),
-(6, 'commercial@commercial.com', 'db0edd04aaac4506f7edab03ac855d56', 'commercial', 'Emily', 'Davis', 'Commercial', NULL),
-(44, 'bellino21@gmail.com', '218dd27aebeccecae69ad8408d9a36bf', 'bellino', 'bellino', 'Bellino', 'NULL', NULL),
-(47, 'ok@ok.com', '00cdb7bb942cf6b290ceb97d6aca64a3', 'ok21', 'ok', 'ok', 'NULL', NULL),
-(48, 'bello@gmail.com', '0d121ce790c57ea8c33fc8c67a26b94b', 'bello', 'bello', 'bello', NULL, NULL),
-(49, 'brutto@gmail.com', '0d121ce790c57ea8c33fc8c67a26b94b', 'brutto', 'brutt', 'brutto', NULL, NULL),
-(50, 'brutto21@gmail.com', '0d121ce790c57ea8c33fc8c67a26b94b', 'brutto', 'brutt', 'brutto', NULL, NULL),
-(51, 'bellino22@gmail.com', '0d121ce790c57ea8c33fc8c67a26b94b', 'bellino', 'Bello', 'Bellino', NULL, NULL);
+(6, 'commercial@commercial.com', 'db0edd04aaac4506f7edab03ac855d56', 'commercial', 'Emily', 'Davis', 'Commercial', NULL);
 
 -- --------------------------------------------------------
 
@@ -304,7 +298,7 @@ ALTER TABLE `invoice`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `ID_User` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1000015;
+  MODIFY `ID_User` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1000017;
 
 --
 -- Constraints for dumped tables
@@ -333,8 +327,8 @@ ALTER TABLE `permission_to_role`
 -- Constraints for table `user`
 --
 ALTER TABLE `user`
-  ADD CONSTRAINT `Area(FK)` FOREIGN KEY (`Area`) REFERENCES `area` (`Area`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  ADD CONSTRAINT `Ruolo_FK` FOREIGN KEY (`Role`) REFERENCES `role` (`Role`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `Area(FK)` FOREIGN KEY (`Area`) REFERENCES `area` (`Area`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `Ruolo_FK` FOREIGN KEY (`Role`) REFERENCES `role` (`Role`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- Constraints for table `user_manage_client`

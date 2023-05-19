@@ -17,7 +17,7 @@ require "../../BACK END/translation/init.php";
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icon-css@3.5.0/css/flag-icon.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icon-css@3.5.0/css/flag-icon.min.css">
 
 
 
@@ -91,6 +91,8 @@ require "../../BACK END/translation/init.php";
         .modal a {
             color: black;
         }
+
+
 
         /*
         label {
@@ -174,35 +176,44 @@ require "../../BACK END/translation/init.php";
                             <div class="align-middle" style="font-size: 18px; padding-left: 18px; padding-top: 20px;">
                                 <ul class="navbar-nav">
                                     <li class="nav-item" style="padding-bottom: 20px;">
-                                        <a class="nav-link" aria-current="page" href="home.php"><i
-                                                class="bi bi-house"></i><?=$translator->trans('Home')?></a>
+                                        <a class="nav-link" aria-current="page" href="home.php"><i class="bi bi-house"></i>
+                                            <?= $translator->trans('Home') ?>
+                                        </a>
                                     </li>
                                     <?php
                                     if ($_SESSION["ruolo"] == "Admin") {
                                         ?>
                                         <li class="nav-item" style="padding-bottom: 20px;">
                                             <a class="nav-link" aria-current="page" href="all_users.php"><i
-                                                    class="bi bi-people"></i><?=$translator->trans('Users')?></a>
+                                                    class="bi bi-people"></i>
+                                                <?= $translator->trans('Users') ?>
+                                            </a>
                                         </li>
                                         <?php
                                     }
                                     ?>
 
                                     <li class="nav-item" style="padding-bottom: 20px;">
-                                        <a class="nav-link" href="clients.php"><i
-                                                class="bi bi-journal-check"></i><?=$translator->trans('Clients')?></a>
+                                        <a class="nav-link" href="clients.php"><i class="bi bi-journal-check"></i>
+                                            <?= $translator->trans('Clients') ?>
+                                        </a>
                                     </li>
                                     <li class="nav-item" style="padding-bottom: 20px;">
-                                        <a class="nav-link active" href="#"><i class="bi bi-bar-chart"></i><?=$translator->trans('Invoices')?></a>
+                                        <a class="nav-link active" href="#"><i class="bi bi-bar-chart"></i>
+                                            <?= $translator->trans('Invoices') ?>
+                                        </a>
                                     </li>
 
                                     <li class="nav-item" style="padding-bottom: 20px;">
-                                        <a class="nav-link" href="#"><i class="bi bi-question-square"></i><?=$translator->trans('Help')?></a>
+                                        <a class="nav-link" href="#"><i class="bi bi-question-square"></i>
+                                            <?= $translator->trans('Help') ?>
+                                        </a>
                                     </li>
                                     <hr style="width: 120%;color:white;">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="profile.php"><i
-                                                class="bi bi-person-square"></i></i><?=$translator->trans('Profile')?></a>
+                                        <a class="nav-link" href="profile.php"><i class="bi bi-person-square"></i></i>
+                                            <?= $translator->trans('Profile') ?>
+                                        </a>
                                     </li>
 
 
@@ -239,7 +250,9 @@ require "../../BACK END/translation/init.php";
                 <div class="col-md-10 col-lg-10 col-xl-10" style="padding:25px">
 
 
-                    <h3 style="padding-bottom:25px"><?=$translator->trans('INVOICE MANAGEMENT')?></h3>
+                    <h3 style="padding-bottom:25px">
+                        <?= $translator->trans('INVOICE MANAGEMENT') ?>
+                    </h3>
 
                     <div class="overflow-auto">
 
@@ -249,7 +262,9 @@ require "../../BACK END/translation/init.php";
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="exampleModalToggleLabel"><?=$translator->trans('New Invoice')?></h1>
+                                        <h1 class="modal-title fs-5" id="exampleModalToggleLabel">
+                                            <?= $translator->trans('New Invoice') ?>
+                                        </h1>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
@@ -260,11 +275,15 @@ require "../../BACK END/translation/init.php";
 
                                             <div class="form-group">
                                                 <div class="mb-3">
-                                                    <label for="client" class="form-label"><?=$translator->trans('Client')?></label>
+                                                    <label for="client" class="form-label">
+                                                        <?= $translator->trans('Client') ?>
+                                                    </label>
                                                     <select name="client" id="client" class="form-control selectpicker"
                                                         data-live-search="true" data-style="btn-black" style="color:black;"
                                                         required>
-                                                        <option value="" selected disabled hidden><?=$translator->trans('Choose here')?></option>
+                                                        <option value="" selected disabled hidden>
+                                                            <?= $translator->trans('Choose here') ?>
+                                                        </option>
 
                                                         <?php
                                                         $query = "";
@@ -298,14 +317,18 @@ require "../../BACK END/translation/init.php";
 
                                             <div class="form-group">
                                                 <div class="mb-3">
-                                                    <label for="num" class="form-label"><?=$translator->trans('Progressive number')?></label>
+                                                    <label for="num" class="form-label">
+                                                        <?= $translator->trans('Progressive number') ?>
+                                                    </label>
                                                     <input type="num" id="num" name="num" class="form-control" required>
                                                 </div>
                                             </div>
 
                                             <div class="form-group">
                                                 <div class="mb-3">
-                                                    <label for="amount" class="form-label"><?=$translator->trans('Amount')?></label>
+                                                    <label for="amount" class="form-label">
+                                                        <?= $translator->trans('Amount') ?>
+                                                    </label>
                                                     <input type="number" id="amount" name="amount" class="form-control"
                                                         step="any" required>
                                                 </div>
@@ -313,14 +336,24 @@ require "../../BACK END/translation/init.php";
 
                                             <div class="form-group">
                                                 <div class="mb-3">
-                                                    <label for="date" class="form-label"><?=$translator->trans('Issuing date')?></label>
-                                                    <input type="date" id="date" name="date" class="form-control" required>
+                                                    <label for="date" class="form-label">
+                                                        <?= $translator->trans('Issuing date') ?>
+                                                    </label>
+                                                    <?php
+                                                    // Ottieni la data corrente nel formato richiesto (YYYY-MM-DD)
+                                                    $currentDate = date('Y-m-d');
+                                                    ?>
+                                                    <input type="date" id="date" name="date" class="form-control"
+                                                        value="<?= $currentDate ?>" required>
                                                 </div>
                                             </div>
 
+
                                             <div class="form-group">
                                                 <div class="mb-3">
-                                                    <label for="bus_name" class="form-label"><?=$translator->trans('Business name')?></label>
+                                                    <label for="bus_name" class="form-label">
+                                                        <?= $translator->trans('Business name') ?>
+                                                    </label>
                                                     <input type="text" id="bus_name" name="bus_name" class="form-control"
                                                         required>
                                                 </div>
@@ -328,12 +361,22 @@ require "../../BACK END/translation/init.php";
 
                                             <div class="form-group">
                                                 <div class="mb-3">
-                                                    <label for="pay_type" class="form-label"><?=$translator->trans('Payment typer')?></label>
+                                                    <label for="pay_type" class="form-label">
+                                                        <?= $translator->trans('Payment typer') ?>
+                                                    </label>
                                                     <select name="pay_type" id="pay_type" class="form-select" required>
-                                                        <option value="" selected disabled hidden><?=$translator->trans('Choose here')?></option>
-                                                        <option value="Bank Transfer"><?=$translator->trans('Bank Transfer')?></option>
-                                                        <option value="Credit Card"><?=$translator->trans('Credit Card')?></option>
-                                                        <option value="Cash"><?=$translator->trans('Cash')?></option>
+                                                        <option value="" selected disabled hidden>
+                                                            <?= $translator->trans('Choose here') ?>
+                                                        </option>
+                                                        <option value="Bank Transfer">
+                                                            <?= $translator->trans('Bank Transfer') ?>
+                                                        </option>
+                                                        <option value="Credit Card">
+                                                            <?= $translator->trans('Credit Card') ?>
+                                                        </option>
+                                                        <option value="Cash">
+                                                            <?= $translator->trans('Cash') ?>
+                                                        </option>
 
                                                     </select>
                                                 </div>
@@ -342,11 +385,15 @@ require "../../BACK END/translation/init.php";
 
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-outline-secondary"
-                                                data-bs-target="#exampleModalToggle" data-bs-toggle="modal"><?=$translator->trans('Cancel')?></button>
+                                                data-bs-target="#exampleModalToggle" data-bs-toggle="modal">
+                                                <?= $translator->trans('Cancel') ?>
+                                            </button>
 
                                             <div class="form-group" id="changeable">
                                                 <button class="btn btn-secondary" id="save" type="submit"
-                                                    data-bs-target="#exampleModalToggle" data-bs-toggle=""><?=$translator->trans('Save')?></button>
+                                                    data-bs-target="#exampleModalToggle" data-bs-toggle="">
+                                                    <?= $translator->trans('Save') ?>
+                                                </button>
                                             </div>
                                         </div>
 
@@ -363,7 +410,8 @@ require "../../BACK END/translation/init.php";
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="exampleModalToggleLabel"><?=$translator->trans('Are you sure to delete it?')?>
+                                        <h1 class="modal-title fs-5" id="exampleModalToggleLabel">
+                                            <?= $translator->trans('Are you sure to delete it?') ?>
                                         </h1>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
@@ -371,11 +419,13 @@ require "../../BACK END/translation/init.php";
 
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-outline-secondary"
-                                            data-bs-target="#exampleModalToggle1" data-bs-toggle="modal"><?=$translator->trans('Cancel')?></button>
+                                            data-bs-target="#exampleModalToggle1" data-bs-toggle="modal">
+                                            <?= $translator->trans('Cancel') ?>
+                                        </button>
                                         <div id="addDeleteButton">
                                             <button class="btn btn-danger" data-bs-toggle="modal"
                                                 data-bs-target="#exampleModalToggle1"
-                                                onclick="deleteInvoice(<?= $invoice['ID_Invoice'] ?>)"><?=$translator->trans('Delete')?></button>
+                                                onclick="deleteInvoice(<?= $invoice['ID_Invoice'] ?>)"><?= $translator->trans('Delete') ?></button>
                                         </div>
                                     </div>
                                 </div>
@@ -385,7 +435,9 @@ require "../../BACK END/translation/init.php";
                         if (in_array("CREATE", $_SESSION["Permissions"])) {
                             ?>
                             <button type="button" class="btn btn-dark" data-bs-toggle="modal" href="#exampleModalToggle"
-                                onclick="add()"><i class="bi bi-plus-square"></i><?=$translator->trans('Add')?></button>
+                                onclick="add()"><i class="bi bi-plus-square"></i>
+                                <?= $translator->trans('Add') ?>
+                            </button>
                             <?php
                         }
                         ?>
@@ -394,13 +446,27 @@ require "../../BACK END/translation/init.php";
                             <table class="table table-dark" id="tableInvoice">
                                 <thead>
                                     <tr style="">
-                                        <th scope="col"><?=$translator->trans('Client')?></th>
-                                        <th scope="col"><?=$translator->trans('Progressive number')?></th>
-                                        <th scope="col"><?=$translator->trans('Issuing date')?></th>
-                                        <th scope="col"><?=$translator->trans('Business name')?></th>
-                                        <th scope="col"><?=$translator->trans('Amount')?></th>
-                                        <th scope="col"><?=$translator->trans('Payment type')?></th>
-                                        <th scope="col"><?=$translator->trans('Actions')?></th>
+                                        <th scope="col">
+                                            <?= $translator->trans('Client') ?>
+                                        </th>
+                                        <th scope="col">
+                                            <?= $translator->trans('Progressive number') ?>
+                                        </th>
+                                        <th scope="col">
+                                            <?= $translator->trans('Issuing date') ?>
+                                        </th>
+                                        <th scope="col">
+                                            <?= $translator->trans('Business name') ?>
+                                        </th>
+                                        <th scope="col">
+                                            <?= $translator->trans('Amount') ?>
+                                        </th>
+                                        <th scope="col">
+                                            <?= $translator->trans('Payment type') ?>
+                                        </th>
+                                        <th scope="col">
+                                            <?= $translator->trans('Actions') ?>
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody id="invoices">
@@ -489,15 +555,40 @@ require "../../BACK END/translation/init.php";
         <script>
 
             $(document).ready(function () {
-                $('#tableInvoice').DataTable();
+                $('#tableInvoice').DataTable({
+                    language: {
+                        emptyTable: "<?= $translator->trans('No data available') ?>",
+                        info: "<?= $translator->trans('Showing') ?> _START_ <?= $translator->trans('to') ?> _END_ <?= $translator->trans('of') ?> _TOTAL_ <?= $translator->trans('entries') ?>",
+                        infoEmpty: "<?= $translator->trans('Showing 0 to 0 of 0 entries') ?>",
+                        infoFiltered: "<?= $translator->trans('(filtered from _MAX_ total entries)') ?>",
+                        infoThousands: ",",
+                        lengthMenu: "<?= $translator->trans('Show _MENU_ entries') ?>",
+                        loadingRecords: "<?= $translator->trans('Loading...') ?>",
+                        processing: "<?= $translator->trans('Processing...') ?>",
+                        search: "<?= $translator->trans('Search') ?>",
+                        zeroRecords: "<?= $translator->trans('No matching records found') ?>",
+                        paginate: {
+                            first: "<?= $translator->trans('First') ?>",
+                            last: "<?= $translator->trans('Last') ?>",
+                            next: "<?= $translator->trans('Next') ?>",
+                            previous: "<?= $translator->trans('Previous') ?>"
+                        },
+                        aria: {
+                            sortAscending: "<?= $translator->trans('activate to sort column ascending') ?>",
+                            sortDescending: "<?= $translator->trans('activate to sort column descending') ?>"
+                        }
+                    }
+
+
+                });
             });
 
             function add() {
                 document.getElementById("exampleModalToggleLabel").innerHTML = "";
-                document.getElementById("exampleModalToggleLabel").innerHTML = "<?=$translator->trans('New Invoice')?>";
+                document.getElementById("exampleModalToggleLabel").innerHTML = "<?= $translator->trans('New Invoice') ?>";
 
                 document.getElementById("changeable").innerHTML = "";
-                document.getElementById("changeable").innerHTML = "<button class='btn btn-dark' id='save' type='submit'' data-bs-target='#exampleModalToggle' data-bs-toggle='' onclick='addInvoice(event)'><?=$translator->trans('Save')?></button>"
+                document.getElementById("changeable").innerHTML = "<button class='btn btn-dark' id='save' type='submit'' data-bs-target='#exampleModalToggle' data-bs-toggle='' onclick='addInvoice(event)'><?= $translator->trans('Save') ?></button>"
             }
 
 
@@ -570,10 +661,10 @@ require "../../BACK END/translation/init.php";
                             // let's redirect 
                             var button = "";
                             if (message.canDelete) {
-                                button = "<div class='d-flex flex-row bd-highlight mb-3 gap-2'><button type='button' class='btn btn-light p-2' onclick=invoiceInfo(" + message.ID_Invoice + ") data-bs-toggle='modal' href='#exampleModalToggle'><i class='bi bi-pencil-fill'></i><?=$translator->trans('Edit')?></button> <button type='button' class='btn btn-danger p-2' data-bs-toggle='modal' href='#exampleModalToggle1' onclick='addDelete(" + message.ID_Invoice + ")'><i class='bi bi-x-square'></i><?=$translator->trans('Delete')?></button></div>"
+                                button = "<div class='d-flex flex-row bd-highlight mb-3 gap-2'><button type='button' class='btn btn-light p-2' onclick=invoiceInfo(" + message.ID_Invoice + ") data-bs-toggle='modal' href='#exampleModalToggle'><i class='bi bi-pencil-fill'></i><?= $translator->trans('Edit') ?></button> <button type='button' class='btn btn-danger p-2' data-bs-toggle='modal' href='#exampleModalToggle1' onclick='addDelete(" + message.ID_Invoice + ")'><i class='bi bi-x-square'></i><?= $translator->trans('Delete') ?></button></div>"
                             }
                             else {
-                                button = "<div class='d-flex flex-row bd-highlight mb-3 gap-2'><button type='button' class='btn btn-light p-2' onclick=invoiceInfo(" + message.ID_Invoice + ") data-bs-toggle='modal' href='#exampleModalToggle'><i class='bi bi-pencil-fill'></i><?=$translator->trans('Edit')?></button>"
+                                button = "<div class='d-flex flex-row bd-highlight mb-3 gap-2'><button type='button' class='btn btn-light p-2' onclick=invoiceInfo(" + message.ID_Invoice + ") data-bs-toggle='modal' href='#exampleModalToggle'><i class='bi bi-pencil-fill'></i><?= $translator->trans('Edit') ?></button>"
                             }
                             console.log(button) <
                                 $("#invoices").append(
@@ -630,10 +721,10 @@ require "../../BACK END/translation/init.php";
                                 console.log("EDITED");
                                 var button = "";
                                 if (message.role != "Administration" && message.role != "Commercial") {
-                                    button = "<div class='d-flex flex-row bd-highlight mb-3 gap-2'><button type='button' class='btn btn-light p-2' onclick=invoiceInfo(" + message.ID_Invoice + ") data-bs-toggle='modal' href='#exampleModalToggle'><i class='bi bi-pencil-fill'></i><?=$translator->trans('Edit')?></button> <button type='button' class='btn btn-danger p-2' data-bs-toggle='modal' href='#exampleModalToggle1' onclick='addDelete(" + message.ID_Invoice + ")'><i class='bi bi-x-square'></i><?=$translator->trans('Delete')?></button></div>"
+                                    button = "<div class='d-flex flex-row bd-highlight mb-3 gap-2'><button type='button' class='btn btn-light p-2' onclick=invoiceInfo(" + message.ID_Invoice + ") data-bs-toggle='modal' href='#exampleModalToggle'><i class='bi bi-pencil-fill'></i><?= $translator->trans('Edit') ?></button> <button type='button' class='btn btn-danger p-2' data-bs-toggle='modal' href='#exampleModalToggle1' onclick='addDelete(" + message.ID_Invoice + ")'><i class='bi bi-x-square'></i><?= $translator->trans('Delete') ?></button></div>"
                                 }
                                 else {
-                                    button = "<div class='d-flex flex-row bd-highlight mb-3 gap-2'><button type='button' class='btn btn-light p-2' onclick=invoiceInfo(" + message.ID_Invoice + ") data-bs-toggle='modal' href='#exampleModalToggle'><i class='bi bi-pencil-fill'></i><?=$translator->trans('Edit')?></button>"
+                                    button = "<div class='d-flex flex-row bd-highlight mb-3 gap-2'><button type='button' class='btn btn-light p-2' onclick=invoiceInfo(" + message.ID_Invoice + ") data-bs-toggle='modal' href='#exampleModalToggle'><i class='bi bi-pencil-fill'></i><?= $translator->trans('Edit') ?></button>"
                                 }
                                 if (message.text === "success") {
                                     var editedInvoice = document.getElementById(message.ID_Invoice);
@@ -659,7 +750,7 @@ require "../../BACK END/translation/init.php";
             });
 
             function addDelete(id) {
-                document.getElementById("addDeleteButton").innerHTML = "<button class='btn btn-danger' data-bs-toggle='modal' data-bs-target='#exampleModalToggle1' onclick='deleteInvoice(" + id + ")'><?=$translator->trans('Delete')?></button>";
+                document.getElementById("addDeleteButton").innerHTML = "<button class='btn btn-danger' data-bs-toggle='modal' data-bs-target='#exampleModalToggle1' onclick='deleteInvoice(" + id + ")'><?= $translator->trans('Delete') ?></button>";
             }
 
             function deleteInvoice(id) {
@@ -692,7 +783,7 @@ require "../../BACK END/translation/init.php";
                 document.getElementById("exampleModalToggleLabel").innerHTML = "Modify invoice";
 
                 document.getElementById("changeable").innerHTML = "";
-                document.getElementById("changeable").innerHTML = "<button class='btn btn-dark' id='save' type='submit'' data-bs-target='#exampleModalToggle' data-bs-toggle='' onclick=editInvoice(" + id + ",event)><?=$translator->trans('Edit')?></button>"
+                document.getElementById("changeable").innerHTML = "<button class='btn btn-dark' id='save' type='submit'' data-bs-target='#exampleModalToggle' data-bs-toggle='' onclick=editInvoice(" + id + ",event)><?= $translator->trans('Edit') ?></button>"
 
                 $.ajax({
                     type: "POST",

@@ -10,9 +10,11 @@ services:
     volumes:
       - ./:/var/www/html/
     ports:
-      - 8000:80
+      - 8001:80
 
   db:
+    volumes:
+      - ./DATABASE/crud.sql:/docker-entrypoint-initdb.d/crud.sql
     container_name: db
     image: mysql
     restart: always
@@ -23,13 +25,26 @@ services:
       MYSQL_PASSWORD: admin
     ports:
       - "9906:3306"
+    command: ["--init-file", "/docker-entrypoint-initdb.d/crud.sql"]
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     ports:
-      - '8080:80'
+      - '8081:80'
     restart: always
     environment:
       PMA_HOST: db
     depends_on:
       - db
+
+  webservice:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: webservice
+    volumes:
+      - ./webservice:/usr/src/app
+    depends_on:
+      - db
+    ports:
+      - 3001:3000

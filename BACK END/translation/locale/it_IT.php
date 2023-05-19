@@ -56,7 +56,22 @@ $itTranslations = [
     "Access denied"=>"Accesso negato",
     "Cancel"=>"Annulla",
     "New Invoice"=>"Nuova fattura",
-    "Choose here"=>"Scegli qui"
+    "Choose here"=>"Scegli qui",
+    "No data available" => "Nessun dato disponibile",
+    "Showing _START_ to _END_ of _TOTAL_ entries" => "Mostrando da _START_ a _END_ di _TOTAL_ voci",
+    "Showing 0 to 0 of 0 entries" => "Mostrando da 0 a 0 di 0 voci",
+    "(filtered from _MAX_ total entries)" => "(filtrato da un totale di _MAX_ voci)",
+    "Show _MENU_ entries" => "Mostra _MENU_ voci",
+    "Loading..." => "Caricamento...",
+    "Processing..." => "Elaborazione...",
+    "Search" => "Cerca",
+    "No matching records found" => "Nessun record corrispondente trovato",
+    "First" => "Primo",
+    "Last" => "Ultimo",
+    "Next" => "Successivo",
+    "Previous" => "Precedente",
+    "activate to sort column ascending" => "attiva per ordinare la colonna in ordine ascendente",
+    "activate to sort column descending" => "attiva per ordinare la colonna in ordine discendente"
 
 
 
