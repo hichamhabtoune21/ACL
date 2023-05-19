@@ -205,7 +205,7 @@ require "../../BACK END/translation/init.php";
                                     </li>
 
                                     <li class="nav-item" style="padding-bottom: 20px;">
-                                        <a class="nav-link" href="#"><i class="bi bi-question-square"></i>
+                                        <a class="nav-link" href="help.php"><i class="bi bi-question-square"></i>
                                             <?= $translator->trans('Help') ?>
                                         </a>
                                     </li>

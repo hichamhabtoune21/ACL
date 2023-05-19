@@ -92,7 +92,7 @@ require "../../BACK END/translation/init.php";
                             <div class="align-middle" style="font-size: 18px; padding-left: 18px; padding-top: 20px;">
                                 <ul class="navbar-nav">
                                     <li class="nav-item" style="padding-bottom: 20px;">
-                                        <a class="nav-link active" aria-current="page" href="#"><i class="bi bi-house"></i>
+                                        <a class="nav-link" aria-current="page" href="home.php"><i class="bi bi-house"></i>
                                             <?= $translator->trans('Home') ?>
                                         </a>
                                     </li>
@@ -125,7 +125,7 @@ require "../../BACK END/translation/init.php";
                                     }
                                     ?>
                                     <li class="nav-item" style="padding-bottom: 20px;">
-                                        <a class="nav-link" href="help.php"><i class="bi bi-question-square"></i>
+                                        <a class="nav-link active" href="#"><i class="bi bi-question-square"></i>
                                             <?= $translator->trans('Help') ?>
                                         </a>
                                     </li>
@@ -169,10 +169,9 @@ require "../../BACK END/translation/init.php";
                     </div>
                 </div>
                 <div class="col-md-10 col-lg-10 col-xl-10" style="padding:25px">
-                    <h1 style="font-size: 50px;">
-                        <?= $translator->trans('Welcome') ?>
-                        <?php echo $_SESSION["username"] ?>
-                    </h1>
+                    <h3 style="font-size: 50px;">
+                        <?= $translator->trans('Contact') . ": "?> admin@admin.com
+                    </h3>
                     <?php
                     if (!isset($_SESSION["ruolo"])) {
                         ?>

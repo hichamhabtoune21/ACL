@@ -90,34 +90,42 @@ require "../../BACK END/translation/init.php";
                                 <div class="align-middle" style="font-size: 18px; padding-left: 18px; padding-top: 20px;">
                                     <ul class="navbar-nav">
                                         <li class="nav-item" style="padding-bottom: 20px;">
-                                            <a class="nav-link" aria-current="page" href="home.php"><i
-                                                    class="bi bi-house"></i><?=$translator->trans('Home')?></a>
+                                            <a class="nav-link" aria-current="page" href="home.php"><i class="bi bi-house"></i>
+                                                <?= $translator->trans('Home') ?>
+                                            </a>
                                         </li>
                                         <?php
                                         if ($_SESSION["ruolo"] == "Admin") {
                                             ?>
                                             <li class="nav-item" style="padding-bottom: 20px;">
                                                 <a class="nav-link" aria-current="page" href="all_users.php"><i
-                                                        class="bi bi-people"></i><?=$translator->trans('Users')?></a>
+                                                        class="bi bi-people"></i>
+                                                    <?= $translator->trans('Users') ?>
+                                                </a>
                                             </li>
                                             <?php
                                         }
                                         ?>
-
                                         <li class="nav-item" style="padding-bottom: 20px;">
-                                            <a class="nav-link active" href="#"><i class="bi bi-journal-check"></i><?=$translator->trans('Clients')?></a>
+                                            <a class="nav-link active" href="#"><i class="bi bi-journal-check"></i>
+                                                <?= $translator->trans('Clients') ?>
+                                            </a>
                                         </li>
                                         <li class="nav-item" style="padding-bottom: 20px;">
-                                            <a class="nav-link" href="invoice.php"><i class="bi bi-bar-chart"></i><?=$translator->trans('Invoices')?></a>
+                                            <a class="nav-link" href="invoice.php"><i class="bi bi-bar-chart"></i>
+                                                <?= $translator->trans('Invoices') ?>
+                                            </a>
                                         </li>
-
                                         <li class="nav-item" style="padding-bottom: 20px;">
-                                            <a class="nav-link" href="#"><i class="bi bi-question-square"></i><?=$translator->trans('Clients')?></a>
+                                            <a class="nav-link" href="help.php"><i class="bi bi-question-square"></i>
+                                                <?= $translator->trans('Help') ?>
+                                            </a>
                                         </li>
                                         <hr style="width: 120%; background-color: white;">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="profile.php"><i
-                                                    class="bi bi-person-square"></i></i><?=$translator->trans('Profile')?></a>
+                                            <a class="nav-link" href="profile.php"><i class="bi bi-person-square"></i></i>
+                                                <?= $translator->trans('Profile') ?>
+                                            </a>
                                         </li>
                                     </ul>
                                 </div>
@@ -125,45 +133,61 @@ require "../../BACK END/translation/init.php";
                             </div>
 
                             <div class="mt-auto position-sticky bottom-0 p-2 bg-dark">
-                            <div class="dropdown d-inline-block me-3">
-                                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
-                                    <?php
-                                    if ($_SESSION['lang'] == 'en_US') {
-                                        $flag = 'gb';
-                                    } else {
-                                        $flag = substr($_SESSION['lang'], 0, 2);
-                                    }
-                                    ?>
-                                    <i id="lingua-icon" class="flag-icon flag-icon-<?= $flag ?>"></i>
-                                </button>
-                                <ul class="dropdown-menu" style="left: 0;">
-                                    <li><a class="dropdown-item" href="#" onclick="updateLanguage('it_IT',event)"><i
-                                                class="flag-icon flag-icon-it"></i> Italiano</a></li>
-                                    <li><a class="dropdown-item" href="#" onclick="updateLanguage('en_US',event)"><i
-                                                class="flag-icon flag-icon-gb"></i> English</a></li>
-                                    <li><a class="dropdown-item" href="#" onclick="updateLanguage('es_ES',event)"><i
-                                                class="flag-icon flag-icon-es"></i> Espanol</a></li>
-                                </ul>
+                                <div class="dropdown d-inline-block me-3">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                                        aria-expanded="false">
+                                        <?php
+                                        if ($_SESSION['lang'] == 'en_US') {
+                                            $flag = 'gb';
+                                        } else {
+                                            $flag = substr($_SESSION['lang'], 0, 2);
+                                        }
+                                        ?>
+                                        <i id="lingua-icon" class="flag-icon flag-icon-<?= $flag ?>"></i>
+                                    </button>
+                                    <ul class="dropdown-menu" style="left: 0;">
+                                        <li><a class="dropdown-item" href="#" onclick="updateLanguage('it_IT',event)"><i
+                                                    class="flag-icon flag-icon-it"></i> Italiano</a></li>
+                                        <li><a class="dropdown-item" href="#" onclick="updateLanguage('en_US',event)"><i
+                                                    class="flag-icon flag-icon-gb"></i> English</a></li>
+                                        <li><a class="dropdown-item" href="#" onclick="updateLanguage('es_ES',event)"><i
+                                                    class="flag-icon flag-icon-es"></i> Espanol</a></li>
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
                         </div>
 
 
                     </div>
                     <div class="col-md-10 col-lg-10 col-xl-10" style="padding:25px">
-                        <h3><?=strtoupper($translator->trans('Clients'))?></h3>
+                        <h3>
+                            <?= strtoupper($translator->trans('Clients')) ?>
+                        </h3>
                         <div class="overflow-auto" style="padding-top:20px">
                             <table class="table table-dark">
                                 <thead>
                                     <tr>
-                                        <th scope="col"><?=$translator->trans('Name')?></th>
-                                        <th scope="col"><?=$translator->trans('Surname')?></th>
-                                        <th scope="col"><?=$translator->trans('Phone')?></th>
-                                        <th scope="col"><?=$translator->trans('Address')?></th>
-                                        <th scope="col"><?=$translator->trans('VAT Number')?></th>
-                                        <th scope="col"><?=$translator->trans('Area')?></th>
-                                        <th scope="col"><?=$translator->trans('Actions')?></th>
+                                        <th scope="col">
+                                            <?= $translator->trans('Name') ?>
+                                        </th>
+                                        <th scope="col">
+                                            <?= $translator->trans('Surname') ?>
+                                        </th>
+                                        <th scope="col">
+                                            <?= $translator->trans('Phone') ?>
+                                        </th>
+                                        <th scope="col">
+                                            <?= $translator->trans('Address') ?>
+                                        </th>
+                                        <th scope="col">
+                                            <?= $translator->trans('VAT Number') ?>
+                                        </th>
+                                        <th scope="col">
+                                            <?= $translator->trans('Area') ?>
+                                        </th>
+                                        <th scope="col">
+                                            <?= $translator->trans('Actions') ?>
+                                        </th>
 
                                     </tr>
                                 </thead>
@@ -205,7 +229,7 @@ require "../../BACK END/translation/init.php";
                                                 <td>
                                                     <button type="button" class="btn btn-danger" data-bs-toggle='modal'
                                                         href='#exampleModalToggle1'
-                                                        onclick='deleteUser(<?= $client["ID_Client"] ?>)'><?=$translator->trans('Delete')?></button>
+                                                        onclick='deleteUser(<?= $client["ID_Client"] ?>)'><?= $translator->trans('Delete') ?></button>
 
                                                 </td>
                                             </tr>

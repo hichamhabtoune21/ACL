@@ -18,7 +18,7 @@ require "../../BACK END/translation/init.php";
         integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icon-css@3.5.0/css/flag-icon.min.css">
 
-    <script src="../update_language.js"></script>
+    <script src="../../BACK END/translation/update_language.js"></script>
     <title>Login Page</title>
 
     <script>

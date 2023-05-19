@@ -71,6 +71,14 @@ $enTranslations = array(
     "Next" => "Next",
     "Previous" => "Previous",
     "activate to sort column ascending" => "activate to sort column ascending",
-    "activate to sort column descending" => "activate to sort column descending"
+    "activate to sort column descending" => "activate to sort column descending",
+    "Are you sure to save it?"=>"Are you sure to save it?",
+    "Email or username already exists"=>"Email or username already exists",
+    "User information updated successfully"=>"User information updated successfully",
+    "North-East"=>"North-East",
+    "North-West"=>"North-West",
+    "Center"=>"Center",
+    "South"=>"South",
+    "Contact"=>"Contact"
 );
 ?>

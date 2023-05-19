@@ -45,18 +45,18 @@ $itTranslations = [
     'INVOICE MANAGEMENT' => 'GESTIONE FATTURE',
     'YOUR PROFILE' => 'IL TUO PROFILO',
     'Logout' => 'Esci',
-    'Select language'=>'Seleziona lingua',
-    'Thanks! You are now registered'=>"Grazie! Ora sei registrato",
-    'Error inserting data: '=>"Errore nell'inserimento dei dati: ",
-    "The username inserted already exists"=> "L'username inserito esiste già",
-    "The email inserted already exists"=> "L'email inserita esiste già",
-    "Incorrect email and/or password"=> "Email e/o password sbagliata/e",
-    "You do not have any role yet"=>"Non hai ancora un ruolo",
-    "Are you sure to delete it?"=>"Sei sicuro di rimuoverlo?",
-    "Access denied"=>"Accesso negato",
-    "Cancel"=>"Annulla",
-    "New Invoice"=>"Nuova fattura",
-    "Choose here"=>"Scegli qui",
+    'Select language' => 'Seleziona lingua',
+    'Thanks! You are now registered' => "Grazie! Ora sei registrato",
+    'Error inserting data: ' => "Errore nell'inserimento dei dati: ",
+    "The username inserted already exists" => "L'username inserito esiste già",
+    "The email inserted already exists" => "L'email inserita esiste già",
+    "Incorrect email and/or password" => "Email e/o password sbagliata/e",
+    "You do not have any role yet" => "Non hai ancora un ruolo",
+    "Are you sure to delete it?" => "Sei sicuro di rimuoverlo?",
+    "Access denied" => "Accesso negato",
+    "Cancel" => "Annulla",
+    "New Invoice" => "Nuova fattura",
+    "Choose here" => "Scegli qui",
     "No data available" => "Nessun dato disponibile",
     "Showing _START_ to _END_ of _TOTAL_ entries" => "Mostrando da _START_ a _END_ di _TOTAL_ voci",
     "Showing 0 to 0 of 0 entries" => "Mostrando da 0 a 0 di 0 voci",
@@ -71,8 +71,17 @@ $itTranslations = [
     "Next" => "Successivo",
     "Previous" => "Precedente",
     "activate to sort column ascending" => "attiva per ordinare la colonna in ordine ascendente",
-    "activate to sort column descending" => "attiva per ordinare la colonna in ordine discendente"
+    "activate to sort column descending" => "attiva per ordinare la colonna in ordine discendente",
+    "Are you sure to save it?" => "Sei sicuro di salvare?",
+    "Email or username already exists" => "Email o username già esistenti",
+    "User information updated successfully" => "Informazioni utente aggiornate con successo",
+    "North-East" => "Nord-Est",
+    "North-West" => "Nord-Ovest",
+    "Center" => "Centro",
+    "South" => "Sud",
+    "Contact" => "Contatta"
 
 
 
-]; 
+
+];

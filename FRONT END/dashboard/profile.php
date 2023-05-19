@@ -151,12 +151,11 @@ require "../../BACK END/translation/init.php";
                         <div class="navbar navbar-dark bg-dark">
                             <div class="align-middle" style="font-size: 18px; padding-left: 18px; padding-top: 20px;">
                                 <ul class="navbar-nav">
-
                                     <li class="nav-item" style="padding-bottom: 20px;">
-                                        <a class="nav-link" aria-current="page" href="home.php"><i
-                                                class="bi bi-house"></i><?=$translator->trans('Home')?></a>
+                                        <a class="nav-link" aria-current="page" href="home.php"><i class="bi bi-house"></i>
+                                            <?= $translator->trans('Home') ?>
+                                        </a>
                                     </li>
-
                                     <?php
                                     if (isset($_SESSION["ruolo"])) {
                                         ?>
@@ -165,32 +164,38 @@ require "../../BACK END/translation/init.php";
                                             ?>
                                             <li class="nav-item" style="padding-bottom: 20px;">
                                                 <a class="nav-link" aria-current="page" href="all_users.php"><i
-                                                        class="bi bi-people"></i><?=$translator->trans('Users')?></a>
+                                                        class="bi bi-people"></i>
+                                                    <?= $translator->trans('Users') ?>
+                                                </a>
                                             </li>
                                             <?php
                                         }
                                         ?>
 
                                         <li class="nav-item" style="padding-bottom: 20px;">
-                                            <a class="nav-link" href="clients.php"><i
-                                                    class="bi bi-journal-check"></i><?=$translator->trans('Clients')?></a>
+                                            <a class="nav-link" href="clients.php"><i class="bi bi-journal-check"></i>
+                                                <?= $translator->trans('Clients') ?>
+                                            </a>
                                         </li>
                                         <li class="nav-item" style="padding-bottom: 20px;">
-                                            <a class="nav-link" href="invoice.php"><i class="bi bi-bar-chart"></i><?=$translator->trans('Invoices')?></a>
+                                            <a class="nav-link" href="invoice.php"><i class="bi bi-bar-chart"></i>
+                                                <?= $translator->trans('Invoices') ?>
+                                            </a>
                                         </li>
                                         <?php
                                     }
                                     ?>
-
                                     <li class="nav-item" style="padding-bottom: 20px;">
-                                        <a class="nav-link" href="#"><i class="bi bi-question-square"></i><?=$translator->trans('Help')?></a>
+                                        <a class="nav-link" href="help.php"><i class="bi bi-question-square"></i>
+                                            <?= $translator->trans('Help') ?>
+                                        </a>
                                     </li>
                                     <hr style="width: 120%; background-color: white;">
                                     <li class="nav-item">
-                                        <a class="nav-link active" href="#"><i
-                                                class="bi bi-person-square"></i></i><?=$translator->trans('Profile')?></a>
+                                        <a class="nav-link active" href="#"><i class="bi bi-person-square"></i></i>
+                                            <?= $translator->trans('Profile') ?>
+                                        </a>
                                     </li>
-
                                 </ul>
                             </div>
                         </div>
@@ -222,7 +227,9 @@ require "../../BACK END/translation/init.php";
 
                 </div>
                 <div class="col-md-10 col-lg-10 col-xl-10" style="padding:25px">
-                    <h3 style="padding-bottom:25px"><?=$translator->trans('YOUR PROFILE')?></h3>
+                    <h3 style="padding-bottom:25px">
+                        <?= $translator->trans('YOUR PROFILE') ?>
+                    </h3>
 
 
                     <form>
@@ -236,7 +243,9 @@ require "../../BACK END/translation/init.php";
                         <form id="novalidate">
                             <div class="form-group w-50">
                                 <div class="mb-3">
-                                    <label for="inputName" class="form-label"><?=$translator->trans('Name')?></label>
+                                    <label for="inputName" class="form-label">
+                                        <?= $translator->trans('Name') ?>
+                                    </label>
                                     <input type="text" class="form-control" id="inputName" name="name"
                                         value="<?= $user["Name"] ?>" required>
                                 </div>
@@ -245,7 +254,9 @@ require "../../BACK END/translation/init.php";
 
                             <div class="form-group w-50">
                                 <div class="mb-3">
-                                    <label for="inputSurname" class="form-label"><?=$translator->trans('Surname')?></label>
+                                    <label for="inputSurname" class="form-label">
+                                        <?= $translator->trans('Surname') ?>
+                                    </label>
                                     <input type="text" class="form-control" id="inputSurname" name="surname"
                                         value="<?= $user["Surname"] ?>" required>
                                 </div>
@@ -253,7 +264,9 @@ require "../../BACK END/translation/init.php";
 
                             <div class="form-group w-50">
                                 <div class="mb-3">
-                                    <label for="inputUsername" class="form-label"><?=$translator->trans('Username')?></label>
+                                    <label for="inputUsername" class="form-label">
+                                        <?= $translator->trans('Username') ?>
+                                    </label>
                                     <input type="text" class="form-control" id="inputUsername" name="username"
                                         value="<?= $user["Username"] ?>" required>
                                 </div>
@@ -261,7 +274,9 @@ require "../../BACK END/translation/init.php";
 
                             <div class="form-group w-50">
                                 <div class="mb-3">
-                                    <label for="inputEmail" class="form-label"><?=$translator->trans('Email address')?></label>
+                                    <label for="inputEmail" class="form-label">
+                                        <?= $translator->trans('Email address') ?>
+                                    </label>
                                     <input type="email" class="form-control" id="inputEmail" name="email"
                                         aria-describedby="emailHelp" value="<?= $user["Email"] ?>" required>
                                 </div>
@@ -269,7 +284,9 @@ require "../../BACK END/translation/init.php";
 
                             <div class="form-group w-50">
                                 <div class="mb-3">
-                                    <label for="inputPassword" class="form-label"><?=$translator->trans('Password')?></label>
+                                    <label for="inputPassword" class="form-label">
+                                        <?= $translator->trans('Password') ?>
+                                    </label>
                                     <input type="password" class="form-control" id="inputPassword" name="password"
                                         pattern=".{8,}"
                                         oninvalid="this.setCustomValidity('Password must be 8 characters long')"
@@ -280,14 +297,15 @@ require "../../BACK END/translation/init.php";
                         <div class="d-flex flex-row bd-highlight mb-3">
                             <div class="p-2 bd-highlight">
                                 <form action="../../BACK END/logout.php" method="POST">
-                                    <button type='submit' class='btn btn-outline-danger'
-                                        formnovalidate="novalidate"><?=$translator->trans('Logout')?></button>
+                                    <button type='submit' class='btn btn-outline-danger' formnovalidate="novalidate">
+                                        <?= $translator->trans('Logout') ?>
+                                    </button>
                                 </form>
                             </div>
                             <div class="p-2 bd-highlight">
                                 <div id="saveButton" style="display: none">
                                     <button type='button' class='btn btn-outline-info' data-bs-toggle='modal'
-                                        href='#exampleModalToggle'><?=$translator->trans('Save')?></button>
+                                        href='#exampleModalToggle'><?= $translator->trans('Save') ?></button>
                                 </div>
                             </div>
 
@@ -301,7 +319,8 @@ require "../../BACK END/translation/init.php";
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="exampleModalToggleLabel"><?=$translator->trans('Are you sure to delete it?')?>
+                                        <h1 class="modal-title fs-5" id="exampleModalToggleLabel">
+                                            <?= $translator->trans('Are you sure to save it?') ?>
                                         </h1>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
@@ -309,11 +328,13 @@ require "../../BACK END/translation/init.php";
 
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-outline-secondary"
-                                            data-bs-target="#exampleModalToggle" data-bs-toggle="modal"><?=$translator->trans('Cancel')?></button>
+                                            data-bs-target="#exampleModalToggle" data-bs-toggle="modal">
+                                            <?= $translator->trans('Cancel') ?>
+                                        </button>
                                         <div>
                                             <button class="btn btn-dark" data-bs-toggle="modal"
                                                 data-bs-target="#exampleModalToggle"
-                                                onclick='changeProfile(<?= $_SESSION["ID_User"] ?>,event)'><?=$translator->trans('Save')?></button>
+                                                onclick='changeProfile(<?= $_SESSION["ID_User"] ?>,event)'><?= $translator->trans('Save') ?></button>
                                         </div>
                                     </div>
                                 </div>
@@ -341,6 +362,10 @@ require "../../BACK END/translation/init.php";
         const surname = $('#inputSurname').val();
         const email = $('#inputEmail').val();
         const password = $('#inputPassword').val();
+        let password_changed=false;
+        if(password!="<?=$user["Password"]?>"){
+            password_changed=true;
+        }
         const username = $('#inputUsername').val();
         save = false;
         document.getElementById("saveButton").style.display = 'none';
@@ -353,10 +378,12 @@ require "../../BACK END/translation/init.php";
                 surname: surname,
                 email: email,
                 password: password,
-                username: username
+                username: username,
+                password_changed:password_changed
             },
             success: function (response) {
-                console.log(response);
+                response=JSON.parse(response);
+                alert(response.text);
             }
         })
     }

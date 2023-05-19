@@ -71,5 +71,13 @@ $esTranslations = [
     "Next" => "Siguiente",
     "Previous" => "Anterior",
     "activate to sort column ascending" => "activar para ordenar columna en forma ascendente",
-    "activate to sort column descending" => "activar para ordenar columna en forma descendente"
+    "activate to sort column descending" => "activar para ordenar columna en forma descendente",
+    "Are you sure to save it?" => "¿Estás seguro de guardarlo?",
+    "Email or username already exists" => "El correo electrónico o el nombre de usuario ya existe",
+    "User information updated successfully" => "Información de usuario actualizada con éxito",
+    "North-East" => "Noreste",
+    "North-West" => "Noroeste",
+    "Center" => "Centro",
+    "South" => "Sur",
+    "Contact" => "Contacto"
 ];
