@@ -1,4 +1,4 @@
-version: '2.2'
+version: '2.0'
 services:
   php-apache-environment:
     container_name: acl-php
