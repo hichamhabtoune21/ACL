@@ -220,8 +220,7 @@ require "../../BACK END/translation/init.php";
                                 </ul>
                             </div>
                         </div>
-                        <div class="mt-auto position-sticky bottom-0 p-2 bg-dark">
-                            <div class="dropdown d-inline-block me-3">
+                            <div class="dropdown d-inline-block me-3" style="padding-left:15px;padding-top:30px;">
                                 <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
                                     aria-expanded="false">
                                     <?php
@@ -242,7 +241,6 @@ require "../../BACK END/translation/init.php";
                                                 class="flag-icon flag-icon-es"></i> Espanol</a></li>
                                 </ul>
                             </div>
-                        </div>
                     </div>
 
 

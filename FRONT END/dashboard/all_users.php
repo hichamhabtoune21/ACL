@@ -184,8 +184,7 @@ require "../../BACK END/translation/init.php";
                                     </ul>
                                 </div>
                             </div>
-                            <div class="mt-auto position-sticky bottom-0 p-2 bg-dark">
-                                <div class="dropdown d-inline-block me-3">
+                            <div class="dropdown d-inline-block me-3" style="padding-left:15px;padding-top:30px;">
                                     <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         <?php
                                         if ($_SESSION['lang'] == 'en_US') {
@@ -204,9 +203,6 @@ require "../../BACK END/translation/init.php";
                                 </div>
                             </div>
                         </div>
-
-
-                    </div>
                     <div class="col-md-10 col-lg-10 col-xl-10" style="padding:25px">
 
                         <div class="modal fade" id="exampleModalToggle1" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">

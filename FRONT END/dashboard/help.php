@@ -141,36 +141,34 @@ require "../../BACK END/translation/init.php";
                             </div>
 
                         </div>
-                        <div class="mt-auto position-sticky bottom-0 p-2 bg-dark">
-                            <div class="dropdown d-inline-block me-3">
-                                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
-                                    <?php
-                                    if ($_SESSION['lang'] == 'en_US') {
-                                        $flag = 'gb';
-                                    } else {
-                                        $flag = substr($_SESSION['lang'], 0, 2);
-                                    }
-                                    ?>
-                                    <i id="lingua-icon" class="flag-icon flag-icon-<?= $flag ?>"></i>
-                                </button>
-                                <ul class="dropdown-menu" style="left: 0;">
-                                    <li><a class="dropdown-item" href="#" onclick="updateLanguage('it_IT',event)"><i
-                                                class="flag-icon flag-icon-it"></i> Italiano</a></li>
-                                    <li><a class="dropdown-item" href="#" onclick="updateLanguage('en_US',event)"><i
-                                                class="flag-icon flag-icon-gb"></i> English</a></li>
-                                    <li><a class="dropdown-item" href="#" onclick="updateLanguage('es_ES',event)"><i
-                                                class="flag-icon flag-icon-es"></i> Espanol</a></li>
-                                </ul>
-                            </div>
+                        <div class="dropdown d-inline-block me-3" style="padding-left:15px;padding-top:30px;">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                <?php
+                                if ($_SESSION['lang'] == 'en_US') {
+                                    $flag = 'gb';
+                                } else {
+                                    $flag = substr($_SESSION['lang'], 0, 2);
+                                }
+                                ?>
+                                <i id="lingua-icon" class="flag-icon flag-icon-<?= $flag ?>"></i>
+                            </button>
+                            <ul class="dropdown-menu" style="left: 0;">
+                                <li><a class="dropdown-item" href="#" onclick="updateLanguage('it_IT',event)"><i
+                                            class="flag-icon flag-icon-it"></i> Italiano</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="updateLanguage('en_US',event)"><i
+                                            class="flag-icon flag-icon-gb"></i> English</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="updateLanguage('es_ES',event)"><i
+                                            class="flag-icon flag-icon-es"></i> Espanol</a></li>
+                            </ul>
                         </div>
 
 
                     </div>
                 </div>
                 <div class="col-md-10 col-lg-10 col-xl-10" style="padding:25px">
-                    <h3 style="font-size: 50px;">
-                        <?= $translator->trans('Contact') . ": "?> admin@admin.com
+                    <h3 style="font-size: 30px;">
+                        <?= $translator->trans('Contact') . ": " ?> admin@admin.com
                     </h3>
                     <?php
                     if (!isset($_SESSION["ruolo"])) {
