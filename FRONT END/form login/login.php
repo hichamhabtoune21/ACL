@@ -83,9 +83,9 @@ require "../../BACK END/translation/init.php";
 
     <div class="container" style="flex: 1 0 auto">
         <div class="row d-flex justify-content-center align-items-center" style="height: 100%;">
-            <div class="col-md-6 col-lg-6 " style="padding: 100px;">
-                <img src="https://www.mortenhansen.com/wp-content/uploads/2018/09/quiz-intro-image-2000x1720.png"
-                    class="img-fluid d-block w-100" alt="...">
+            <div class="col-md-6 col-lg-6 " style="padding: 60px;">
+            <img src="https://www.mortenhansen.com/wp-content/uploads/2018/09/quiz-intro-image-2000x1720.png"
+                class="img-fluid d-block mx-auto" style="max-width: 100%; height: auto;" alt="...">
             </div>
             <div class="col-md-6 col-lg-6">
                 <h1 style="font-size: 50px; padding-bottom: 50px;">
