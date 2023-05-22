@@ -76,6 +76,9 @@ require "../../BACK END/translation/init.php";
                             <?= $translator->trans("About") ?>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://localhost:3000/api-docs">API</a>
+                    </li>
                 </ul>
             </div>
         </div>
