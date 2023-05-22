@@ -183,9 +183,6 @@ require "../../BACK END/translation/init.php";
                                         <th scope="col">
                                             <?= $translator->trans('Area') ?>
                                         </th>
-                                        <th scope="col">
-                                            <?= $translator->trans('Actions') ?>
-                                        </th>
 
                                     </tr>
                                 </thead>
@@ -222,13 +219,6 @@ require "../../BACK END/translation/init.php";
                                                 </td>
                                                 <td>
                                                     <?= $client["Area"]; ?>
-                                                </td>
-
-                                                <td>
-                                                    <button type="button" class="btn btn-danger" data-bs-toggle='modal'
-                                                        href='#exampleModalToggle1'
-                                                        onclick='deleteUser(<?= $client["ID_Client"] ?>)'><?= $translator->trans('Delete') ?></button>
-
                                                 </td>
                                             </tr>
                                             <?php
