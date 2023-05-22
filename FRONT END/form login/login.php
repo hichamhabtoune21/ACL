@@ -77,7 +77,7 @@ require "../../BACK END/translation/init.php";
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="http://localhost:3000/api-docs">API</a>
+                        <a class="nav-link" href="http://localhost:3000/api-docs" target="_blank">API</a>
                     </li>
                 </ul>
             </div>

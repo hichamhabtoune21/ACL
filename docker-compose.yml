@@ -22,7 +22,7 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: crud
       MYSQL_USER: admin
-      MYSQL_PASSWORD: admin
+      MYSQL_PASSWORD: ACL_GROUP_1
     ports:
       - "9906:3306"
     command: ["--init-file", "/docker-entrypoint-initdb.d/crud.sql"]
