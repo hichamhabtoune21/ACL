@@ -9,7 +9,8 @@ $username = $_POST["username"];
 $email = $_POST["email"];
 $password = $_POST["password"];
 $password_changed = $_POST["password_changed"];
-if ($password_changed) {
+$hashed_password=$password;
+if ($password_changed=="true") {
     $hashed_password = md5($password);
 }
 

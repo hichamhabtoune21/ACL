@@ -2,6 +2,8 @@
 //session_start();
 include("../../BACK END/connect.php");
 require "../../BACK END/translation/init.php";
+include "../../BACK END/update_role.php";
+
 
 ?>
 <!doctype html>
@@ -218,7 +220,7 @@ require "../../BACK END/translation/init.php";
                                                     <?= $client["VAT number"]; ?>
                                                 </td>
                                                 <td>
-                                                    <?= $client["Area"]; ?>
+                                                    <?= $translator->trans($client["Area"]); ?>
                                                 </td>
                                             </tr>
                                             <?php

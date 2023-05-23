@@ -2,6 +2,8 @@
 //session_start();
 include("../../BACK END/connect.php");
 require "../../BACK END/translation/init.php";
+include "../../BACK END/update_role.php";
+
 
 ?>
 <!doctype html>

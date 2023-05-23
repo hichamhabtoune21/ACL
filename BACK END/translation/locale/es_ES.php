@@ -11,6 +11,7 @@ $esTranslations = [
     'Surname' => 'Apellido',
     'Username' => 'Nombre de usuario',
     'Repeat password' => 'Repetir contraseña',
+    "The passwords entered are different"=>"Las contraseñas ingresadas son diferentes",
     'Welcome' => 'Bienvenido',
     'Home' => 'Inicio',
     'Users' => 'Usuarios',

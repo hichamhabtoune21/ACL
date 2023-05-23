@@ -1,13 +1,14 @@
 <?php
-//session_start();
 include("../../BACK END/connect.php");
 require "../../BACK END/translation/init.php";
+include "../../BACK END/update_role.php";
 
 ?>
 <!doctype html>
 <html>
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -170,6 +171,8 @@ require "../../BACK END/translation/init.php";
                     <h1 style="font-size: 50px;">
                         <?= $translator->trans('Welcome') ?>
                         <?php echo $_SESSION["username"] ?>
+                        <?php echo $_SESSION["ruolo"] ?>
+
                     </h1>
                     <?php
                     if (!isset($_SESSION["ruolo"])) {

@@ -239,15 +239,15 @@ require "../../BACK END/translation/init.php";
                     url: '../../BACK END/script_signup.php',
                     data: $(this).serialize(),
                     success: function (response) {
-                        console.log(response.text);
+                        console.log(response);
 
                         // user is logged in successfully in the back-end 
                         // let's redirect 
                         var message = JSON.parse(response);
+                        console.log(message);
 
                         var warning = "";
                         if (message.text == true) {
-                            /*warning = "<p class='text-success'><?= $translator->trans("Thanks! You are now registered") ?></p>";*/
                             alert('<?= $translator->trans("Thanks! You are now registered") ?>');
                             window.location.href="../form login/login.php";
 

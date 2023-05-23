@@ -1,5 +1,6 @@
 <?php
 include "connect.php";
+require 'translation/init.php';
 $name = $_POST["name"];
 $surname = $_POST["surname"];
 $username = $_POST["username"];
@@ -7,13 +8,18 @@ $email = $_POST["email"];
 $password = $_POST["password"];
 $password1 = $_POST["password1"];
 $t["text"] = "";
+$warning = false;
+
 
 $hashed_password = md5($password);
 
 mysqli_query($connect, "SET FOREIGN_KEY_CHECKS=0");
 
 if ($password != $password1) {
-    $t["text"] = $t["text"] . "The passwords entered are different\n";
+    $t["text"] = $t["text"] . $translator->trans("The passwords entered are different")."<br>";
+    $warning = true;
+
+
 }
 $query = "SELECT Email FROM user where Email = ?";
 $check_email = $connect->prepare($query);
@@ -22,7 +28,6 @@ $check_email->execute();
 
 
 
-$warning = false;
 
 if (mysqli_num_rows($check_email->get_result()) > 0) { // se esiste già un'email uguale
     $t["text"] = $t["text"] . $translator->trans("The email inserted already exists") . '<br>';
@@ -50,12 +55,14 @@ if (!$warning) {
     $result->execute();
     if (mysqli_affected_rows($connect) > 0) {
         $t["text"] = true;
+        echo json_encode(array("text" => $t["text"]));
     } else {
         $t["text"] = false;
         $t["problem"] = mysqli_error($connect);
     }
-} 
+} else {
 
     echo json_encode(array("text" => $t["text"]));
+}
 
 ?>

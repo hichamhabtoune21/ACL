@@ -11,6 +11,7 @@ $itTranslations = [
     'Surname' => 'Cognome',
     'Username' => 'Username',
     'Repeat password' => 'Ripeti password',
+    "The passwords entered are different"=>"Le password inseriite sono diverse",
     'Welcome' => 'Benvenuto/a',
     'Home' => 'Home',
     'Users' => 'Utenti',

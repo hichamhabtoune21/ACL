@@ -2,6 +2,7 @@
 //session_start();
 include("../../BACK END/connect.php");
 require "../../BACK END/translation/init.php";
+include "../../BACK END/update_role.php";
 
 ?>
 <!doctype html>
@@ -286,7 +287,7 @@ require "../../BACK END/translation/init.php";
                                         <?= $translator->trans('Password') ?>
                                     </label>
                                     <input type="password" class="form-control" id="inputPassword" name="password"
-                                        pattern=".{8,}"
+                                pattern="^.{8,}$"
                                         oninvalid="this.setCustomValidity('Password must be 8 characters long')"
                                         value="<?= $user["Password"] ?>" required>
                                 </div>

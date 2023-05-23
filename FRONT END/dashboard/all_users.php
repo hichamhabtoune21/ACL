@@ -2,6 +2,7 @@
 //session_start();
 include("../../BACK END/connect.php");
 require "../../BACK END/translation/init.php";
+include "../../BACK END/update_role.php";
 
 ?>
 
@@ -109,7 +110,7 @@ require "../../BACK END/translation/init.php";
 
 <body class="d-flex flex-column" style="min-height: 100vh">
 
-    <?php if (isset($_SESSION["id"]) && isset($_SESSION["ruolo"])) {
+    <?php if ((isset($_SESSION["id"]) && isset($_SESSION["ruolo"])) && $_SESSION['ruolo']=="Admin") {
         if ($_SESSION["ruolo"] == "Admin") { ?>
             <div class="container-fluid">
                 <div class="row">
@@ -218,7 +219,6 @@ require "../../BACK END/translation/init.php";
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-outline-secondary" data-bs-target="#exampleModalToggle1" data-bs-toggle="modal"><?= $translator->trans('Cancel') ?></button>
                                         <div id="addDeleteButton">
-                                            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModalToggle1" onclick="deletUser(<?= $invoice['ID_User'] ?>)"><?= $translator->trans('Delete') ?></button>
                                         </div>
                                     </div>
                                 </div>
@@ -237,7 +237,7 @@ require "../../BACK END/translation/init.php";
 
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-outline-secondary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal"><?= $translator->trans('Cancel') ?></button>
-                                        <div id="addDeleteButton">
+                                        <div id="savebtn">
                                             <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModalToggle" onclick="changeRole(event)"><?= $translator->trans('Save') ?></button>
                                         </div>
                                     </div>
@@ -276,7 +276,7 @@ require "../../BACK END/translation/init.php";
                                     if (mysqli_num_rows($result)) {
                                         while ($user = mysqli_fetch_array($result)) {
                                     ?>
-                                            <tr>
+                                            <tr id='<?= $user['ID_User']?>-row'>
                                                 <td>
                                                     <?= $user["Email"]; ?>
                                                 </td>
@@ -346,7 +346,7 @@ require "../../BACK END/translation/init.php";
                                                             <?php
                                                             if ($user['Area'] == "North-West") {
                                                                 echo "
-        <option selected value='North-West'>" . $translator->trans("Nort-West") . "</option>
+        <option selected value='North-West'>" . $translator->trans("North-West") . "</option>
         <option value='North-East'>" . $translator->trans("North-East") . "</option>
         <option value='Center'>" . $translator->trans("Center") . "</option>
         <option value='South'>" . $translator->trans("South") . "</option>
@@ -401,7 +401,7 @@ require "../../BACK END/translation/init.php";
                                                 </td>
 
                                                 <td>
-                                                    <button type="button" class="btn btn-danger" data-bs-toggle='modal' href='#exampleModalToggle1' onclick='deleteUser(<?= $user["ID_User"] ?>)'><?= $translator->trans('Delete') ?></button>
+                                                    <button type="button" class="btn btn-danger" data-bs-toggle='modal' href='#exampleModalToggle1' onclick='addDelete(<?= $user["ID_User"] ?>)'><?= $translator->trans('Delete') ?></button>
 
                                                 </td>
                                             </tr>
@@ -432,7 +432,29 @@ require "../../BACK END/translation/init.php";
 </body>
 <script>
     var save = false;
+    function addDelete(id) {
+        document.getElementById("addDeleteButton").innerHTML = "<button class='btn btn-danger' data-bs-toggle='modal' data-bs-target='#exampleModalToggle1' onclick='deleteUser(" + id + ",event)'><?= $translator->trans('Delete') ?></button>";
+    }
+    function deleteUser(id,event){
+        event.preventDefault();
+        var row = document.getElementById(id+'-row');
+        row.parentNode.removeChild(row);
+        $.ajax({
+                type: "POST",
+                url: '../../BACK END/deleteUser.php',
+                data: {
+                    ID_User: id,
+                },
+                success: function(response) {
+                    console.log(response);
 
+                },
+                error: function() {
+                   alert("failed");
+                }
+
+            })
+    }
     function changeRole(event) {
         event.preventDefault();
         var role;
@@ -453,8 +475,6 @@ require "../../BACK END/translation/init.php";
                 },
                 success: function(response) {
                     console.log(response);
-
-                    //alert("oooo");
                 },
                 error: function() {
                     alert("failed");

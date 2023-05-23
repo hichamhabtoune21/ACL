@@ -11,6 +11,7 @@ $enTranslations = array(
     'Surname' => 'Surname',
     'Username' => 'Username',
     'Repeat password' => 'Repeat password',
+    "The passwords entered are different"=>"The passwords entered are different",
     'Welcome' => 'Welcome',
     'Home' => 'Home',
     'Users' => 'Users',
