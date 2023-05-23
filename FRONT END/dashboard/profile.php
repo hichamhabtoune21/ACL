@@ -366,7 +366,7 @@ include "../../BACK END/update_role.php";
         const password = document.getElementById('inputPassword').value;
 
         // Verificare che i campi non siano vuoti
-        if (name === '' || surname === '' || email === '' || password === '') {
+        if (name === '' || surname === '' || email === '' || password === '' || username==='') {
             alert("<?=$translator->trans('All fields must not be empty')?>");
             return;
         }
