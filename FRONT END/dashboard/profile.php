@@ -287,34 +287,14 @@ include "../../BACK END/update_role.php";
                                         <?= $translator->trans('Password') ?>
                                     </label>
                                     <input type="password" class="form-control" id="inputPassword" name="password"
-                                pattern="^.{8,}$"
+                                        pattern="^.{8,}$"
                                         oninvalid="this.setCustomValidity('Password must be 8 characters long')"
                                         value="<?= $user["Password"] ?>" required>
                                 </div>
                             </div>
-                        </form>
-                        <div class="d-flex flex-row bd-highlight mb-3">
-                            <div class="p-2 bd-highlight">
-                                <form action="../../BACK END/logout.php" method="POST">
-                                    <button type='submit' class='btn btn-outline-danger' formnovalidate="novalidate">
-                                        <?= $translator->trans('Logout') ?>
-                                    </button>
-                                </form>
-                            </div>
-                            <div class="p-2 bd-highlight">
-                                <div id="saveButton" style="display: none">
-                                    <button type='button' class='btn btn-outline-info' data-bs-toggle='modal'
-                                        href='#exampleModalToggle'><?= $translator->trans('Save') ?></button>
-                                </div>
-                            </div>
-
-
-                        </div>
-
-
-
+                            <!--
                         <div class="modal fade" id="exampleModalToggle" aria-hidden="true"
-                            aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+                            aria-labelledby="exampleModalToggleLabel" tabindex="-1" style="display: none">
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -339,7 +319,27 @@ include "../../BACK END/update_role.php";
                                 </div>
                             </div>
                         </div>
-                    </form>
+                            -->
+                        </form>
+                        <div class="d-flex flex-row bd-highlight mb-3">
+                            <div class="p-2 bd-highlight">
+                                <form action="../../BACK END/logout.php" method="POST">
+                                    <button type='submit' class='btn btn-outline-danger' formnovalidate="novalidate">
+                                        <?= $translator->trans('Logout') ?>
+                                    </button>
+                                </form>
+                            </div>
+                            <div class="p-2 bd-highlight">
+                                <div id="saveButton" style="display: none">
+                                    <button type='button' class='btn btn-outline-info' data-bs-toggle='modal'
+                                        onclick='validateForm(<?= $_SESSION["ID_User"] ?>,event)'
+                                        href='#exampleModalToggle'><?= $translator->trans('Save') ?></button>
+                                </div>
+                            </div>
+
+
+                        </div>
+
                 </div>
             </div>
             <?php
@@ -354,6 +354,40 @@ include "../../BACK END/update_role.php";
 <script>
     var save = false;
     var userModified = [];
+
+    function validateForm(id, event) {
+        event.preventDefault();
+
+        // Ottenere i valori dei campi del form
+        const name = document.getElementById('inputName').value;
+        const surname = document.getElementById('inputSurname').value;
+        const username = document.getElementById('inputUsername').value;
+        const email = document.getElementById('inputEmail').value;
+        const password = document.getElementById('inputPassword').value;
+
+        // Verificare che i campi non siano vuoti
+        if (name === '' || surname === '' || email === '' || password === '') {
+            alert("<?=$translator->trans('All fields must not be empty')?>");
+            return;
+        }
+
+        // Verificare che l'email rispetti il pattern
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailPattern.test(email)) {
+            alert("<?=$translator->trans('Enter a valid email address')?>");
+            return;
+        }
+
+        // Verificare che la password sia di 8 caratteri
+        if (password.length < 8) {
+            alert("<?=$translator->trans('The password must be at least 8 characters')?>");
+            return;
+        }
+
+
+        // Se tutti i controlli sono passati, puoi inviare il form
+        changeProfile(id, event)
+    }
 
     function changeProfile(id, event) {
         event.preventDefault();

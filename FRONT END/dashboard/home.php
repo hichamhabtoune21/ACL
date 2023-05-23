@@ -170,8 +170,8 @@ include "../../BACK END/update_role.php";
                 <div class="col-md-10 col-lg-10 col-xl-10" style="padding:25px">
                     <h1 style="font-size: 50px;">
                         <?= $translator->trans('Welcome') ?>
-                        <?php echo $_SESSION["username"] ?>
-                        <?php echo $_SESSION["ruolo"] ?>
+                        <?php echo $_SESSION["username"] ?><br>
+                        <?php echo "Role: " . $_SESSION["ruolo"] ?>
 
                     </h1>
                     <?php

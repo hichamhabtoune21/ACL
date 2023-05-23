@@ -80,6 +80,9 @@ $enTranslations = array(
     "North-West"=>"North-West",
     "Center"=>"Center",
     "South"=>"South",
-    "Contact"=>"Contact"
+    "Contact"=>"Contact",
+    'All fields must not be empty'=>'All fields must not be empty',
+    'Enter a valid email address'=>'Enter a valid email address',
+    'The password must be at least 8 characters'=>'The password must be at least 8 characters'
 );
 ?>

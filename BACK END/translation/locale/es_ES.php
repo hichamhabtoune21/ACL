@@ -80,5 +80,8 @@ $esTranslations = [
     "North-West" => "Noroeste",
     "Center" => "Centro",
     "South" => "Sur",
-    "Contact" => "Contacto"
+    "Contact" => "Contacto",
+    'All fields must not be empty'=>'Todos los campos no deben estar vacíos' ,
+    'Enter a valid email address'=>'Ingrese una dirección de correo electrónico válida',
+    'The password must be at least 8 characters'=>'La contraseña debe tener al menos 8 caracteres'
 ];

@@ -80,7 +80,10 @@ $itTranslations = [
     "North-West" => "Nord-Ovest",
     "Center" => "Centro",
     "South" => "Sud",
-    "Contact" => "Contatta"
+    "Contact" => "Contatta",
+    'All fields must not be empty'=>'Tutti i campi non devono essere vuoti',
+    'Enter a valid email address'=>'Inserisci un indirizzo email valido',
+    'The password must be at least 8 characters'=>'La password deve essere lunga almeno be 8 caratteri'
 
 
 
