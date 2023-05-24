@@ -1,7 +1,7 @@
 <?php
-$connect = new mysqli("db", "admin","ACL_GROUP_1","crud"); //con docker
+$connect = new mysqli("host_database", "username","password","name_database"); //con docker
   //$connect = new mysqli("localhost", "root","root","crud"); //con xampp
-if(!$connect){
+if(!$connect){ 
     echo "Connection server error";
 }
 ?>
