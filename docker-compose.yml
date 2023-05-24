@@ -20,9 +20,9 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: crud
-      MYSQL_USER: admin
-      MYSQL_PASSWORD: ACL_GROUP_1
+      MYSQL_DATABASE: db_name
+      MYSQL_USER: username
+      MYSQL_PASSWORD: password
     ports:
       - "9906:3306"
     command: ["--init-file", "/docker-entrypoint-initdb.d/crud.sql"]
